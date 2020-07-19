@@ -1,0 +1,227 @@
+[
+  {
+    "timer": 300,
+    "questions": [
+      {
+        "number": 1,
+        "question": "Pengaruh seseorang terhadap orang lain seharusnya bergantung pada .........",
+        "question_marks": {
+          "a": "Kekuasaan",
+          "b": "bujukan",
+          "c": "Kekayaan",
+          "d": "Keberanian",
+          "e": "Kewibawaan"
+        }
+      },
+      {
+        "number": 2,
+        "question": "Lawannya Hemat ialah .........",
+        "question_marks": {
+          "a": "Murah",
+          "b": "Kikir",
+          "c": "Boros",
+          "d": "Bernilai",
+          "e": "Kaya"
+        }
+      },
+      {
+        "number": 3,
+        "question": "......... tidak termasuk cuaca",
+        "question_marks": {
+          "a": "Angin Puyuh",
+          "b": "Halilintar",
+          "c": "Salju",
+          "d": "Gempa Bumi",
+          "e": "Kabut"
+        }
+      },
+      {
+        "number": 4,
+        "question": "Lawannya \"setia\" ialah .........",
+        "question_marks": {
+          "a": "Cinta",
+          "b": "Benci",
+          "c": "Persahabatan",
+          "d": "Khianat",
+          "e": "Permusuhan"
+        }
+      },
+      {
+        "number": 5,
+        "question": "Seekor kuda selalu mempunyai .........",
+        "question_marks": {
+          "a": "Kandang",
+          "b": "Ladam",
+          "c": "Pelana",
+          "d": "Kuku",
+          "e": "Surai"
+        }
+      },
+      {
+        "number": 6,
+        "question": "Seorang paman ......... dari kemenakannya.",
+        "question_marks": {
+          "a": "Jarang",
+          "b": "Biasanya",
+          "c": "Selalu",
+          "d": "Tidak pernah",
+          "e": "Kadang-kadang"
+        }
+      },
+      {
+        "number": 7,
+        "question": "Pada jumlah yang sama, nilai kalori tertinggi terdapat pada .........",
+        "question_marks": {
+          "a": "Ikan",
+          "b": "Daging",
+          "c": "Lemak",
+          "d": "Tahu",
+          "e": "Sayuran"
+        }
+      },
+      {
+        "number": 8,
+        "question": "Pada suatu pertangdingan selalu terdapat .........",
+        "question_marks": {
+          "a": "Lawan",
+          "b": "Wasit",
+          "c": "Penonton",
+          "d": "Sorak",
+          "e": "Kemenangan"
+        }
+      },
+      {
+        "number": 9,
+        "question": "Suatu pernyataan yang belum dipastikan dikatakan sebagai pernyataan yang .........",
+        "question_marks": {
+          "a": "Paradoks",
+          "b": "Tergesa-gesa",
+          "c": "Mempunyai arti rangkap",
+          "d": "Menyesatkan",
+          "e": "Hipotesis"
+        }
+      },
+      {
+        "number": 10,
+        "question": "Pada sepatu selalu terdapat .........",
+        "question_marks": {
+          "a": "Kulit",
+          "b": "Sol",
+          "c": "Tali Sepatu",
+          "d": "Gesper",
+          "e": "Lidah"
+        }
+      },
+      {
+        "number": 11,
+        "question": "Suatu ......... tidak menyangkut persoalan pencegahan kecelakaan.",
+        "question_marks": {
+          "a": "Lampu lalu lintas",
+          "b": "Kacamata pelindung",
+          "c": "Kotak PPPK",
+          "d": "Tanda peringatan",
+          "e": "Palang kereta api"
+        }
+      },
+      {
+        "number": 12,
+        "question": "Mata uang logam Rp. 500,- mempinyai garis tengah ......... mm",
+        "question_marks": {
+          "a": "20",
+          "b": "29",
+          "c": "17",
+          "d": "15",
+          "e": "24"
+        }
+      },
+      {
+        "number": 13,
+        "question": "Seseorang yang bersikap menyangsikan setiap kemajuan ialah seorang yang .........",
+        "question_marks": {
+          "a": "Demokratis",
+          "b": "Radikal",
+          "c": "Liberal",
+          "d": "Konservatif",
+          "e": "Anarkis"
+        }
+      },
+      {
+        "number": 14,
+        "question": "Lawannya \"tidak pernah\" ialah .........",
+        "question_marks": {
+          "a": "Sering",
+          "b": "Kadang-kadang",
+          "c": "Jarang",
+          "d": "Kerapkali",
+          "e": "Selalu"
+        }
+      },
+      {
+        "number": 15,
+        "question": "Jarak antara Jakarta-Surabaya kira-kira ......... km",
+        "question_marks": {
+          "a": "650",
+          "b": "1000",
+          "c": "800",
+          "d": "600",
+          "e": "950"
+        }
+      },
+      {
+        "number": 16,
+        "question": "Untuk dapat membuat nada yang rendah dan mendalam, kita memerlukan banyak .........",
+        "question_marks": {
+          "a": "Kekuatan",
+          "b": "Perasaan",
+          "c": "Ayunan",
+          "d": "Berat",
+          "e": "Suara"
+        }
+      },
+      {
+        "number": 17,
+        "question": "Ayah ......... lebih berpengalaman dari pada anaknya.",
+        "question_marks": {
+          "a": "Selalu",
+          "b": "Biasanya",
+          "c": "Jauh",
+          "d": "Jarang",
+          "e": "Pada dasarnya"
+        }
+      },
+      {
+        "number": 18,
+        "question": "Di antara kota-kota berikut ini maka kota ......... letaknya paling selatan",
+        "question_marks": {
+          "a": "Jakarta",
+          "b": "Bandung",
+          "c": "Cirebon",
+          "d": "Semarang",
+          "e": "Surabaya"
+        }
+      },
+      {
+        "number": 19,
+        "question": "Jika kita mengetahui jumlah presentase nomor-nomor lotere yang tidak menang, maka kita dapat menghitung .........",
+        "question_marks": {
+          "a": "Jumlah nomor yang menang",
+          "b": "Pajak lotere",
+          "c": "Kemungkinan menang",
+          "d": "Jumlah pengikut",
+          "e": "Tinggi keuntungan"
+        }
+      },
+      {
+        "number": 20,
+        "question": "Seorang anak yang berumur 10 tahun tingginya rata-rata ......... cm",
+        "question_marks": {
+          "a": "150",
+          "b": "130",
+          "c": "110",
+          "d": "105",
+          "e": "115"
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,94 @@
+[
+  {
+    "type": "image",
+    "instruction": "Ditentukan 5 (lima) buah kubus, yaitu kubus a, b, c, d, e. Pada tiap-tiap kubus terdapat enam tanda yang berlainan pada setiap sisinya. Tiga dari tanda itu dapat dilihat.\nKubus-kubus yang ditentukan itu (a, b, c, d, e) ialah kubus-kubus yang berbeda, artinya kubus-kubus itu dapat mempunyai tanda-tanda yang sama, akan tetapi susunannya berlainan. Setiap soal memperlihatkan salah satu kubus yang ditentukan di dalam kedudukan yang berbeda.\n\nCarilah kubus yang dimaksudkan itu dan pilih jawaban saudara pada pilihan dibawah soal.\nKubus itu dapat diputar, dapat digulingkan atau dapat diputar dan digulingkan dalam pikiran saudara.\nOleh karena itu mungkin akan terlihat suatu tanda baru.",
+    "questions" : [
+        {
+          "number": 1,
+          "title": "Contoh 08",
+          "question": "gambar_a",
+          "question_marks": {
+            "a": "gambar_a",
+            "b": "gambar_b",
+            "c": "gambar_c",
+            "d": "gambar_d",
+            "e": "gambar_e"
+          },
+          "answers": {
+            "hint": "Contoh ini memperlihatkan kubus a dengan kedudukan yang berbeda.\nMendapatkannya adalah dengan cara menggulingkan lebih dahulu kubus itu ke kiri satu kali dan kemudian diputar ke kiri satu kali, sehingga sisi kubus yang bertanda dua segiempat hitam terletak di depan, seperti kubus a.",
+            "answer": "a",
+            "message": "Oleh karena itu, pada pilihan contoh 08, gambar A yang harus dipilih."
+          }
+        },
+        {
+          "number": 2,
+          "title": "Contoh berikutnya",
+          "question": "gambar_e",
+          "question_marks": {
+            "a": "gambar_a",
+            "b": "gambar_b",
+            "c": "gambar_c",
+            "d": "gambar_d",
+            "e": "gambar_e"
+          },
+          "answers": {
+            "hint": "Contoh kedua adalah kubus e.\nCara mendapatkannya adalah dengan digulingkan ke belakang satu kali dan diputar ke kanan satu kali, sehingga sis kubus yang bertanda dua segiempat hitam terletak di depan, seperti kubus e.",
+            "answer": "e",
+            "message": ""
+          }
+        },
+        {
+          "number": 3,
+          "title": "",
+          "question": "gambar_b",
+          "question_marks": {
+            "a": "gambar_a",
+            "b": "gambar_b",
+            "c": "gambar_c",
+            "d": "gambar_d",
+            "e": "gambar_e"
+          },
+          "answers": {
+            "hint": "Contoh ketiga adalah kubus b.\nCara mendapatkannya adalah dengan menggulingkannya ke kiri satu kali, sehingga dasar kubus yang tadinya tidak terlihat memunculkan tanda baru (dalam hal ini adalah tanda dua segiempat hitam) dan tanda silang pada sisi atas kubus itu menjadi tidak terlihat lagi.",
+            "answer": "b",
+            "message": ""
+          }
+        },
+        {
+          "number": 4,
+          "title": "",
+          "question": "gambar_c",
+          "question_marks": {
+            "a": "gambar_a",
+            "b": "gambar_b",
+            "c": "gambar_c",
+            "d": "gambar_d",
+            "e": "gambar_e"
+          },
+          "answers": {
+            "hint": "Contoh Keempat adalah kubus c.",
+            "answer": "c",
+            "message": ""
+          }
+        },
+        {
+          "number": 5,
+          "title": "",
+          "question": "gambar_d",
+          "question_marks": {
+            "a": "gambar_a",
+            "b": "gambar_b",
+            "c": "gambar_c",
+            "d": "gambar_d",
+            "e": "gambar_e"
+          },
+          "answers": {
+            "hint": "",
+            "answer": "d",
+            "message": ""
+          }
+        }
+    ],
+    "timer": 180
+  }
+]

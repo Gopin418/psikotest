@@ -1,0 +1,28 @@
+[
+  {
+    "time": 180,
+    "instruction": "Disediakan waktu 3 menit untuk menghafalkan kata-kata dibawah ini.",
+    "remembers": [
+      {
+        "title": "Burung",
+        "remember": ["Itik", "Elang", "Walet", "Tekukur", "Nuri"]
+      },
+      {
+        "title": "Kesenian",
+        "remember": ["Quintet", "Arca", "Opera", "Gamelan", "Ukiran"]
+      },
+      {
+        "title": "Binatang",
+        "remember": ["Musang", "Rusa", "Beruang", "Zebra", "Harimau"]
+      },
+      {
+        "title": "Perkakas",
+        "remember": ["Wajan", "Jarum", "Kikir", "Cangkul", "Palu"]
+      },
+      {
+        "title": "Bunga",
+        "remember": ["Soka", "Larat", "Flamboyan", "Yasmin", "Dahlia"]
+      }
+    ]
+  }
+]

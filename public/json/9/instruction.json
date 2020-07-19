@@ -1,0 +1,43 @@
+[
+  {
+    "type": "selection",
+    "instruction": "Pada persoalan berikutnya terdapat sejumlah pertanyaan mengenai kata-kata yang telah saudara hafalkan tadi. pilihlah jawaban sodara pada pilihan dibawah soal.",
+    "questions" : [
+        {
+          "number": 1,
+          "title": "Contoh 09",
+          "question": "Kata yang mempunyai huruf permulaan - Q - adalah suatu .........",
+          "question_marks": {
+            "a": "Bunga",
+            "b": "Perkakas",
+            "c": "Burung",
+            "d": "Kesenian",
+            "e": "Binatang"
+          },
+          "answers": {
+            "hint": "Quintet adalah termasuk dalam jenis kesenian. sehingga jawaban yang benar adalah ",
+            "answer": "Kesenian",
+            "message": "Oleh karena itu, pada pilihan contoh 09, jawaban \"Quintet\" yang harus dipilih."
+          }
+        },
+        {
+          "number": 2,
+          "title": "Contoh berikutnya",
+          "question": "Kata yang mempunyai huruf permulaan - Z - suatu .........",
+          "question_marks": {
+            "a": "Bunga",
+            "b": "Perkakas",
+            "c": "Burung",
+            "d": "Kesenian",
+            "e": "Binatang"
+          },
+          "answers": {
+            "hint": "Jawabannya adalah e, karena Zebra termasuk dalam jenis ",
+            "answer": "Binatang",
+            "message": ""
+          }
+        }
+    ],
+    "timer": 120
+  }
+]

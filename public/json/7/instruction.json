@@ -1,0 +1,43 @@
+[
+  {
+    "type": "image",
+    "instruction": "Pada persoalan berikutnya, setiap soal memperlihatkan sesuatu bentuk tertentu yang terpotong menjadi beberapa bagian.\nCarilah di antara bentuk-bentuk yang ditentukan, bentuk yang dapat dibangun dengan cara menyusun potongan-potongan itu sedemikian rupa, sehingga tidak ada kelebihan sudut atau ruang di antaranya.",
+    "questions" : [
+        {
+          "number": 1,
+          "title": "Contoh 07",
+          "question": "gambar_a",
+          "question_marks": {
+            "a": "gambar_a",
+            "b": "gambar_b",
+            "c": "gambar_c",
+            "d": "gambar_d",
+            "e": "gambar_e"
+          },
+          "answers": {
+            "hint": "Jika potongan-potongan pada contoh 07 diatas disusun (digabungkan), maka akan menghasilkan bentuk ",
+            "answer": "a",
+            "message": "Oleh karena itu, pada pilihan contoh 07, pilihan a yang harus dipilih."
+          }
+        },
+        {
+          "number": 2,
+          "title": "Contoh berikutnya",
+          "question": "gambar_b",
+          "question_marks": {
+            "a": "gambar_a",
+            "b": "gambar_b",
+            "c": "gambar_c",
+            "d": "gambar_d",
+            "e": "gambar_e"
+          },
+          "answers": {
+            "hint": "Potongan-potongan contoh kedua setelah disusun (digabungkan), maka akan menghasilkan bentuk e.\nContoh ketiga menjadi bentuk b.\nContoh keempat ialah bentuk ",
+            "answer": "d",
+            "message": ""
+          }
+        }
+    ],
+    "timer": 240
+  }
+]

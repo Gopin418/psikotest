@@ -1,0 +1,227 @@
+[
+  {
+    "timer": 300,
+    "questions": [
+      {
+        "number": 21,
+        "question": "",
+        "question_marks": {
+          "a": "Lingkaran",
+          "b": "Panah",
+          "c": "Elips",
+          "d": "Busur",
+          "e": "Lengkungan"
+        }
+      },
+      {
+        "number": 22,
+        "question": "",
+        "question_marks": {
+          "a": "Mengetuk",
+          "b": "Memaki",
+          "c": "Menjahit",
+          "d": "Menggergaji",
+          "e": "Memukul"
+        }
+      },
+      {
+        "number": 23,
+        "question": "",
+        "question_marks": {
+          "a": "Lebar",
+          "b": "Keliling",
+          "c": "Luas",
+          "d": "Isi",
+          "e": "Panjang"
+        }
+      },
+      {
+        "number": 24,
+        "question": "",
+        "question_marks": {
+          "a": "Mengikat",
+          "b": "Menyatukan",
+          "c": "Melepaskan",
+          "d": "Mengaitkan",
+          "e": "Melekatkan"
+        }
+      },
+      {
+        "number": 25,
+        "question": "",
+        "question_marks": {
+          "a": "Arah",
+          "b": "Timur",
+          "c": "Perjalanan",
+          "d": "Tujuan",
+          "e": "Selatan"
+        }
+      },
+      {
+        "number": 26,
+        "question": "",
+        "question_marks": {
+          "a": "Jarak",
+          "b": "Perpisahan",
+          "c": "Tugas",
+          "d": "Batas",
+          "e": "Perceraian"
+        }
+      },
+      {
+        "number": 27,
+        "question": "",
+        "question_marks": {
+          "a": "Saringan",
+          "b": "Kelambu",
+          "c": "Payung",
+          "d": "Lapisan",
+          "e": "Jala"
+        }
+      },
+      {
+        "number": 28,
+        "question": "",
+        "question_marks": {
+          "a": "Putih",
+          "b": "Pucat",
+          "c": "Buram",
+          "d": "Kasar",
+          "e": "Berkilauan"
+        }
+      },
+      {
+        "number": 29,
+        "question": "",
+        "question_marks": {
+          "a": "Otobis",
+          "b": "Pesawat terbang",
+          "c": "Sepeda motor",
+          "d": "Sepeda",
+          "e": "Kapal api"
+        }
+      },
+      {
+        "number": 30,
+        "question": "",
+        "question_marks": {
+          "a": "Biola",
+          "b": "Seruling",
+          "c": "Klarinet",
+          "d": "Terompet",
+          "e": "Saxophone"
+        }
+      },
+      {
+        "number": 31,
+        "question": "",
+        "question_marks": {
+          "a": "Bergelombang",
+          "b": "Kasar",
+          "c": "berduri",
+          "d": "Licin",
+          "e": "Lurus"
+        }
+      },
+      {
+        "number": 32,
+        "question": "",
+        "question_marks": {
+          "a": "Jam",
+          "b": "Kompas",
+          "c": "Penunjuk jalan",
+          "d": "Bintang pari",
+          "e": "Arah"
+        }
+      },
+      {
+        "number": 33,
+        "question": "",
+        "question_marks": {
+          "a": "Kebijaksanaan",
+          "b": "Pendidikan",
+          "c": "Perencanaan",
+          "d": "Penempatan",
+          "e": "Pengerahan"
+        }
+      },
+      {
+        "number": 34,
+        "question": "",
+        "question_marks": {
+          "a": "Bermotor",
+          "b": "Berjalan",
+          "c": "Berlayar",
+          "d": "Bersepeda",
+          "e": "Berkuda"
+        }
+      },
+      {
+        "number": 35,
+        "question": "",
+        "question_marks": {
+          "a": "Gambar",
+          "b": "Lukisan",
+          "c": "Potret",
+          "d": "Patung",
+          "e": "Ukiran"
+        }
+      },
+      {
+        "number": 36,
+        "question": "",
+        "question_marks": {
+          "a": "Panjang",
+          "b": "Lonjong",
+          "c": "Runcing",
+          "d": "Bulat",
+          "e": "Bersudut"
+        }
+      },
+      {
+        "number": 37,
+        "question": "",
+        "question_marks": {
+          "a": "Kunci",
+          "b": "Palang pintu",
+          "c": "Gerendel",
+          "d": "Gunting",
+          "e": "Obeng"
+        }
+      },
+      {
+        "number": 38,
+        "question": "",
+        "question_marks": {
+          "a": "Jembatan",
+          "b": "Batas",
+          "c": "Perkawinan",
+          "d": "Pagar",
+          "e": "Masyarakat"
+        }
+      },
+      {
+        "number": 39,
+        "question": "",
+        "question_marks": {
+          "a": "Mengetam",
+          "b": "Memahat",
+          "c": "Mengasah",
+          "d": "Melicinkan",
+          "e": "Menggosok"
+        }
+      },
+      {
+        "number": 40,
+        "question": "",
+        "question_marks": {
+          "a": "Batu",
+          "b": "Baja",
+          "c": "Bulu",
+          "d": "karet",
+          "e": "Kayu"
+        }
+      }
+    ]
+  }
+]

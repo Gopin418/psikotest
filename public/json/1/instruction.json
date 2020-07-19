@@ -1,0 +1,31 @@
+[
+  {
+    "type": "selection",
+    "instruction": "Soal-soal 01-20 terdiri atas kalimat-kalimat.\nsetiap kalimat satu kata hilang dan disediakan 5 (lima) pilihan sebagai penggantinya.\nPilihlah kata yang tepat yang dapat menyempurnakan kalimat itu!",
+    "questions" : [
+      {
+          "number": 1,
+          "title": "Contoh 01",
+          "question": "Seekor kuda mempunyai kesamaan terbanyak dengan seekor .........",
+          "question_marks": ["Kucing","Bajing","Keledai","Lembu","Anjing"],
+          "answers": {
+            "hint": "Jawaban yang benar ialah:",
+            "answer": "Keledai",
+            "message": "Oleh karena itu, pada pilihan contoh 01 \"Keledai\" yang harus dipilih."
+          }
+      },
+      {
+          "number": 2,
+          "title": "Contoh berikutnya",
+          "question": "Lawannya harapan ialah .........",
+          "question_marks": ["Duka", "Putus asa", "Sengsara", "Cinta", "Benci"],
+          "answers": {
+            "hint": "Jawaban yang benar ialah:",
+            "answer": "Putus asa",
+            "message": "Maka \"Putus asa\" seharusnya dipilih."
+          }
+        }
+    ],
+    "timer": 120
+  }
+]

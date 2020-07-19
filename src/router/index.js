@@ -1,14 +1,21 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+// import Home from '../views/Home.vue'
+import Login from '../views/Login.vue'
+import FirstTest from '../views/FirstTest.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'login',
+    component: Login
+  },
+  {
+    path: '/first-test',
+    name: 'FirstTest',
+    component: FirstTest
   },
   {
     path: '/about',
@@ -24,6 +31,22 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+const openRoutes = ['login']
+
+router.beforeEach((to, from, next) => {
+  if (openRoutes.includes(to.name)) {
+    if (!window.$cookies.get('user')) {
+      next()
+    } else {
+      next('/first-test')
+    }
+  } else if (window.$cookies.get('user')) {
+    next()
+  } else {
+    next('/')
+  }
 })
 
 export default router
