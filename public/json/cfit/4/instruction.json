@@ -1,0 +1,99 @@
+[
+  {
+    "type": "selection",
+    "instruction": "Terdapat 3 gambar dan 1 kotak gambar kosong dibawah, ketiga gambar dibawah membentuk suatu pola, saudara akan mencari pola selanjutnya yang berhubungan dengan 3 gambar sebelumnya",
+    "questions" : [
+      {
+          "number": 1,
+          "title": "Contoh 01",
+          "question": ["gambar_c"],
+          "question_marks": {
+            "a": "gambar_a",
+            "b": "gambar_b",
+            "c": "gambar_c",
+            "d": "gambar_d",
+            "e": "gambar_e",
+            "f": "gambar_f"
+          },
+          "answers": {
+            "hint": "Jawaban yang benar ialah:",
+            "answer": "c",
+            "message": "Oleh karena itu, pada pilihan contoh 01 C yang harus dipilih."
+          }
+      },
+      {
+          "number": 2,
+          "title": "Contoh berikutnya",
+          "question": ["gambar_f"],
+          "question_marks": {
+            "a": "gambar_a",
+            "b": "gambar_b",
+            "c": "gambar_c",
+            "d": "gambar_d",
+            "e": "gambar_e",
+            "f": "gambar_f"
+          },
+          "answers": {
+            "hint": "Jawaban yang benar ialah:",
+            "answer": "f",
+            "message": "Maka A seharusnya dipilih."
+          }
+      },
+      {
+          "number": 3,
+          "title": "Contoh lainnya",
+          "question": ["gambar_a"],
+          "question_marks": {
+            "a": "gambar_a",
+            "b": "gambar_b",
+            "c": "gambar_c",
+            "d": "gambar_d",
+            "e": "gambar_e",
+            "f": "gambar_f"
+          },
+          "answers": {
+            "hint": "Jawaban yang benar ialah:",
+            "answer": "a",
+            "message": "Maka A seharusnya dipilih."
+          }
+      },
+      {
+          "number": 4,
+          "title": "Contoh lainnya",
+          "question": ["gambar_c"],
+          "question_marks": {
+            "a": "gambar_a",
+            "b": "gambar_b",
+            "c": "gambar_c",
+            "d": "gambar_d",
+            "e": "gambar_e",
+            "f": "gambar_f"
+          },
+          "answers": {
+            "hint": "Jawaban yang benar ialah:",
+            "answer": "c",
+            "message": "Maka C seharusnya dipilih."
+          }
+      },
+      {
+          "number": 5,
+          "title": "Contoh lainnya",
+          "question": ["gambar_b"],
+          "question_marks": {
+            "a": "gambar_a",
+            "b": "gambar_b",
+            "c": "gambar_c",
+            "d": "gambar_d",
+            "e": "gambar_e",
+            "f": "gambar_f"
+          },
+          "answers": {
+            "hint": "Jawaban yang benar ialah:",
+            "answer": "b",
+            "message": "Maka B seharusnya dipilih."
+          }
+      }
+    ],
+    "timer": 120
+  }
+]

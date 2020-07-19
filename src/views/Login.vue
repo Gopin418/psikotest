@@ -88,14 +88,15 @@ export default {
   },
   methods: {
     save () {
-      this.$cookies.set('user', this.user)
+      this.$cookies.set('user', JSON.stringify(this.user))
       this.$cookies.set('instruction', JSON.stringify(this.instruction))
+      this.$store.commit('saveUser', this.user)
       this.$store.commit('instructionReset', this.instruction)
       this.$store.commit('questionsDataReset')
       this.$store.commit('resetCurrent')
       this.$store.commit('testReset')
       this.$store.commit('instructionDataReset')
-      this.$router.push('first-test')
+      this.$router.push('/first-test')
       this.user = {
         name: '',
         user_number: ''

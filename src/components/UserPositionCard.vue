@@ -54,7 +54,6 @@
         <v-card-title class="headline">Waktu Habis!</v-card-title>
         <v-card-text>Waktu yang diberikan untuk memahami instruksi telah habis, silahkan mulai tes sekarang.</v-card-text>
         <v-card-actions>
-          <v-spacer></v-spacer>
           <v-btn class="text-capitalize font-weight-regular mt-2"
           @click="startTest()"
           v-show="instruction[testNumber-1][0] == true"
@@ -95,7 +94,7 @@ export default {
   },
   created () {
     this.instruction = JSON.parse(this.$cookies.get('instruction'))
-    axios.get(this.baseUrl + '/json/' + this.testNumber + '/instruction.json')
+    axios.get(this.baseUrl + '/json/cfit/' + this.testNumber + '/instruction.json')
       .then(response => {
         this.$store.commit('instructionDataUpdate', response.data)
         this.timeOption = this.instructions.map(x => {
@@ -113,7 +112,7 @@ export default {
       const timer = setInterval(() => {
         this.$store.commit('setTime', moment(this.date.subtract(1, 'seconds')))
         this.time = this.date.format('mm:ss')
-        if (this.time === '01:50') {
+        if (this.time === '00:00') {
           clearInterval(timer)
           this.dialog = true
         }
@@ -151,38 +150,41 @@ export default {
       this.$store.commit('move', this.jump)
     },
     getData () {
-      axios.get(this.baseUrl + '/json/' + this.testNumber + '/instruction.json')
+      axios.get(this.baseUrl + '/json/cfit/' + this.testNumber + '/instruction.json')
         .then(response => {
           this.$store.commit('instructionDataUpdate', response.data)
           this.$store.commit('numAnswersUpdate', response.data)
           this.timeOption = this.instructions.map(x => {
             return x.timer
           })
-          this.$store.commit('setTime', moment(this.timeOption[0] / 60, 'minutes'))
-          this.time = this.date.format('mm:ss')
-          setTimeout(() => {
-            const timer = setInterval(() => {
-              this.$store.commit('setTime', moment(this.date.subtract(1, 'seconds')))
-              this.time = this.date.format('mm:ss')
-              if (this.time === '01:50') {
-                clearInterval(timer)
-                this.dialog = true
-              }
-            }, 1000)
-          }, 1000)
         }).catch(e => {
           console.log(e)
         })
 
-      axios.get(this.baseUrl + '/json/' + this.testNumber + '/test.json')
+      axios.get(this.baseUrl + '/json/cfit/' + this.testNumber + '/test.json')
         .then(response => {
           this.$store.commit('questionsDataUpdate', response.data)
         }).catch(e => {
           console.log(e)
         })
     },
+    timeSet (time) {
+      this.$store.commit('setTime', moment(time[0] / 60, 'minutes'))
+      this.time = this.date.format('mm:ss')
+      setTimeout(() => {
+        const timer = setInterval(() => {
+          this.$store.commit('setTime', moment(this.date.subtract(1, 'seconds')))
+          this.time = this.date.format('mm:ss')
+          if (this.time === '01:50') {
+            clearInterval(timer)
+            this.dialog = true
+          }
+        }, 1000)
+      }, 1000)
+    },
     startTest () {
       this.dialog = false
+      this.timeSet(this.timeOption)
       if (this.testNumber === 9 && this.rememberStatus === true) {
         this.$store.commit('rememberDisable')
         this.getData()
@@ -197,6 +199,7 @@ export default {
     nextTest () {
       this.dialog = false
       this.$store.commit('moveTest')
+      this.timeSet(this.timeOption)
       if (this.testNumber === 9) {
         this.$store.commit('startRemember')
       } else {

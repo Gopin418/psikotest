@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 // import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import FirstTest from '../views/FirstTest.vue'
+import SecondTest from '../views/SecondTest.vue'
+import Cfit from '../views/CFIT.vue'
 
 Vue.use(VueRouter)
 
@@ -16,6 +18,16 @@ const routes = [
     path: '/first-test',
     name: 'FirstTest',
     component: FirstTest
+  },
+  {
+    path: '/second-test',
+    name: 'SecondTest',
+    component: SecondTest
+  },
+  {
+    path: '/cfit',
+    name: 'CFIT',
+    component: Cfit
   },
   {
     path: '/about',

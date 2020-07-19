@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  created () {
+  mounted () {
     this.$store.commit('saveUser', this.$cookies.get('user'))
   },
   computed: {
