@@ -1,0 +1,163 @@
+[
+  {
+    "timer": 300,
+    "questions": [
+      {
+        "number": 1,
+        "question": ["gambar_a"],
+        "question_marks": {
+          "a": "gambar_a",
+          "b": "gambar_b",
+          "c": "gambar_c",
+          "d": "gambar_d",
+          "e": "gambar_e",
+          "f": "gambar_f"
+        }
+      },
+      {
+        "number": 2,
+        "question": ["gambar_c"],
+        "question_marks": {
+          "a": "gambar_a",
+          "b": "gambar_b",
+          "c": "gambar_c",
+          "d": "gambar_d",
+          "e": "gambar_e",
+          "f": "gambar_f"
+        }
+      },
+      {
+        "number": 3,
+        "question": ["gambar_a"],
+        "question_marks": {
+          "a": "gambar_a",
+          "b": "gambar_b",
+          "c": "gambar_c",
+          "d": "gambar_d",
+          "e": "gambar_e",
+          "f": "gambar_f"
+        }
+      },
+      {
+        "number": 4,
+        "question": ["gambar_c"],
+        "question_marks": {
+          "a": "gambar_a",
+          "b": "gambar_b",
+          "c": "gambar_c",
+          "d": "gambar_d",
+          "e": "gambar_e",
+          "f": "gambar_f"
+        }
+      },
+      {
+        "number": 5,
+        "question": ["gambar_a"],
+        "question_marks": {
+          "a": "gambar_a",
+          "b": "gambar_b",
+          "c": "gambar_c",
+          "d": "gambar_d",
+          "e": "gambar_e",
+          "f": "gambar_f"
+        }
+      },
+      {
+        "number": 6,
+        "question": ["gambar_e"],
+        "question_marks": {
+          "a": "gambar_a",
+          "b": "gambar_b",
+          "c": "gambar_c",
+          "d": "gambar_d",
+          "e": "gambar_e",
+          "f": "gambar_f"
+        }
+      },
+      {
+        "number": 7,
+        "question": ["gambar_c"],
+        "question_marks": {
+          "a": "gambar_a",
+          "b": "gambar_b",
+          "c": "gambar_c",
+          "d": "gambar_d",
+          "e": "gambar_e",
+          "f": "gambar_f"
+        }
+      },
+      {
+        "number": 8,
+        "question": ["gambar_e"],
+        "question_marks": {
+          "a": "gambar_a",
+          "b": "gambar_b",
+          "c": "gambar_c",
+          "d": "gambar_d",
+          "e": "gambar_e",
+          "f": "gambar_f"
+        }
+      },
+      {
+        "number": 9,
+        "question": ["gambar_a"],
+        "question_marks": {
+          "a": "gambar_a",
+          "b": "gambar_b",
+          "c": "gambar_c",
+          "d": "gambar_d",
+          "e": "gambar_e",
+          "f": "gambar_f"
+        }
+      },
+      {
+        "number": 10,
+        "question": ["gambar_d"],
+        "question_marks": {
+          "a": "gambar_a",
+          "b": "gambar_b",
+          "c": "gambar_c",
+          "d": "gambar_d",
+          "e": "gambar_e",
+          "f": "gambar_f"
+        }
+      },
+      {
+        "number": 11,
+        "question": ["gambar_f"],
+        "question_marks": {
+          "a": "gambar_a",
+          "b": "gambar_b",
+          "c": "gambar_c",
+          "d": "gambar_d",
+          "e": "gambar_e",
+          "f": "gambar_f"
+        }
+      },
+      {
+        "number": 12,
+        "question": ["gambar_c"],
+        "question_marks": {
+          "a": "gambar_a",
+          "b": "gambar_b",
+          "c": "gambar_c",
+          "d": "gambar_d",
+          "e": "gambar_e",
+          "f": "gambar_f"
+        }
+      },
+      {
+        "number": 13,
+        "question": ["gambar_c"],
+        "question_marks": {
+          "a": "gambar_a",
+          "b": "gambar_b",
+          "c": "gambar_c",
+          "d": "gambar_d",
+          "e": "gambar_e",
+          "f": "gambar_f"
+        }
+      }
+    ]
+  }
+]

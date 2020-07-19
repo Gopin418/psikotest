@@ -1,0 +1,60 @@
+[
+  {
+    "type": "selection",
+    "instruction": "Terdapat 5 gambar dan dua diantaranya memiiliki kecocokan, pilihlah 2 gambar tersebut",
+    "questions" : [
+      {
+          "number": 1,
+          "title": "Contoh 02",
+          "question": [],
+          "question_marks": {
+            "a": "gambar_a",
+            "b": "gambar_b",
+            "c": "gambar_c",
+            "d": "gambar_d",
+            "e": "gambar_e"
+          },
+          "answers": {
+            "hint": "Jawaban yang benar ialah:",
+            "answer": "c",
+            "message": "Oleh karena itu, pada pilihan contoh 02 C yang harus dipilih."
+          }
+      },
+      {
+          "number": 2,
+          "title": "Contoh berikutnya",
+          "question": [],
+          "question_marks": {
+            "a": "gambar_a",
+            "b": "gambar_b",
+            "c": "gambar_c",
+            "d": "gambar_d",
+            "e": "gambar_e"
+          },
+          "answers": {
+            "hint": "Jawaban yang benar ialah:",
+            "answer": "a",
+            "message": "Maka A seharusnya dipilih."
+          }
+      },
+      {
+          "number": 3,
+          "title": "Contoh lainnya",
+          "question": [],
+          "question_marks": {
+            "a": "gambar_a",
+            "b": "gambar_b",
+            "c": "gambar_c",
+            "d": "gambar_d",
+            "e": "gambar_e"
+          },
+          "answers": {
+            "hint": "Jawaban yang benar ialah:",
+            "answer": "f",
+            "message": "Maka B seharusnya dipilih."
+          }
+      }
+    ],
+    "timer": 120
+  }
+]
