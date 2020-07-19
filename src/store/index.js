@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import router from '../router/index'
 
 Vue.use(Vuex)
 
@@ -43,7 +42,6 @@ export default new Vuex.Store({
     saveUser (state, userData) {
       state.user.push(userData)
       state.user.shift()
-      router.push('/first-test')
     },
     questionsDataReset (state) {
       state.questions = []

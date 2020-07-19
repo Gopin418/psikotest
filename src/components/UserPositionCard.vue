@@ -158,18 +158,6 @@ export default {
           this.timeOption = this.instructions.map(x => {
             return x.timer
           })
-          this.$store.commit('setTime', moment(this.timeOption[0] / 60, 'minutes'))
-          this.time = this.date.format('mm:ss')
-          setTimeout(() => {
-            const timer = setInterval(() => {
-              this.$store.commit('setTime', moment(this.date.subtract(1, 'seconds')))
-              this.time = this.date.format('mm:ss')
-              if (this.time === '01:50') {
-                clearInterval(timer)
-                this.dialog = true
-              }
-            }, 1000)
-          }, 1000)
         }).catch(e => {
           console.log(e)
         })
@@ -181,8 +169,23 @@ export default {
           console.log(e)
         })
     },
+    timeSet (time) {
+      this.$store.commit('setTime', moment(time[0] / 60, 'minutes'))
+      this.time = this.date.format('mm:ss')
+      setTimeout(() => {
+        const timer = setInterval(() => {
+          this.$store.commit('setTime', moment(this.date.subtract(1, 'seconds')))
+          this.time = this.date.format('mm:ss')
+          if (this.time === '01:50') {
+            clearInterval(timer)
+            this.dialog = true
+          }
+        }, 1000)
+      }, 1000)
+    },
     startTest () {
       this.dialog = false
+      this.timeSet(this.timeOption)
       if (this.testNumber === 9 && this.rememberStatus === true) {
         this.$store.commit('rememberDisable')
         this.getData()
@@ -197,6 +200,7 @@ export default {
     nextTest () {
       this.dialog = false
       this.$store.commit('moveTest')
+      this.timeSet(this.timeOption)
       if (this.testNumber === 9) {
         this.$store.commit('startRemember')
       } else {
