@@ -1,0 +1,31 @@
+[
+  {
+    "type": "selection",
+    "instruction": "Ditentukan tiga kata.\nAntara kata pertama dan kata kedua terdapat suatu hubungan yang tertentu\nAntara kata ketiga dan salah satu kata di antara lima kata pilihan harus pula terdapat hubungan yang sama itu.\nCarilah kata itu.",
+    "questions" : [
+        {
+          "number": 1,
+          "title": "Contoh 03",
+          "question": "Hutan : Pohon = Tembok : ?",
+          "question_marks": ["Batu bata", "Rumah", "Semen", "Putih", "Dinding"],
+          "answers": {
+            "hint": "Hubungan antara hutan dan pohon ialah bahwa hutan terdiri atas pohon-pohon, maka hubungan antara tembok dan salah satu kata pilihan ialah bahwa tembok terdiri atas batu-batu bata.\n",
+            "answer": "Batu bata",
+            "message": "Oleh karena itu, pada pilihan contoh 03, \"Batu bata\" yang harus dipilih."
+          }
+        },
+        {
+          "number": 2,
+          "title": "Contoh berikutnya",
+          "question": "Gelap Terang = Basah : ?",
+          "question_marks": ["Hujan", "Hari", "Lembab", "Angin", "Kering"],
+          "answers": {
+            "hint": "Gelap ialah lawannya dari terang, maka untuk basah lawannya ialah kering.\nMaka jawaban yang benar ialah: \"Kering\".",
+            "answer": "Kering",
+            "message": "Oleh karena itu \"Kering\" seharusnya yang dipilih."
+          }
+        }
+    ],
+    "timer": 120
+  }
+]

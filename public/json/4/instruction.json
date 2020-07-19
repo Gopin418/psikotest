@@ -1,0 +1,29 @@
+[
+  {
+    "type": "fill",
+    "instruction": "Ditentukan dua kata.\nCarilah satu perkataan yang meliputi pengertian kedua kata tadi.\nTulislah perkataan itu pada kolom disamping soal.",
+    "questions" : [
+        {
+          "number": 1,
+          "title": "Contoh 04",
+          "question": "Ayam - Itik",
+          "answers": {
+            "hint": "Perkataan \"Burung\" dapat meliputi pengertian kedua kata itu.\nMaka jawabannya ialah \"Burung\".",
+            "answer": "Burung",
+            "message": "Oleh karena itu, pada kolom contoh 04, harus diisi \"Burung\"."
+          }
+        },
+        {
+          "number": 2,
+          "title": "Contoh berikutnya",
+          "question": "Gaun - Celana",
+          "answers": {
+            "hint": "Pada contoh ini jawabannya ialah : \"Pakaian\", maka \"Pakaian\" yang seharusnya diisi.",
+            "answer": "Pakaian",
+            "message": "Carilah selalu perkataan yang tepat yang dapat meliputi pengertian kedua kata itu."
+          }
+        }
+    ],
+    "timer": 60
+  }
+]

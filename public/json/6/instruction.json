@@ -1,0 +1,29 @@
+[
+  {
+    "type": "numeric",
+    "instruction": "Pada persoalan berikut akan diberikan deret angka.\nSetiap deret tersusun menurut suatu aturan tertentu dan dapat dilanjutkan menurut aturan itu.\nCarilah untuk setiap deret, angka berikutnya dan pilihlah jawaban saudara pada koloh dibawah soal.",
+    "questions" : [
+      {
+        "number": 1,
+        "title": "Contoh 06",
+        "question": "2 4 6 8 10 12 14 ?",
+        "answers": {
+          "hint": "Pada deret ini angka berikutnya selalu didapat jika angka di depannya ditambah dengan 2.\nMaka jawabannya ialah: 16",
+          "answer": [1, 6],
+          "message": "Oleh karena itu, pada kolom dibawah angka 1 dan 6 harus dipilih."
+        }
+      },
+      {
+        "number": 2,
+        "title": "Contoh berikutnya",
+        "question": "9 7 10 8 11 9 12 ?",
+        "answers": {
+          "hint": "Pada deret ini selalu berganti-gantu harus dikurangi dengan 2 dan setelah itu ditambah dengan 3.\nJawaban contoh ini ialah 10, maka dari itu angka 1 dan angka 0 seharusnya yang dipilih.",
+          "answer": [1, 0],
+          "message": "Kadang-kadang pada beberapa soal harus pula dikalikan atau dibagi."
+        }
+      }
+    ],
+    "timer": 180
+  }
+]

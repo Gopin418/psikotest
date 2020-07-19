@@ -1,0 +1,227 @@
+[
+  {
+    "timer": 300,
+    "questions": [
+      {
+        "number": 41,
+        "question": "Menemukan : Menghilangkan = Mengingat : ?",
+        "question_marks": {
+          "a": "Menghafal",
+          "b": "Mengenal",
+          "c": "Melupakan",
+          "d": "Berpikir",
+          "e": "Memimpikan"
+        }
+      },
+      {
+        "number": 42,
+        "question": "Bunga : Jambangan = Burung : ?",
+        "question_marks": {
+          "a": "Sarang",
+          "b": "Langit",
+          "c": "Pagar",
+          "d": "Pohon",
+          "e": "Sangkar"
+        }
+      },
+      {
+        "number": 43,
+        "question": "Kereta api : Rel = Otobis : ?",
+        "question_marks": {
+          "a": "Roda",
+          "b": "Poros",
+          "c": "ban",
+          "d": "Jalan raya",
+          "e": "Kecepatan"
+        }
+      },
+      {
+        "number": 44,
+        "question": "Perak : Emas = Cincin : ?",
+        "question_marks": {
+          "a": "Arloji",
+          "b": "Berlian",
+          "c": "Permata",
+          "d": "Gelang",
+          "e": "Platina"
+        }
+      },
+      {
+        "number": 45,
+        "question": "Lingkaran : Bola = Bujursangkar : ?",
+        "question_marks": {
+          "a": "Bentuk",
+          "b": "Gambar",
+          "c": "Segi empat",
+          "d": "Kubus",
+          "e": "Piramida"
+        }
+      },
+      {
+        "number": 46,
+        "question": "Saran : Keputusan = Merundingkan : ?",
+        "question_marks": {
+          "a": "Menawarkan",
+          "b": "Menentukan",
+          "c": "Menilai",
+          "d": "Menimbang",
+          "e": "Merenungkan"
+        }
+      },
+      {
+        "number": 47,
+        "question": "Lidah : Asam = Hidung : ?",
+        "question_marks": {
+          "a": "Mencium",
+          "b": "Bernapas",
+          "c": "Mengecap",
+          "d": "Tengik",
+          "e": "Asin"
+        }
+      },
+      {
+        "number": 48,
+        "question": "Darah : Pembuluh =  Air : ?",
+        "question_marks": {
+          "a": "Pintu Air",
+          "b": "Sungai",
+          "c": "Talang",
+          "d": "Hujan",
+          "e": "Ember"
+        }
+      },
+      {
+        "number": 49,
+        "question": "Saraf : Penyalur = Pupil : ?",
+        "question_marks": {
+          "a": "Penyinaran",
+          "b": "Mata",
+          "c": "Melihat",
+          "d": "Cahaya",
+          "e": "Pelindung"
+        }
+      },
+      {
+        "number": 50,
+        "question": "Pengantar surat : Pengantar telegram = Pandai besi : ?",
+        "question_marks": {
+          "a": "Palu godam",
+          "b": "Pedagang besi",
+          "c": "Api",
+          "d": "Tukang emas",
+          "e": "Besi Tempat"
+        }
+      },
+      {
+        "number": 51,
+        "question": "Buta : Warna = Tuli : ?",
+        "question_marks": {
+          "a": "Pendengaran",
+          "b": "Mendengar",
+          "c": "Nada",
+          "d": "Kata",
+          "e": "Telinga"
+        }
+      },
+      {
+        "number": 52,
+        "question": "Makanan : Bumbu = Ceramah : ?",
+        "question_marks": {
+          "a": "Penghinaan",
+          "b": "Pidato",
+          "c": "Kelakar",
+          "d": "Kesan",
+          "e": "Ayat"
+        }
+      },
+      {
+        "number": 53,
+        "question": "Marah : Emosi = Duka cita : ?",
+        "question_marks": {
+          "a": "Suka cita",
+          "b": "Sakit hati",
+          "c": "Suasana hati",
+          "d": "Sedih",
+          "e": "Rindu"
+        }
+      },
+      {
+        "number": 54,
+        "question": "Mantel : Jubah = Wool : ?",
+        "question_marks": {
+          "a": "Bahan sandang",
+          "b": "Domba",
+          "c": "Sutra",
+          "d": "Jas",
+          "e": "Tekstil"
+        }
+      },
+      {
+        "number": 55,
+        "question": "Ketinggian puncak : Tekanan udara = Ketinggian nada : ?",
+        "question_marks": {
+          "a": "Garpu tala",
+          "b": "Sopran",
+          "c": "Nyanyian",
+          "d": "Panjang senar",
+          "e": "Suara"
+        }
+      },
+      {
+        "number": 56,
+        "question": "Negara : Revolusi = Hidup : ?",
+        "question_marks": {
+          "a": "Biologi",
+          "b": "Keturunan",
+          "c": "Mutasi",
+          "d": "Seleksi",
+          "e": "Ilmu hewan"
+        }
+      },
+      {
+        "number": 57,
+        "question": "Kekurangan : Penemuan = Panas : ?",
+        "question_marks": {
+          "a": "Haus",
+          "b": "Khatulistiwa",
+          "c": "Es",
+          "d": "Matahari",
+          "e": "Dingin"
+        }
+      },
+      {
+        "number": 58,
+        "question": "Kayu : Diketam = Besi : ?",
+        "question_marks": {
+          "a": "Dipalu",
+          "b": "Digergaji",
+          "c": "Dituang",
+          "d": "Dikikir",
+          "e": "Ditempa"
+        }
+      },
+      {
+        "number": 59,
+        "question": "Olahragawan : Lembing = Cendikiawan : ?",
+        "question_marks": {
+          "a": "Perpustakaan",
+          "b": "Penelitian",
+          "c": "Karya",
+          "d": "Studi",
+          "e": "Mikroskop"
+        }
+      },
+      {
+        "number": 60,
+        "question": "Keledai : Kuda pacuan = Pembakaran : ?",
+        "question_marks": {
+          "a": "Pemadam api",
+          "b": "Obor",
+          "c": "Letupan",
+          "d": "Korek api",
+          "e": "Lautan api"
+        }
+      }
+    ]
+  }
+]

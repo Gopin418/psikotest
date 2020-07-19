@@ -1,0 +1,29 @@
+[
+  {
+    "type": "numeric",
+    "instruction": "Persoalan berikutnya ialah soal-soal hitungan.",
+    "questions" : [
+        {
+          "number": 1,
+          "title": "Contoh 05",
+          "question": "Sebatang pensil harganya 25 rupiah. berapakah harga 3 batang?",
+          "answers": {
+            "hint": "Perhatikan cara menjawab dibawah!\n\nKolom ini terdiri atas angka-angka 1 sampa 9 dan 0.\nUntuk menunjukkan jawaban suatu soal, maka pilihlah angka-angka yang terdapat di dalam jawaban itu.\nKeurutan angka jawaban tidak perlu dihiraukan. \nJawabannya ialah: 75",
+            "answer": [7, 5],
+            "message": "Pada contoh 05 jawabannya ialah 75.\nOleh karena itu, pada kolom dibawah angka 7 dan 5 harus dipilih."
+          }
+        },
+        {
+          "number": 2,
+          "title": "Contoh lainnya",
+          "question": "Dengan sepeda Husin mencapai 15km dalam waktu 1 jam. Berapa km-kah yang dapat ia capai dalam waktu 4 jam?",
+          "answers": {
+            "hint": "",
+            "answer": [6, 0],
+            "message": "Maka untuk menunjukkan jawaban itu angka 6 dan 0 seharusnya yang dipilih."
+          }
+        }
+    ],
+    "timer": 180
+  }
+]

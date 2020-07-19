@@ -1,0 +1,31 @@
+[
+  {
+    "type": "selection",
+    "instruction": "Ditentukan lima kata.\nPada 4 dari 5 kata itu terdapat suatu kesamaan.\nCarilah kata yang kelima yang tidak memiliki kesamaan dengan keempat kata itu.",
+    "questions" : [
+        {
+          "number": 1,
+          "title": "Contoh 02",
+          "question": "",
+          "question_marks": ["Meja", "Kursi", "Burung", "Lemari", "Tempat tidur"],
+          "answers": {
+            "hint": "a, b, d, dan e ialah perabot rumah (meubel).\nc burung bukan perabot rumah atau tidak memiliki kesamaan dengan keempat itu",
+            "answer": "Burung",
+            "message": "Oleh karena itu, pada pilihan contoh 02, \"Burung\" yang harus dipilih."
+          }
+        },
+        {
+          "number": 2,
+          "title": "Contoh berikutnya",
+          "question": "",
+          "question_marks": ["Duduk", "Berbaring", "Berdiri", "Berjalan", "berjongkok"],
+          "answers": {
+            "hint": "Pada a, b, c, dan e orang dalam keadaan tidak bergerak, sedangkan d orang dalam keadaan bergerak\nMaka jawaban yang benar ialah: \"Berjalan\".",
+            "answer": "Berjalan",
+            "message": "Oleh karena itu \"Berjalan\" seharusnya yang dipilih."
+          }
+        }
+    ],
+    "timer": 120
+  }
+]

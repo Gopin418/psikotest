@@ -1,0 +1,71 @@
+[
+  {
+    "timer": 300,
+    "questions": [
+      {
+        "number": 61,
+        "question": "mawar - melati"
+      },
+      {
+        "number": 62,
+        "question": "mata - telinga"
+      },
+      {
+        "number": 63,
+        "question": "gula - intan"
+      },
+      {
+        "number": 64,
+        "question": "hujan - salju"
+      },
+      {
+        "number": 65,
+        "question": "pengantar surat - telepon"
+      },
+      {
+        "number": 66,
+        "question": "kamera - kacamata"
+      },
+      {
+        "number": 67,
+        "question": "lambung - usus"
+      },
+      {
+        "number": 68,
+        "question": "banyak - sedikit"
+      },
+      {
+        "number": 69,
+        "question": "telur - benih"
+      },
+      {
+        "number": 70,
+        "question": "bendera - lencana"
+      },
+      {
+        "number": 71,
+        "question": "rumput - gajah"
+      },
+      {
+        "number": 72,
+        "question": "ember - kantong"
+      },
+      {
+        "number": 73,
+        "question": "awal - akhir"
+      },
+      {
+        "number": 74,
+        "question": "kikir - boros"
+      },
+      {
+        "number": 75,
+        "question": "penawaran - permintaan"
+      },
+      {
+        "number": 76,
+        "question": "atas - bawah"
+      }
+    ]
+  }
+]
