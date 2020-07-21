@@ -10,7 +10,7 @@
     </v-card>
     <v-card outlined>
       <v-card-text>
-        <div v-show="this.instruction[this.testNumber-1][0] == true && this.rememberStatus == false">
+        <div v-show="this.currentInstruction[0] == true && this.rememberStatus == false">
           <p class="text-h6 font-weight-regular">Instruksi</p>
           <v-row class="mx-0">
             <v-col cols="2" class="pa-1" v-for="i in this.$store.state.instructionLength" :key="i">
@@ -24,7 +24,7 @@
           </v-row>
         </div>
 
-        <div v-show="this.instruction[this.testNumber-1][0] == false">
+        <div v-show="this.currentInstruction[0] == false">
           <p class="text-h6 font-weight-regular">Soal</p>
           <div v-for="question in questions" :key="question.timer">
             <v-row class="mx-0">
@@ -38,13 +38,13 @@
             </v-row>
           </div>
         </div>
-        <v-btn class="text-capitalize font-weight-regular mt-2" @click="startTest()" v-show="instruction[testNumber-1][0] == true" :disabled="current < 2 && this.rememberStatus == false" large color="primary" depressed block>Mulai Tes</v-btn>
+        <v-btn class="text-capitalize font-weight-regular mt-2" @click="startTest()" v-show="currentInstruction[0] == true" :disabled="current < 2 && this.rememberStatus == false" large color="primary" depressed block>Mulai Tes</v-btn>
         <v-btn class="text-capitalize font-weight-regular mt-2"
         @click="testNumber === 9 ? finish() : nextTest()"
         color="primary"
         large
         depressed
-        v-show="instruction[testNumber-1][0] == false" :disabled="current == this.$store.state.numbers[1] ? false : true"
+        v-show="currentInstruction[0] == false" :disabled="current == this.$store.state.numbers[1] ? false : true"
         block>{{ this.$store.state.testNumber === 9 ? 'Selesai' : 'Lanjut ke IST ' + this.next }}</v-btn>
       </v-card-text>
     </v-card>
@@ -56,7 +56,7 @@
         <v-card-actions>
           <v-btn class="text-capitalize font-weight-regular mt-2"
           @click="startTest()"
-          v-show="instruction[testNumber-1][0] == true"
+          v-show="currentInstruction[0] == true"
           :disabled="this.rememberStatus == true"
           large
           color="primary"
@@ -68,7 +68,7 @@
           color="primary"
           large
           depressed
-          v-show="instruction[testNumber-1][0] == false"
+          v-show="currentInstruction[0] == false"
           block>{{ this.$store.state.testNumber === 9 ? 'Selesai' : 'Lanjut ke IST ' + this.next }}</v-btn>
         </v-card-actions>
       </v-card>
@@ -85,6 +85,7 @@ export default {
     return {
       jump: 0,
       time: 0,
+      currentInstruction: [],
       dialog: false,
       instruction: [],
       timeOption: [],
@@ -93,7 +94,6 @@ export default {
     }
   },
   created () {
-    this.instruction = JSON.parse(this.$cookies.get('instruction'))
     axios.get(this.baseUrl + '/json/cfit/' + this.testNumber + '/instruction.json')
       .then(response => {
         this.$store.commit('instructionDataUpdate', response.data)
@@ -108,6 +108,9 @@ export default {
   },
   mounted () {
     this.next = this.testNumber + 1
+    this.instruction = JSON.parse(this.$cookies.get('instruction'))
+    this.currentInstruction.push(this.instruction[0])
+    this.currentInstruction = this.currentInstruction.flat()
     setTimeout(() => {
       const timer = setInterval(() => {
         this.$store.commit('setTime', moment(this.date.subtract(1, 'seconds')))
@@ -189,7 +192,7 @@ export default {
         this.$store.commit('rememberDisable')
         this.getData()
       } else {
-        this.instruction[this.testNumber - 1][0] = false
+        this.currentInstruction[0] = false
         this.$cookies.set('instruction', JSON.stringify(this.instruction))
         this.$store.commit('instructionUpdate', this.instruction)
         this.$store.commit('move', this.numbers[0])

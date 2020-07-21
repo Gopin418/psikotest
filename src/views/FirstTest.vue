@@ -41,7 +41,7 @@ export default {
       ]
     }
   },
-  mounted () {
+  created () {
     this.$cookies.set('instruction', JSON.stringify(this.instruction))
     this.$store.commit('instructionReset', this.instruction)
   }
