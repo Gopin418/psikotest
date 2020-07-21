@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 // import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
+import Register from '../views/Register.vue'
 import Menu from '../views/Menu.vue'
 import FirstTest from '../views/FirstTest.vue'
 import SecondTest from '../views/SecondTest.vue'
@@ -14,6 +15,11 @@ const routes = [
     path: '/',
     name: 'login',
     component: Login
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: Register
   },
   {
     path: '/menu',
@@ -51,7 +57,7 @@ const router = new VueRouter({
   routes
 })
 
-const openRoutes = ['login']
+const openRoutes = ['login', 'register']
 
 router.beforeEach((to, from, next) => {
   if (openRoutes.includes(to.name)) {

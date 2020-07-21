@@ -24,30 +24,36 @@
               <v-card-text>
                 <v-form class="pt-4">
                   <v-text-field
-                    label="Nama"
-                    name="name"
+                    label="Email"
+                    name="email"
                     outlined
+                    autofocus
                     color="primary"
-                    v-model="user.name"
+                    v-model="user.email"
                     type="text"
                   ></v-text-field>
 
                   <v-text-field
-                    label="Nomor Peserta"
-                    name="user_number"
+                    label="Kata sandi"
+                    name="password"
                     outlined
                     color="primary"
-                    v-model="user.user_number"
-                    type="text"
+                    v-model="user.password"
+                    type="password"
                   ></v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions>
+                <v-btn
+                  color="primary"
+                  text
+                  href="/register"
+                  class="text-capitalize">Buat Akun</v-btn>
                 <v-spacer></v-spacer>
                 <v-btn
                   color="primary"
                   depressed
-                  class="text-capitalize"
+                  class="text-capitalize px-8 py-5"
                   @click.prevent="save">Masuk</v-btn>
               </v-card-actions>
             </v-card>
@@ -59,6 +65,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'Login',
   props: {
@@ -67,40 +75,21 @@ export default {
   data () {
     return {
       user: {
-        name: '',
-        user_number: ''
-      },
-      instruction: [
-        [true, 120],
-        [true, 120],
-        [true, 120],
-        [true, 120],
-        [true, 120],
-        [true, 120],
-        [true, 120],
-        [true, 120],
-        [true, 120]
-      ]
+        email: '',
+        password: ''
+      }
     }
-  },
-  mounted () {
-    this.$cookies.remove('instruction')
   },
   methods: {
     save () {
       this.$cookies.set('user', JSON.stringify(this.user))
-      this.$cookies.set('instruction', JSON.stringify(this.instruction))
-      this.$store.commit('saveUser', this.user)
-      this.$store.commit('instructionReset', this.instruction)
-      this.$store.commit('questionsDataReset')
-      this.$store.commit('resetCurrent')
-      this.$store.commit('testReset')
-      this.$store.commit('instructionDataReset')
-      this.$router.push('/first-test')
-      this.user = {
-        name: '',
-        user_number: ''
-      }
+      axios.post('localhost:8000/api/login', this.user)
+        .then(response => {
+          // expected response with user profile data and session / token
+          this.$router.push('/menu')
+        }).catch(e => {
+          console.log(e)
+        })
     }
   }
 }

@@ -29,6 +29,13 @@ export default {
   components: {
     Header
   },
+  mounted () {
+    this.$cookies.remove('instruction')
+    this.$store.commit('questionsDataReset')
+    this.$store.commit('resetCurrent')
+    this.$store.commit('testReset')
+    this.$store.commit('instructionDataReset')
+  },
   data () {
     return {
       menus: [
