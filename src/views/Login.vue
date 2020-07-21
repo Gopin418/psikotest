@@ -82,10 +82,12 @@ export default {
   },
   methods: {
     save () {
-      this.$cookies.set('user', JSON.stringify(this.user))
-      axios.post('localhost:8000/api/login', this.user)
+      axios.post('http://localhost:8001/api/auth/login', this.user)
         .then(response => {
+          console.log(response.data)
           // expected response with user profile data and session / token
+          // this.$router.push('/menu')
+          this.$cookies.set('token', response.data.token)
           this.$router.push('/menu')
         }).catch(e => {
           console.log(e)

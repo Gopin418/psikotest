@@ -61,12 +61,12 @@ const openRoutes = ['login', 'register']
 
 router.beforeEach((to, from, next) => {
   if (openRoutes.includes(to.name)) {
-    if (!window.$cookies.get('user')) {
+    if (!window.$cookies.get('token')) {
       next()
     } else {
       next('/menu')
     }
-  } else if (window.$cookies.get('user')) {
+  } else if (window.$cookies.get('token')) {
     next()
   } else {
     next('/')

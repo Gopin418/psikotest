@@ -6,7 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     user: [
-      { name: '', user_number: '' }
+      { firstName: '', userNumber: '' }
     ],
     timer: 0,
     current: 1,

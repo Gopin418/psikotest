@@ -10,7 +10,7 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn depressed color="primary" class="mr-4">{{ user[0].name }} / {{ user[0].user_number }}</v-btn>
+      <v-btn depressed color="primary" class="mr-4">{{ user[0].firstName }} / {{ user[0].userNumber }}</v-btn>
 
       <v-btn @click="logout()" icon>
         <v-icon>mdi-logout-variant</v-icon>
@@ -20,9 +20,14 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   mounted () {
-    this.$store.commit('saveUser', this.$cookies.get('user'))
+    axios.get('http://localhost:8001/api/user')
+      .then(response => {
+        this.$store.commit('saveUser', response.data.user)
+      })
   },
   computed: {
     user () {
@@ -31,7 +36,7 @@ export default {
   },
   methods: {
     logout () {
-      this.$cookies.remove('user')
+      this.$cookies.remove('token')
       this.$router.push('/')
     }
   }
