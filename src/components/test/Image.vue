@@ -28,8 +28,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
   data () {
     return {
@@ -47,16 +45,6 @@ export default {
     },
     questions () {
       return this.$store.state.questions
-    }
-  },
-  mounted () {
-    if (this.currentTest !== 'remember') {
-      axios.get(this.baseUrl + '/json/' + this.testNumber + '/test.json')
-        .then(response => {
-          this.$store.commit('questionsDataUpdate', response.data)
-        }).catch(e => {
-          console.log(e)
-        })
     }
   },
   methods: {
@@ -94,7 +82,6 @@ export default {
         }
       }
       this.$forceUpdate()
-      console.log(this.answers)
     }
   }
 }

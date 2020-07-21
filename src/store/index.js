@@ -10,6 +10,7 @@ export default new Vuex.Store({
     ],
     timer: 0,
     current: 1,
+    testType: '',
     testNumber: 1,
     questionLength: 1,
     instructionLength: 1,
@@ -38,6 +39,9 @@ export default new Vuex.Store({
     testReset (state) {
       state.testNumber = 1
       state.instructionStatus = true
+    },
+    setTest (state, type) {
+      state.testType = type
     },
     saveUser (state, userData) {
       state.user.push(userData)

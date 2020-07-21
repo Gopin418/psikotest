@@ -15,21 +15,11 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
   date () {
     return {
       baseUrl: process.env.VUE_APP_BASE_URL
     }
-  },
-  mounted () {
-    axios.get(this.baseUrl + '/json/' + this.testNumber + '/test.json')
-      .then(response => {
-        this.$store.commit('questionsDataUpdate', response.data)
-      }).catch(e => {
-        console.log(e)
-      })
   },
   computed: {
     current () {

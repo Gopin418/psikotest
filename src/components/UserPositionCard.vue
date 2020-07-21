@@ -89,38 +89,16 @@ export default {
       dialog: false,
       instruction: [],
       timeOption: [],
+      questionTime: [],
+      countdown: '',
       next: 0,
       baseUrl: process.env.VUE_APP_BASE_URL
     }
   },
-  created () {
-    axios.get(this.baseUrl + '/json/cfit/' + this.testNumber + '/instruction.json')
-      .then(response => {
-        this.$store.commit('instructionDataUpdate', response.data)
-        this.timeOption = this.instructions.map(x => {
-          return x.timer
-        })
-        this.$store.commit('setTime', moment(this.timeOption[0] / 60, 'minutes'))
-        this.time = this.date.format('mm:ss')
-      }).catch(e => {
-        console.log(e)
-      })
-  },
   mounted () {
     this.next = this.testNumber + 1
-    this.instruction = JSON.parse(this.$cookies.get('instruction'))
-    this.currentInstruction.push(this.instruction[0])
-    this.currentInstruction = this.currentInstruction.flat()
-    setTimeout(() => {
-      const timer = setInterval(() => {
-        this.$store.commit('setTime', moment(this.date.subtract(1, 'seconds')))
-        this.time = this.date.format('mm:ss')
-        if (this.time === '00:00') {
-          clearInterval(timer)
-          this.dialog = true
-        }
-      }, 1000)
-    }, 1000)
+    this.instructionUpdate()
+    this.getData()
   },
   computed: {
     date () {
@@ -145,6 +123,9 @@ export default {
     },
     rememberStatus () {
       return this.$store.state.rememberStatus
+    },
+    test () {
+      return this.$store.state.testType
     }
   },
   methods: {
@@ -152,59 +133,97 @@ export default {
       this.jump = i - 1
       this.$store.commit('move', this.jump)
     },
+    instructionUpdate () {
+      this.instruction = JSON.parse(this.$cookies.get('instruction'))
+      this.currentInstruction = []
+      this.currentInstruction.push(this.instruction[this.testNumber - 1])
+      this.currentInstruction = this.currentInstruction.flat()
+      console.log(this.currentInstruction)
+    },
+    getRememberData () {
+      axios.get(this.baseUrl + '/json/' + this.test + '/' + this.testNumber + '/remember.json')
+        .then(response => {
+          this.timeOption = this.instructions.map(x => {
+            return x.timer
+          })
+          this.timeSet(this.timeOption)
+          this.$store.commit('rememberDataUpdate', response.data)
+          this.$store.commit('rememberEnable')
+        }).catch(e => {
+          console.log(e)
+        })
+      this.$forceUpdate()
+    },
     getData () {
-      axios.get(this.baseUrl + '/json/cfit/' + this.testNumber + '/instruction.json')
+      this.$store.commit('questionsDataReset')
+      this.$store.commit('instructionDataReset')
+      this.$store.commit('setTest', this.$cookies.get('type'))
+      axios.get(this.baseUrl + '/json/' + this.test + '/' + this.testNumber + '/instruction.json')
         .then(response => {
           this.$store.commit('instructionDataUpdate', response.data)
           this.$store.commit('numAnswersUpdate', response.data)
           this.timeOption = this.instructions.map(x => {
             return x.timer
           })
+          this.timeSet(this.timeOption)
         }).catch(e => {
           console.log(e)
         })
 
-      axios.get(this.baseUrl + '/json/cfit/' + this.testNumber + '/test.json')
+      axios.get(this.baseUrl + '/json/' + this.test + '/' + this.testNumber + '/test.json')
         .then(response => {
           this.$store.commit('questionsDataUpdate', response.data)
+          this.questionTime = response.data.map(x => {
+            return x.timer
+          })
         }).catch(e => {
           console.log(e)
         })
+      this.$forceUpdate()
     },
     timeSet (time) {
       this.$store.commit('setTime', moment(time[0] / 60, 'minutes'))
       this.time = this.date.format('mm:ss')
-      setTimeout(() => {
-        const timer = setInterval(() => {
-          this.$store.commit('setTime', moment(this.date.subtract(1, 'seconds')))
-          this.time = this.date.format('mm:ss')
-          if (this.time === '01:50') {
-            clearInterval(timer)
-            this.dialog = true
-          }
-        }, 1000)
+      clearInterval(this.countdown)
+      this.countdown = setInterval(() => {
+        this.$store.commit('setTime', moment(this.date).subtract(1, 'seconds'))
+        this.time = this.date.format('mm:ss')
+        if (this.time === '00:00') {
+          clearInterval(this.countdown)
+          this.dialog = true
+          this.$store.commit('rememberDisable')
+        }
       }, 1000)
     },
     startTest () {
       this.dialog = false
-      this.timeSet(this.timeOption)
+      clearInterval(this.countdown)
       if (this.testNumber === 9 && this.rememberStatus === true) {
         this.$store.commit('rememberDisable')
         this.getData()
       } else {
-        this.currentInstruction[0] = false
+        this.instruction.forEach((item, i) => {
+          if (i === this.testNumber - 1) {
+            item[0] = false
+          }
+        })
+        this.timeSet(this.questionTime)
         this.$cookies.set('instruction', JSON.stringify(this.instruction))
         this.$store.commit('instructionUpdate', this.instruction)
         this.$store.commit('move', this.numbers[0])
         this.$store.commit('instructionLocalUpdate')
+        this.instructionUpdate()
       }
+      this.$forceUpdate()
     },
     nextTest () {
       this.dialog = false
       this.$store.commit('moveTest')
-      this.timeSet(this.timeOption)
+      this.next = this.testNumber
+      clearInterval(this.countdown)
       if (this.testNumber === 9) {
         this.$store.commit('startRemember')
+        this.getRememberData()
       } else {
         this.getData()
       }
@@ -215,8 +234,11 @@ export default {
         this.$store.commit('rememberDisable')
         this.getData()
       }
+      this.instructionUpdate()
+      this.$forceUpdate()
     },
     finish () {
+      clearInterval(this.countdown)
       this.$cookies.remove('user')
       this.$router.push('/')
     }

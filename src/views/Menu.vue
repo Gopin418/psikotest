@@ -4,7 +4,7 @@
     <v-container fluid class="px-10 pt-8">
       <v-row v-for="(menu, index) in menus" :key="index">
         <v-col cols="3">
-          <v-card :href="menu.link" min-width="300" outlined hover>
+          <v-card @click="testSelect(menu.type, menu.link)" min-width="300" outlined hover>
             <v-card-text>
               <v-row>
                 <v-col class="pa-0 pl-3">
@@ -39,10 +39,17 @@ export default {
   data () {
     return {
       menus: [
-        { title: 'IST', link: '/first-test' },
-        { title: 'Pauli Test', link: '/second-test' },
-        { title: 'CFIT', link: '/cfit' }
+        { title: 'IST', type: 'ist', link: '/first-test' },
+        { title: 'Pauli Test', type: 'pauli', link: '/second-test' },
+        { title: 'CFIT', type: 'cfit', link: '/cfit' }
       ]
+    }
+  },
+  methods: {
+    testSelect (test, link) {
+      this.$store.commit('setTest', test)
+      this.$cookies.set('type', test)
+      this.$router.push(link)
     }
   }
 }
