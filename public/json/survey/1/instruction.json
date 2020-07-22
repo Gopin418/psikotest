@@ -1,0 +1,57 @@
+[
+  {
+    "type": "survey",
+    "instruction": "Soal-soal berikut terdiri dari 12 kalimat yang memiliki urutan acak, urutkan pilihan anda.",
+    "questions" : [
+      {
+          "number": 1,
+          "title": "Contoh 01",
+          "question": "Bagi para remaja dan anak-anak. KLH diperkenalkan dengan mengadakan berbagai lomba. Urutkan pilihan Anda.",
+          "question_marks": [
+            "Juri lomba pidato mengenai KLH.",
+            "Juri lomba proyek observasi IPA.",
+            "Juri lomba matematika murid SD.",
+            "Juri lomba \"Remaja putri ngetop dalam bergaul\".",
+            "Juri lomba mengetik cepat dan rapih.",
+            "Juri lomba merangkai kata-kata menjadi cerita KLH.",
+            "Juri lomba menyanyi lagu daerah.",
+            "Juri lomba seni merangkai bunga.",
+            "Juri lomba PPPK dan Palng Merah Remaja.",
+            "Juri lomba memasak nasi goreng paling istimewa.",
+            "Juri lomba voli.",
+            "Juri lomba sepeda"
+          ],
+          "answers": {
+            "hint": "",
+            "answer": [1, 8 , 7, 6, 4, 5, 10, 9, 11, 12, 3, 2],
+            "message": "Berikut contoh dalam mengisi urutan, berikutnya isilah sesuai pilihan Anda."
+          }
+      },
+      {
+          "number": 2,
+          "title": "Contoh berikutnya",
+          "question": "Bagi para remaja dan anak-anak. KLH diperkenalkan dengan mengadakan berbagai lomba. Urutkan pilihan Anda.",
+          "question_marks": [
+            "Juri lomba pidato mengenai KLH.",
+            "Juri lomba proyek observasi IPA.",
+            "Juri lomba matematika murid SD.",
+            "Juri lomba \"Remaja putri ngetop dalam bergaul\".",
+            "Juri lomba mengetik cepat dan rapih.",
+            "Juri lomba merangkai kata-kata menjadi cerita KLH.",
+            "Juri lomba menyanyi lagu daerah.",
+            "Juri lomba seni merangkai bunga.",
+            "Juri lomba PPPK dan Palng Merah Remaja.",
+            "Juri lomba memasak nasi goreng paling istimewa.",
+            "Juri lomba voli.",
+            "Juri lomba sepeda"
+          ],
+          "answers": {
+            "hint": "",
+            "answer": [12, 1, 10, 11, 7, 4, 6, 8, 3, 5, 9, 2],
+            "message": "Berikut contoh dalam mengisi urutan, berikutnya isilah sesuai pilihan Anda."
+          }
+        }
+    ],
+    "timer": 120
+  }
+]

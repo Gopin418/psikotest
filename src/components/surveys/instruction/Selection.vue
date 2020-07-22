@@ -7,29 +7,32 @@
         <div v-for="question in instruction.questions" :key="question.title">
           <div v-show="current == question.number">
             <p class="font-weight-bold">{{ question.title }}</p>
-
-            <v-row>
-              <v-col>
-                <p class="text-h5 text-center pt-3">{{ question.question }}</p>
+            <p>{{ question.question }}</p>
+            <v-row v-for="(selection, index) in question.question_marks" :key="index">
+              <v-col class="py-6 pb-0">
+                <p>{{ selection }}</p>
               </v-col>
-              <v-col>
-                <v-text-field
-                  label="Jawaban"
-                  name="answer"
-                  outlined
+              <v-col cols="2" class="pb-0">
+                <v-select
+                  label="Urutan"
+                  dense
+                  chips
                   color="primary"
-                  :value="question.answers.answer"
-                  readonly
-                  autofocus
-                  type="text"
-                ></v-text-field>
+                  v-model="question.answers.answer[index]"
+                  :items="question.answers.answer"></v-select>
               </v-col>
             </v-row>
-
             <br><br>
-            <p>{{ question.answers.hint }}</p>
+            <p>{{ question.answers.hint + ' ' + question.answers.answer}}</p>
             <p>{{ question.answers.message }}</p>
-
+            <v-radio-group v-model="question.answers.answer" row>
+              <v-radio v-for="selection in question.question_marks"
+              :key="selection"
+              :label="selection"
+              :value="selection"
+              :color="selection == question.answers.answer ? 'primary' : 'red'"
+              readonly></v-radio>
+            </v-radio-group>
           </div>
         </div>
       </div>
@@ -40,7 +43,8 @@
 export default {
   data () {
     return {
-      baseUrl: process.env.VUE_APP_BASE_URL
+      baseUrl: process.env.VUE_APP_BASE_URL,
+      answer: []
     }
   },
   computed: {

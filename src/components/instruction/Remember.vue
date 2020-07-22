@@ -17,8 +17,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
   data () {
     return {
@@ -35,16 +33,6 @@ export default {
     remembers () {
       return this.$store.state.rememberData
     }
-  },
-  mounted () {
-    axios.get(this.baseUrl + '/json/' + this.testNumber + '/remember.json')
-      .then(response => {
-        console.log(response.data)
-        this.$store.commit('rememberDataUpdate', response.data)
-        this.$store.commit('rememberEnable')
-      }).catch(e => {
-        console.log(e)
-      })
   }
 }
 </script>

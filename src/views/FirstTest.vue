@@ -25,6 +25,25 @@ export default {
     ISTHeader,
     QuestionCard,
     UserPositionCard
+  },
+  data () {
+    return {
+      instruction: [
+        [true, 120],
+        [true, 120],
+        [true, 120],
+        [true, 120],
+        [true, 120],
+        [true, 120],
+        [true, 120],
+        [true, 120],
+        [true, 120]
+      ]
+    }
+  },
+  created () {
+    this.$cookies.set('instruction', JSON.stringify(this.instruction))
+    this.$store.commit('instructionReset', this.instruction)
   }
 }
 </script>

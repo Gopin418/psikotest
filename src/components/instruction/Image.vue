@@ -43,8 +43,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
   data () {
     return {
@@ -67,16 +65,6 @@ export default {
     instructionAnswer () {
       return this.$store.state.instructionAnswer
     }
-  },
-  mounted () {
-    axios.get(this.baseUrl + '/json/' + this.testNumber + '/instruction.json')
-      .then(response => {
-        this.$store.commit('instructionDataUpdate', response.data)
-        this.$store.commit('numAnswersUpdate', response.data)
-      }).catch(e => {
-        console.log(e)
-      })
-    this.instructionAnswers.push(this.$store.state.instrutionAnswer)
   },
   methods: {
     elevate (data, number, mark) {

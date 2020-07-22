@@ -17,14 +17,7 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
-  data () {
-    return {
-      baseUrl: process.env.VUE_APP_BASE_URL
-    }
-  },
   computed: {
     current () {
       return this.$store.state.current
@@ -34,16 +27,6 @@ export default {
     },
     questions () {
       return this.$store.state.questions
-    }
-  },
-  mounted () {
-    if (this.currentTest !== 'remember') {
-      axios.get(this.baseUrl + '/json/' + this.testNumber + '/test.json')
-        .then(response => {
-          this.$store.commit('questionsDataUpdate', response.data)
-        }).catch(e => {
-          console.log(e)
-        })
     }
   }
 }

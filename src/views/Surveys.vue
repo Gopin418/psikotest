@@ -3,7 +3,7 @@
     <Header/>
     <v-row class="mt-8">
       <v-col class="pl-12" cols="8">
-        <CfitQuestion />
+        <SurveyQuestion />
       </v-col>
       <v-col class="pr-12">
         <UserPositionCard />
@@ -14,21 +14,18 @@
 
 <script>
 import Header from '../components/Header'
-import CfitQuestion from '../components/CfitQuestion'
+import SurveyQuestion from '../components/SurveyQuestion'
 import UserPositionCard from '../components/UserPositionCard'
 
 export default {
   components: {
     Header,
-    CfitQuestion,
+    SurveyQuestion,
     UserPositionCard
   },
   data () {
     return {
       instruction: [
-        [true, 120],
-        [true, 120],
-        [true, 120],
         [true, 120]
       ]
     }

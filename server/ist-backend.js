@@ -11,11 +11,17 @@ var Storage = require('node-storage')
 
 var router = require('express').Router()
 
+router.get('/ambil-info-hasil-test-ist', function (req, res) {
+  var sesi = req.params.sesi
+
+
+})
+
 router.post('/simpan-data-jawaban-ist-mode1', function (req, res) {
   var sesi = req.body.sesi
   var kodeTest = req.body.kdTest
-  var jawaban = req.body.jawaban
   var waktu = req.body.waktu
+  var jawaban = req.body.jawaban
 
   var Query = 'INSERT INTO t_jawaban_ist (sesi, kode_test, jawaban, waktu) '
   Query += 'VALUES (?, ?, ?, ?)'
@@ -51,8 +57,8 @@ router.post('/simpan-data-jawaban-ist-mode1', function (req, res) {
 router.post('/simpan-data-jawaban-ist-mode2', function (req, res) {
   var sesi = req.body.sesi
   var kodeTest = req.body.kdTest
-  var jawaban = req.body.jawaban
   var waktu = req.body.waktu
+  var jawaban = req.body.jawaban
 
   var Query = 'INSERT INTO t_jawaban_ist (sesi, kode_test, jawaban1, jawaban2, waktu) '
   Query += 'VALUES (?, ?, ?, ?, ?)'
@@ -88,8 +94,8 @@ router.post('/simpan-data-jawaban-ist-mode2', function (req, res) {
 router.post('/simpan-data-jawaban-ist-mode3', function (req, res) {
   var sesi = req.body.sesi
   var kodeTest = req.body.kdTest
-  var jawaban = req.body.jawaban
   var waktu = req.body.waktu
+  var jawaban = req.body.jawaban
 
   var Query = 'INSERT INTO t_jawaban_ist (sesi, kode_test, jawaban1, jawaban2, jawaban3, waktu) '
   Query += 'VALUES (?, ?, ?, ?, ?, ?)'

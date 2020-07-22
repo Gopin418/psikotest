@@ -32,8 +32,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
   data () {
     return {
@@ -53,15 +51,6 @@ export default {
     numAnswers () {
       return this.$store.state.numAnswers
     }
-  },
-  mounted () {
-    axios.get(this.baseUrl + '/json/' + this.testNumber + '/instruction.json')
-      .then(response => {
-        this.$store.commit('instructionDataUpdate', response.data)
-        this.$store.commit('numAnswersUpdate', response.data)
-      }).catch(e => {
-        console.log(e)
-      })
   }
 }
 </script>

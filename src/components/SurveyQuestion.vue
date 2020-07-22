@@ -3,7 +3,7 @@
     <v-card outlined>
       <v-card-text>
 
-        <div v-if="this.$store.state.currentTest == 'selection'">
+        <div v-if="this.$store.state.currentTest == 'survey'">
           <InstructionSelection v-show="this.$store.state.instructionStatus == true"/>
           <TestSelection v-show="this.$store.state.instructionStatus == false"/>
         </div>
@@ -27,8 +27,8 @@
 </template>
 
 <script>
-import InstructionSelection from '../components/cfit/instruction/Selection'
-import TestSelection from '../components/cfit/test/Selection'
+import InstructionSelection from '../components/surveys/instruction/Selection'
+import TestSelection from '../components/surveys/test/Selection'
 
 export default {
   components: {
