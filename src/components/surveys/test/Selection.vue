@@ -90,7 +90,6 @@ export default {
         }
       }
       this.$forceUpdate()
-      console.log(this.answers)
     }
   }
 }

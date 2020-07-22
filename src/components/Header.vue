@@ -23,7 +23,7 @@
 import axios from 'axios'
 
 export default {
-  mounted () {
+  created () {
     axios.get('http://localhost:8001/api/user')
       .then(response => {
         this.$store.commit('saveUser', response.data.user)

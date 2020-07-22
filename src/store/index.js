@@ -23,9 +23,16 @@ export default new Vuex.Store({
     currentTest: 'selection',
     questions: [],
     numAnswers: [],
+    answersData: [],
     numbers: []
   },
   mutations: {
+    saveAnswer (state, answers) {
+      state.answersData = answers
+    },
+    resetAnswer (state) {
+      state.answersData = []
+    },
     setTime (state, time) {
       state.timer = time
     },
