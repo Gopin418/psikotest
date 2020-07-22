@@ -40,12 +40,12 @@
         </div>
         <v-btn class="text-capitalize font-weight-regular mt-2" @click="startTest()" v-show="currentInstruction[0] == true" :disabled="current < 2 && this.rememberStatus == false" large color="primary" depressed block>Mulai Tes</v-btn>
         <v-btn class="text-capitalize font-weight-regular mt-2"
-        @click="testNumber === 9 ? finish() : nextTest()"
+        @click="testNumber === 9 && test === 'ist' || testNumber === 4 && test === 'cfit' ? finish() : nextTest()"
         color="primary"
         large
         depressed
         v-show="currentInstruction[0] == false" :disabled="current == this.$store.state.numbers[1] ? false : true"
-        block>{{ this.$store.state.testNumber === 9 ? 'Selesai' : 'Lanjut ke IST ' + this.next }}</v-btn>
+        block>{{ this.$store.state.testNumber === 9 && test === 'ist' || testNumber === 4 && test === 'cfit' ? 'Selesai' : 'Lanjut ke IST ' + (this.next + 1) }}</v-btn>
       </v-card-text>
     </v-card>
 
@@ -64,12 +64,12 @@
           block>Mulai Tes</v-btn>
 
           <v-btn class="text-capitalize font-weight-regular mt-2"
-          @click="testNumber === 9 ? finish() : nextTest()"
+          @click="testNumber === 9 && test === 'ist' || testNumber === 4 && test === 'cfit' ? finish() : nextTest()"
           color="primary"
           large
           depressed
           v-show="currentInstruction[0] == false"
-          block>{{ this.$store.state.testNumber === 9 ? 'Selesai' : 'Lanjut ke IST ' + this.next }}</v-btn>
+          block>{{ this.$store.state.testNumber === 9 && test === 'ist' || testNumber === 4 && test === 'cfit' ? 'Selesai' : 'Lanjut ke IST ' + (this.next + 1) }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -97,8 +97,8 @@ export default {
   },
   mounted () {
     this.next = this.testNumber + 1
-    this.instructionUpdate()
     this.getData()
+    this.instructionUpdate()
   },
   computed: {
     date () {
@@ -158,9 +158,11 @@ export default {
       this.$store.commit('questionsDataReset')
       this.$store.commit('instructionDataReset')
       this.$store.commit('setTest', this.$cookies.get('type'))
+      console.log('')
       axios.get(this.baseUrl + '/json/' + this.test + '/' + this.testNumber + '/instruction.json')
         .then(response => {
           this.$store.commit('instructionDataUpdate', response.data)
+          console.log(this.$store.state.instructionData)
           this.$store.commit('numAnswersUpdate', response.data)
           this.timeOption = this.instructions.map(x => {
             return x.timer
@@ -240,7 +242,7 @@ export default {
     finish () {
       clearInterval(this.countdown)
       this.$cookies.remove('user')
-      this.$router.push('/')
+      this.$router.push('/menu')
     }
   }
 }

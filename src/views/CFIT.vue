@@ -26,21 +26,17 @@ export default {
   data () {
     return {
       instruction: [
-        [false, 120],
+        [true, 120],
         [true, 120],
         [true, 120],
         [true, 120]
       ]
     }
   },
-  mounted () {
+  created () {
     this.$cookies.remove('instruction')
     this.$cookies.set('instruction', JSON.stringify(this.instruction))
     this.$store.commit('instructionReset', this.instruction)
-    this.$store.commit('questionsDataReset')
-    this.$store.commit('resetCurrent')
-    this.$store.commit('testReset')
-    this.$store.commit('instructionDataReset')
   }
 }
 </script>

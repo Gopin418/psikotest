@@ -50,9 +50,6 @@ export default {
     },
     testNumber () {
       return this.$store.state.testNumber
-    },
-    instructions () {
-      return this.$store.state.instructionData
     }
   },
   methods: {
