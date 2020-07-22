@@ -7,6 +7,7 @@ import Menu from '../views/Menu.vue'
 import FirstTest from '../views/FirstTest.vue'
 import SecondTest from '../views/SecondTest.vue'
 import Cfit from '../views/CFIT.vue'
+import Surveys from '../views/Surveys.vue'
 
 Vue.use(VueRouter)
 
@@ -40,6 +41,11 @@ const routes = [
     path: '/cfit',
     name: 'CFIT',
     component: Cfit
+  },
+  {
+    path: '/surveys',
+    name: 'Surveys',
+    component: Surveys
   },
   {
     path: '/about',

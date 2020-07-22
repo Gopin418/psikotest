@@ -40,12 +40,12 @@
         </div>
         <v-btn class="text-capitalize font-weight-regular mt-2" @click="startTest()" v-show="currentInstruction[0] == true" :disabled="current < 2 && this.rememberStatus == false" large color="primary" depressed block>Mulai Tes</v-btn>
         <v-btn class="text-capitalize font-weight-regular mt-2"
-        @click="testNumber === 9 && test === 'ist' || testNumber === 4 && test === 'cfit' ? finish() : nextTest()"
+        @click="testNumber === 9 && test === 'ist' || testNumber === 4 && test === 'cfit' || test === 'survey' ? finish() : nextTest()"
         color="primary"
         large
         depressed
         v-show="currentInstruction[0] == false" :disabled="current == this.$store.state.numbers[1] ? false : true"
-        block>{{ this.$store.state.testNumber === 9 && test === 'ist' || testNumber === 4 && test === 'cfit' ? 'Selesai' : 'Lanjut ke IST ' + (this.next + 1) }}</v-btn>
+        block>{{ this.$store.state.testNumber === 9 && test === 'ist' || testNumber === 4 && test === 'cfit' || test === 'survey' ? 'Selesai' : 'Lanjut ke IST ' + (this.next + 1) }}</v-btn>
       </v-card-text>
     </v-card>
 
@@ -64,12 +64,12 @@
           block>Mulai Tes</v-btn>
 
           <v-btn class="text-capitalize font-weight-regular mt-2"
-          @click="testNumber === 9 && test === 'ist' || testNumber === 4 && test === 'cfit' ? finish() : nextTest()"
+          @click="testNumber === 9 && test === 'ist' || testNumber === 4 && test === 'cfit' || test === 'survey' ? finish() : nextTest()"
           color="primary"
           large
           depressed
           v-show="currentInstruction[0] == false"
-          block>{{ this.$store.state.testNumber === 9 && test === 'ist' || testNumber === 4 && test === 'cfit' ? 'Selesai' : 'Lanjut ke IST ' + (this.next + 1) }}</v-btn>
+          block>{{ this.$store.state.testNumber === 9 && test === 'ist' || testNumber === 4 && test === 'cfit' || test === 'survey' ? 'Selesai' : 'Lanjut ke IST ' + (this.next + 1) }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

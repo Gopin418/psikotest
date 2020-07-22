@@ -41,7 +41,8 @@ export default {
       menus: [
         { title: 'IST', type: 'ist', link: '/first-test' },
         { title: 'Pauli Test', type: 'pauli', link: '/second-test' },
-        { title: 'CFIT', type: 'cfit', link: '/cfit' }
+        { title: 'CFIT', type: 'cfit', link: '/cfit' },
+        { title: 'Kuisioner', type: 'survey', link: '/surveys' }
       ]
     }
   },
