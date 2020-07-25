@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-// require('dotenv').config()
 var JWT = require('./jwt-auth')
 var mysql = require('mysql')
 var sql = mysql.createConnection({
@@ -8,8 +7,6 @@ var sql = mysql.createConnection({
   password: process.env.DB_PASS,
   database: process.env.DB_NAME
 })
-// var HashMap = require('hashmap')
-// var Storage = require('node-storage')
 
 var router = require('express').Router()
 
@@ -18,9 +15,6 @@ router.get('/ambil-info-hasil-test-ist', function (req, res) {
 })
 
 router.post('/simpan-data-jawaban-normal', function (req, res) {
-  // var sesi = req.body.sesi
-  // var kodeTest = req.body.kdTest
-
   var token = req.headers.Authorization
   console.log(token)
   var session = ''
@@ -40,11 +34,11 @@ router.post('/simpan-data-jawaban-normal', function (req, res) {
   var waktu = req.body.time
   var jawaban = req.body.answer_data
 
-  var Query = ' INSERT INTO t_test (id_user, sesi, tipe_test, waktu) '
-  Query += ' VALUES (?, ?, ?, ?) '
+  var Query = ' INSERT INTO t_test (id_user, sesi, tipe_test, nomor_test, waktu) '
+  Query += ' VALUES (?, ?, ?, ?, ?) '
 
   sql.beginTransaction(function (_err) {
-    var data = [idUser, sesi, tipeTest, nomorTest]
+    var data = [idUser, sesi, tipeTest, nomorTest, waktu]
 
     sql.query(Query, data, function (_err, results, fields) {
       console.log(_err)
@@ -57,7 +51,7 @@ router.post('/simpan-data-jawaban-normal', function (req, res) {
       var idTest = results.insertId
       console.log(idTest)
 
-      Query = ' UPDATE t_jawaban_normal pasti = 0 WHERE id_test = ? and nomo_soal = ? '
+      Query = ' UPDATE t_jawaban_normal pasti = 0 WHERE id_test = ? and nomor_soal = ? '
       Query += ' VALUES (?, ?) '
       for (let i = 0; i < jawaban.length; i++) {
         var nomorSoal = jawaban[i][0]
@@ -81,36 +75,25 @@ router.post('/simpan-data-jawaban-normal', function (req, res) {
           sql.query(Query, data, function (_err, results, fields) {
             console.log(_err)
             if (_err) {
+              res.status(501).send({ error: 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin' })
+              sql.rollback(function (_err) { })
+              throw _err
+            }
+            if (i >= jawaban.length - 1) {
+              sql.commit(function (_err) {
+                if (_err) {
+                  res.status(501).send({ error: 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin' })
+                  sql.rollback(function (_err) { })
+                  throw _err
+                }
+                console.log('success!')
+                res.send({ succes: 'success' })
+              })
             }
           })
         })
       }
     })
-
-    // for (let i = 0; i < jawaban.length; i++) {
-    //   const val = [idUser, sesi, jawaban[i], waktu]
-    //   sql.query(Query, val, function (_err, results, fields) {
-    //     console.log(_err)
-    //     if (_err) {
-    //       res.status(500).send({ error: _err })
-    //       return sql.rollback(function (_err) {
-    //         throw _err
-    //       })
-    //     }
-
-    //     if (i === jawaban.length - 1) {
-    //       sql.commit(function (_err) {
-    //         if (_err) {
-    //           return sql.rollback(function (_err) {
-    //             throw _err
-    //           })
-    //         }
-    //         console.log('success!')
-    //         res.send({ succes: results.insertId })
-    //       })
-    //     }
-    //   })
-    // }
   })
 })
 

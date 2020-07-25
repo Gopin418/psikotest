@@ -1,5 +1,4 @@
 
-// require('dotenv').config()
 const { JWT, JWK } = require('jose')
 
 const key = JWK.asKey({
