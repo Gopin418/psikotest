@@ -20,8 +20,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
   data () {
     return {
@@ -29,10 +27,12 @@ export default {
     }
   },
   created () {
-    axios.get(this.backendUrl + '/api/user')
-      .then(response => {
-        this.$store.commit('saveUser', response.data.user)
-      })
+    const user = {
+      firstName: this.$cookies.get('name'),
+      userNumber: this.$cookies.get('number')
+    }
+
+    this.$store.commit('saveUser', user)
   },
   computed: {
     user () {
@@ -42,6 +42,8 @@ export default {
   methods: {
     logout () {
       this.$cookies.remove('token')
+      this.$cookies.remove('name')
+      this.$cookies.remove('number')
       this.$router.push('/')
     }
   }
