@@ -13,6 +13,7 @@
               name="name"
               outlined
               color="primary"
+              @focusout="answering(question.number, $event.target.value)"
               :value="question.answer"
               autofocus
               type="text"
@@ -27,10 +28,14 @@
 
 <script>
 export default {
-  date () {
+  data () {
     return {
-      baseUrl: process.env.VUE_APP_BASE_URL
+      baseUrl: process.env.VUE_APP_BASE_URL,
+      answersData: []
     }
+  },
+  created () {
+    this.$root.$refs.fillAnswer = this
   },
   computed: {
     current () {
@@ -41,6 +46,16 @@ export default {
     },
     testNumber () {
       return this.$store.state.testNumber
+    }
+  },
+  methods: {
+    answering (number, answer) {
+      this.answersData.push([number, answer])
+      this.$store.commit('saveAnswer', this.answersData)
+    },
+    reset () {
+      this.$store.commit('resetAnswer')
+      this.answersData = []
     }
   }
 }

@@ -6,7 +6,11 @@
       <p v-if="testNumber == 5">{{ question.question }}</p>
       <p v-if="testNumber == 6" class="text-center text-h6">{{ question.question }}</p>
       <v-row class="mx-10">
-        <v-checkbox v-for="i in 10" :key="i" class="mx-4" :label="i != 10 ? i.toString() : '0'"></v-checkbox>
+        <v-checkbox v-for="i in 10" :key="i"
+          class="mx-4"
+          :label="i != 10 ? i.toString() : '0'"
+          @change="answers(question.number, i, $event)"
+          ></v-checkbox>
       </v-row>
       </div>
     </div>
@@ -16,9 +20,10 @@
 
 <script>
 export default {
-  date () {
+  data () {
     return {
-      baseUrl: process.env.VUE_APP_BASE_URL
+      baseUrl: process.env.VUE_APP_BASE_URL,
+      answersData: []
     }
   },
   computed: {
@@ -30,6 +35,19 @@ export default {
     },
     testNumber () {
       return this.$store.state.testNumber
+    }
+  },
+  created () {
+    this.$root.$refs.numericAnswer = this
+  },
+  methods: {
+    answers (number, answer, event) {
+      this.answersData.push([number, answer, event])
+      this.$store.commit('saveAnswer', this.answersData)
+    },
+    reset () {
+      this.$store.commit('resetAnswer')
+      this.answersData = []
     }
   }
 }

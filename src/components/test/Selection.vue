@@ -8,6 +8,7 @@
             <v-radio v-for="selection in question.question_marks"
             :key="selection"
             :label="selection"
+            @change="answers(question.number, selection)"
             :value="selection"></v-radio>
           </v-radio-group>
       </div>
@@ -18,6 +19,15 @@
 
 <script>
 export default {
+  data () {
+    return {
+      answersData: [],
+      currentTest: 1
+    }
+  },
+  created () {
+    this.$root.$refs.answer = this
+  },
   computed: {
     current () {
       return this.$store.state.current
@@ -27,6 +37,19 @@ export default {
     },
     questions () {
       return this.$store.state.questions
+    },
+    answeredData () {
+      return this.$store.state.answersData
+    }
+  },
+  methods: {
+    answers (number, answer) {
+      this.answersData.push([number, answer])
+      this.$store.commit('saveAnswer', this.answersData)
+    },
+    reset () {
+      this.$store.commit('resetAnswer')
+      this.answersData = []
     }
   }
 }

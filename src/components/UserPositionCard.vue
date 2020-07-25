@@ -45,7 +45,7 @@
         large
         depressed
         v-show="currentInstruction[0] == false" :disabled="current == this.$store.state.numbers[1] ? false : true"
-        block>{{ this.$store.state.testNumber === 9 && test === 'ist' || testNumber === 4 && test === 'cfit' || test === 'survey' ? 'Selesai' : 'Lanjut ke IST ' + (this.next + 1) }}</v-btn>
+        block>{{ this.$store.state.testNumber === 9 && test === 'ist' || testNumber === 4 && test === 'cfit' || test === 'survey' ? 'Selesai' : 'Lanjut ke ' + test + ' Selanjutnya' }}</v-btn>
       </v-card-text>
     </v-card>
 
@@ -69,7 +69,7 @@
           large
           depressed
           v-show="currentInstruction[0] == false"
-          block>{{ this.$store.state.testNumber === 9 && test === 'ist' || testNumber === 4 && test === 'cfit' || test === 'survey' ? 'Selesai' : 'Lanjut ke IST ' + (this.next + 1) }}</v-btn>
+          block>{{ this.$store.state.testNumber === 9 && test === 'ist' || testNumber === 4 && test === 'cfit' || test === 'survey' ? 'Selesai' : 'Lanjut ke ' + test + ' Selanjutnya' }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -86,13 +86,22 @@ export default {
       jump: 0,
       time: 0,
       currentInstruction: [],
+      timeUsed: 0,
       dialog: false,
       instruction: [],
       timeOption: [],
       questionTime: [],
       countdown: '',
       next: 0,
-      baseUrl: process.env.VUE_APP_BASE_URL
+      baseUrl: process.env.VUE_APP_BASE_URL,
+      answerData: {
+        user_id: '',
+        user_name: '',
+        test_type: '',
+        test_number: '',
+        time: '',
+        answer_data: ''
+      }
     }
   },
   mounted () {
@@ -101,6 +110,9 @@ export default {
     this.instructionUpdate()
   },
   computed: {
+    user () {
+      return this.$store.state.user
+    },
     date () {
       return this.$store.state.timer
     },
@@ -126,6 +138,12 @@ export default {
     },
     test () {
       return this.$store.state.testType
+    },
+    tesType () {
+      return this.$store.state.currentTest
+    },
+    answeredData () {
+      return this.$store.state.answersData
     }
   },
   methods: {
@@ -138,7 +156,6 @@ export default {
       this.currentInstruction = []
       this.currentInstruction.push(this.instruction[this.testNumber - 1])
       this.currentInstruction = this.currentInstruction.flat()
-      console.log(this.currentInstruction)
     },
     getRememberData () {
       axios.get(this.baseUrl + '/json/' + this.test + '/' + this.testNumber + '/remember.json')
@@ -158,11 +175,9 @@ export default {
       this.$store.commit('questionsDataReset')
       this.$store.commit('instructionDataReset')
       this.$store.commit('setTest', this.$cookies.get('type'))
-      console.log('')
       axios.get(this.baseUrl + '/json/' + this.test + '/' + this.testNumber + '/instruction.json')
         .then(response => {
           this.$store.commit('instructionDataUpdate', response.data)
-          console.log(this.$store.state.instructionData)
           this.$store.commit('numAnswersUpdate', response.data)
           this.timeOption = this.instructions.map(x => {
             return x.timer
@@ -189,6 +204,7 @@ export default {
       clearInterval(this.countdown)
       this.countdown = setInterval(() => {
         this.$store.commit('setTime', moment(this.date).subtract(1, 'seconds'))
+        this.timeUsed += 1
         this.time = this.date.format('mm:ss')
         if (this.time === '00:00') {
           clearInterval(this.countdown)
@@ -220,23 +236,45 @@ export default {
     },
     nextTest () {
       this.dialog = false
-      this.$store.commit('moveTest')
-      this.next = this.testNumber
-      clearInterval(this.countdown)
-      if (this.testNumber === 9) {
-        this.$store.commit('startRemember')
-        this.getRememberData()
-      } else {
-        this.getData()
+      this.answerData = {
+        user_id: this.user[0].userNumber,
+        user_name: this.user[0].firstName,
+        test_type: this.test,
+        test_number: this.testNumber,
+        time: this.timeUsed,
+        answer_data: JSON.stringify(this.answeredData)
       }
+      axios.post('http://localhost:8001/api/answer', this.answerData)
+        .then(response => {
+          this.$store.commit('moveTest')
+          this.next = this.testNumber
+          if (this.tesType === 'selection') {
+            this.$root.$refs.answer.reset()
+          } else if (this.testType === 'numeric') {
+            this.$root.$refs.numericAnswer.reset()
+          } else if (this.testType === 'fill') {
+            this.$root.$refs.fillAnswer.reset()
+          } else if (this.testType === 'image') {
+            this.$root.$refs.imageAnswer.reset()
+          }
+          clearInterval(this.countdown)
+          if (this.testNumber === 9) {
+            this.$store.commit('startRemember')
+            this.getRememberData()
+          } else {
+            this.getData()
+          }
 
-      if (this.testNumber === 9 && this.rememberStatus === false) {
-        this.$store.commit('rememberEnable')
-      } else if (this.testNumber === 9 && this.rememberStatus === true) {
-        this.$store.commit('rememberDisable')
-        this.getData()
-      }
-      this.instructionUpdate()
+          if (this.testNumber === 9 && this.rememberStatus === false) {
+            this.$store.commit('rememberEnable')
+          } else if (this.testNumber === 9 && this.rememberStatus === true) {
+            this.$store.commit('rememberDisable')
+            this.getData()
+          }
+          this.instructionUpdate()
+        }).catch(e => {
+          console.log(e)
+        })
       this.$forceUpdate()
     },
     finish () {

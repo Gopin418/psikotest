@@ -16,7 +16,7 @@
             round
             :elevation="elevate(answers, question.number, alphabets)"
             :color="color(answers, question.number, alphabets)"
-            @click.native="answering( [alphabets, question.number], questions.questions.length )">
+            @click.native="answering( [question.number, alphabets], questions.questions.length )">
               <v-img width="120" :src="baseUrl + '/img/' + selection + '.png'"></v-img>
             </v-card>
           </v-col>
@@ -47,11 +47,14 @@ export default {
       return this.$store.state.questions
     }
   },
+  created () {
+    this.$root.$refs.imageAnswer = this
+  },
   methods: {
     elevate (data, number, mark) {
       let elevate = '0'
       for (var i = 0; i < data.length; i++) {
-        if (data[i][1] === number && data[i][0] === mark) {
+        if (data[i][0] === number && data[i][1] === mark) {
           elevate = '12'
         }
       }
@@ -60,7 +63,7 @@ export default {
     color (data, number, mark) {
       let color = ''
       for (var i = 0; i < data.length; i++) {
-        if (data[i][1] === number && data[i][0] === mark) {
+        if (data[i][0] === number && data[i][1] === mark) {
           color = 'primary'
         }
       }
@@ -71,7 +74,7 @@ export default {
         this.answers.push(data)
       } else {
         for (var i = 0; i < this.answers.length; i++) {
-          if (this.answers[i][1] === data[1]) {
+          if (this.answers[i][0] === data[0]) {
             this.answers[i] = data
           } else if (this.answers[i + 1] === undefined) {
             this.answers.push(data)
@@ -81,7 +84,15 @@ export default {
           }
         }
       }
+      this.answersPush()
       this.$forceUpdate()
+    },
+    answersPush () {
+      this.$store.commit('saveAnswer', this.answers)
+    },
+    reset () {
+      this.$store.commit('resetAnswer')
+      this.answers = []
     }
   }
 }
