@@ -96,8 +96,6 @@ export default {
       baseUrl: process.env.VUE_APP_BASE_URL,
       backendUrl: process.env.VUE_APP_BACKEND_URL,
       answerData: {
-        user_id: '',
-        user_name: '',
         test_type: '',
         test_number: '',
         time: '',
@@ -238,12 +236,10 @@ export default {
     nextTest () {
       this.dialog = false
       this.answerData = {
-        user_id: this.user[0].userNumber,
-        user_name: this.user[0].firstName,
         test_type: this.test,
         test_number: this.testNumber,
         time: this.timeUsed,
-        answer_data: JSON.stringify(this.answeredData)
+        answer_data: this.answeredData
       }
       axios.post(this.backendUrl + '/api/answer', this.answerData)
         .then(response => {
