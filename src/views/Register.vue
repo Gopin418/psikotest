@@ -135,7 +135,7 @@
                             :items="['Laki-laki', 'Perempuan']"
                             label="Jenis Kelamin"
                             outlined
-                            v-model="user.gender"
+                            @change="gender"
                             dense></v-select>
                         </v-col>
                       </v-row>
@@ -172,7 +172,7 @@ export default {
   data () {
     return {
       backendUrl: process.env.VUE_APP_BACKEND_URL,
-      educations: ['SD', 'SMP', 'SMA/K', 'Diploma 1', 'Diploma 2', 'Diploma 3', 'Strata 1', 'Strata 2', 'Strata 3'],
+      educations: ['Sekolah Dasar', 'Sekolah Lanjutan Tingkat Pertama', 'Sekolah Lanjutan Tingkat Atas', 'Diploma', 'Strata 1', 'Strata 2', 'Strata 3'],
       modal: false,
       step: 1,
       type: 'password',
@@ -211,6 +211,13 @@ export default {
           this.icon = 'eye-off'
       }
     },
+    gender (gender) {
+      if (gender === 'Laki-laki') {
+        this.user.gender = 1
+      } else if (gender === 'Perempuan') {
+        this.user.gender = 2
+      }
+    },
     back () {
       this.step -= 1
       this.subtitle = 'Buat akun dan lanjutkan ke PSI'
@@ -220,7 +227,8 @@ export default {
       this.subtitle = this.user.email
     },
     register () {
-      axios.post(this.backendUrl + '/api/auth/register', this.user)
+      this.user.birthdate = new Date(this.user.birthdate).getTime()
+      axios.post(this.backendUrl + '/api/auth/registrasi', this.user)
         .then(response => {
           // expected 201 code before redirect to Login page
           if (response.data.messages.code === 201) {

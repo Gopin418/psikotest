@@ -2,25 +2,27 @@
   <div class="">
     <Header/>
     <Timer class="fixed" v-show="show" />
-    <v-container>
-      <v-row>
-        <v-col v-for="(a, index) in this.pauli" :key="index">
-          <table>
-            <tr v-for="(i, indexes) in a" :key="indexes">
-              <td height="57" class="py-3">{{ i }}</td>
-              <td rowspan="10" v-if="indexes === 0">
-                <table class="my-4">
-                  <tr v-for="(x, indexing) in 9" :key="indexing" class="spaceUnder">
-                    <td>
-                      <v-text-field maxlength="1" @keyup="keyUp(a[indexing], a[x], $event.target.value)" class="pa-0" outlined dense></v-text-field>
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-          </table>
-        </v-col>
-      </v-row>
+    <v-container fluid>
+      <v-card class="scroll mx-auto px-4" outlined max-height="900" max-width="1300">
+        <v-row>
+          <v-col v-for="(a, index) in this.pauli" :key="index">
+            <table>
+              <tr v-for="(i, indexes) in a" :key="indexes">
+                <td height="57" class="py-3">{{ i }}</td>
+                <td rowspan="10" v-if="indexes === 0">
+                  <table width="50" class="my-4">
+                    <tr v-for="(x, indexing) in 9" :key="indexing" class="spaceUnder">
+                      <td>
+                        <v-text-field maxlength="1" @keyup="keyUp(a[indexing], a[x], $event.target.value)" class="pa-0" outlined dense></v-text-field>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </v-col>
+        </v-row>
+      </v-card>
     </v-container>
 
     <v-dialog v-model="dialog" persistent max-width="430">
@@ -71,7 +73,7 @@ export default {
   },
   created () {
     var pauli = []
-    for (var i = 0; i < 15; i++) {
+    for (var i = 0; i < 50; i++) {
       for (var x = 0; x < 10; x++) {
         pauli.push(Math.floor(Math.random() * 9) + 1)
       }
@@ -151,5 +153,14 @@ tr.spaceUnder>td {
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
+}
+
+.scroll {
+  overflow-y: none !important;
+  overflow-x: scroll !important;
+}
+
+.row {
+  flex-wrap: nowrap;
 }
 </style>
