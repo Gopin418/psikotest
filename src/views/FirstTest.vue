@@ -3,7 +3,7 @@
     <Header/>
     <v-row class="mt-8">
       <v-col class="pl-12" cols="8">
-        <ISTHeader/>
+        <SecondHeader/>
         <QuestionCard/>
       </v-col>
       <v-col class="pr-12">
@@ -17,12 +17,12 @@
 import Header from '../components/Header'
 import QuestionCard from '../components/QuestionCard'
 import UserPositionCard from '../components/UserPositionCard'
-import ISTHeader from '../components/ISTHeader'
+import SecondHeader from '../components/SecondHeader'
 
 export default {
   components: {
     Header,
-    ISTHeader,
+    SecondHeader,
     QuestionCard,
     UserPositionCard
   },

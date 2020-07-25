@@ -77,12 +77,13 @@ export default {
       user: {
         email: '',
         password: ''
-      }
+      },
+      backendUrl: process.env.VUE_APP_BACKEND_URL
     }
   },
   methods: {
     save () {
-      axios.post('http://localhost:8001/api/auth/login', this.user)
+      axios.post(this.backendUrl + '/api/auth/login', this.user)
         .then(response => {
           console.log(response.data)
           // expected response with user profile data and session / token
