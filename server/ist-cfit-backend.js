@@ -56,42 +56,42 @@ router.post('/simpan-data-jawaban-normal', function (req, res) {
       for (let i = 0; i < jawaban.length; i++) {
         var nomorSoal = jawaban[i][0]
         data = [idTest, nomorSoal]
-
-        var jawaban1 = (jawaban[i][1] === undefined) ? null : jawaban[i][1]
-        var jawaban2 = (jawaban[i][2] === undefined) ? null : jawaban[i][2]
-        var jawaban3 = (jawaban[i][3] === undefined) ? null : jawaban[i][3]
-        var jawaban4 = (jawaban[i][4] === undefined) ? null : jawaban[i][4]
-        var jawaban5 = (jawaban[i][5] === undefined) ? null : jawaban[i][5]
-
-        sql.query(Query, data, function (_err, results, fields) {
-          if (_err) {
-            res.status(501).send({ error: 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin' })
-            sql.rollback(function (_err) { })
-            throw _err
+        var jalan = 1
+        for (let j = 1; j < 21 && jalan === 1; j++) {
+          var indexSoal = j
+          if (jawaban[indexSoal] === undefined) {
+            jalan = 0
           }
-          Query = ' INSERT INTO t_jawaban_normal (id_test, nomor_soal, jawaban1, jawaban2, jawaban3, jawaban4, jawaban5, pasti) '
-          Query += ' VALUES (?, ?, ?, ?, ?, ?, ?, 1) '
-          data = [idTest, nomorSoal, jawaban1, jawaban2, jawaban3, jawaban4, jawaban5]
           sql.query(Query, data, function (_err, results, fields) {
-            console.log(_err)
             if (_err) {
               res.status(501).send({ error: 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin' })
               sql.rollback(function (_err) { })
               throw _err
             }
-            if (i >= jawaban.length - 1) {
-              sql.commit(function (_err) {
-                if (_err) {
-                  res.status(501).send({ error: 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin' })
-                  sql.rollback(function (_err) { })
-                  throw _err
-                }
-                console.log('success!')
-                res.send({ succes: 'success' })
-              })
-            }
+            Query = ' INSERT INTO t_jawaban_normal (id_test, nomor_soal, index_soal, jawaban, pasti) '
+            Query += ' VALUES (?, ?, ?, ?, 1) '
+            data = [idTest, nomorSoal, indexSoal, jawaban]
+            sql.query(Query, data, function (_err, results, fields) {
+              console.log(_err)
+              if (_err) {
+                res.status(501).send({ error: 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin' })
+                sql.rollback(function (_err) { })
+                throw _err
+              }
+              if (i >= jawaban.length - 1) {
+                sql.commit(function (_err) {
+                  if (_err) {
+                    res.status(501).send({ error: 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin' })
+                    sql.rollback(function (_err) { })
+                    throw _err
+                  }
+                  console.log('success!')
+                  res.send({ succes: 'success' })
+                })
+              }
+            })
           })
-        })
+        }
       }
     })
   })
