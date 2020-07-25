@@ -88,6 +88,8 @@ export default {
           console.log(response.data)
           // expected response with user profile data and session / token
           // this.$router.push('/menu')
+          this.$cookies.set('name', response.data.namaUser)
+          this.$cookies.set('number', response.data.tanggalLahir)
           this.$cookies.set('token', response.data.token)
           this.$router.push('/menu')
         }).catch(e => {
