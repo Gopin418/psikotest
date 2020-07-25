@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 25, 2020 at 04:55 PM
+-- Generation Time: Jul 25, 2020 at 05:28 PM
 -- Server version: 10.5.4-MariaDB
 -- PHP Version: 7.2.7
 
@@ -29,11 +29,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `t_jawaban_normal` (
   `id_test` int(11) NOT NULL,
   `nomor_soal` int(11) NOT NULL,
-  `jawaban1` int(11) DEFAULT NULL,
-  `jawaban2` int(11) DEFAULT NULL,
-  `jawaban3` int(11) DEFAULT NULL,
-  `jawaban4` int(11) DEFAULT NULL,
-  `jawaban5` int(11) DEFAULT NULL,
+  `index_soal` int(11) DEFAULT NULL,
+  `jawaban` int(11) DEFAULT NULL,
   `pasti` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -70,8 +67,11 @@ CREATE TABLE `t_sesi_test` (
 
 INSERT INTO `t_sesi_test` (`id_user`, `sesi`, `tanggal_test`) VALUES
 (1, '6335f3ebf67e08f30c6f', 1595693401941),
+(1, '76dc61d83c5a21ab1daf', 1595696487432),
+(1, '93a8a34d1753890d99b9', 1595696479701),
 (1, 'a44da2823474c8e67fd2', 1595693391096),
-(1, 'a781565cd3c5ae333a31', 1595693405693);
+(1, 'a781565cd3c5ae333a31', 1595693405693),
+(1, 'aedfef48f7ed533458da', 1595696770763);
 
 -- --------------------------------------------------------
 
@@ -149,7 +149,7 @@ ALTER TABLE `t_test`
 -- AUTO_INCREMENT for table `t_users`
 --
 ALTER TABLE `t_users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
