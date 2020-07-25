@@ -64,25 +64,13 @@
                       <v-row class="mt-1">
                         <v-col class="py-0">
                           <v-text-field
-                            label="Nama Depan"
-                            name="firstName"
-                            outlined
-                            dense
-                            autofocus
-                            color="primary"
-                            type="text"
-                            v-model="user.firstName"
-                          ></v-text-field>
-                        </v-col>
-                        <v-col class="py-0">
-                          <v-text-field
-                            label="Nama Belakang"
-                            name="lastName"
+                            label="Nama Lengkap"
+                            name="name"
                             outlined
                             dense
                             color="primary"
                             type="text"
-                            v-model="user.lastName"
+                            v-model="user.fullname"
                           ></v-text-field>
                         </v-col>
                       </v-row>
@@ -134,6 +122,16 @@
                       <v-row>
                         <v-col cols="6" class="py-0">
                           <v-select
+                            :items="educations"
+                            label="Jenjang Pendidikan"
+                            outlined
+                            v-model="user.education"
+                            dense></v-select>
+                        </v-col>
+                      </v-row>
+                      <v-row>
+                        <v-col cols="6" class="py-0">
+                          <v-select
                             :items="['Laki-laki', 'Perempuan']"
                             label="Jenis Kelamin"
                             outlined
@@ -174,16 +172,17 @@ export default {
   data () {
     return {
       backendUrl: process.env.VUE_APP_BACKEND_URL,
+      educations: ['SD', 'SMP', 'SMA/K', 'Diploma 1', 'Diploma 2', 'Diploma 3', 'Strata 1', 'Strata 2', 'Strata 3'],
       modal: false,
       step: 1,
       type: 'password',
       icon: 'eye-off',
       subtitle: 'Buat akun dan lanjutkan ke PSI',
       user: {
-        firstName: '',
-        lastName: '',
+        fullname: '',
         city: '',
         birthdate: '',
+        education: '',
         gender: '',
         email: '',
         password: ''
