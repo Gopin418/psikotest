@@ -135,7 +135,7 @@
                             :items="['Laki-laki', 'Perempuan']"
                             label="Jenis Kelamin"
                             outlined
-                            v-model="user.gender"
+                            @change="gender"
                             dense></v-select>
                         </v-col>
                       </v-row>
@@ -209,6 +209,13 @@ export default {
         default:
           this.type = 'password'
           this.icon = 'eye-off'
+      }
+    },
+    gender (gender) {
+      if (gender === 'Laki-laki') {
+        this.user.gender = 1
+      } else if (gender === 'Perempuan') {
+        this.user.gender = 2
       }
     },
     back () {
