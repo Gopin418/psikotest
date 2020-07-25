@@ -173,6 +173,7 @@ import axios from 'axios'
 export default {
   data () {
     return {
+      backendUrl: process.env.VUE_APP_BACKEND_URL,
       modal: false,
       step: 1,
       type: 'password',
@@ -220,7 +221,7 @@ export default {
       this.subtitle = this.user.email
     },
     register () {
-      axios.post('http://localhost:8001/api/auth/register', this.user)
+      axios.post(this.backendUrl + '/api/auth/register', this.user)
         .then(response => {
           // expected 201 code before redirect to Login page
           if (response.data.messages.code === 201) {

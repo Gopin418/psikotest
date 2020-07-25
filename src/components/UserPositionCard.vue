@@ -94,6 +94,7 @@ export default {
       countdown: '',
       next: 0,
       baseUrl: process.env.VUE_APP_BASE_URL,
+      backendUrl: process.env.VUE_APP_BACKEND_URL,
       answerData: {
         user_id: '',
         user_name: '',
@@ -244,7 +245,7 @@ export default {
         time: this.timeUsed,
         answer_data: JSON.stringify(this.answeredData)
       }
-      axios.post('http://localhost:8001/api/answer', this.answerData)
+      axios.post(this.backendUrl + '/api/answer', this.answerData)
         .then(response => {
           this.$store.commit('moveTest')
           this.next = this.testNumber

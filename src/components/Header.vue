@@ -23,8 +23,13 @@
 import axios from 'axios'
 
 export default {
+  data () {
+    return {
+      backendUrl: process.env.VUE_APP_BACKEND_URL
+    }
+  },
   created () {
-    axios.get('http://localhost:8001/api/user')
+    axios.get(this.backendUrl + '/api/user')
       .then(response => {
         this.$store.commit('saveUser', response.data.user)
       })
