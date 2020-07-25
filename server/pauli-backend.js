@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-require('dotenv').config()
+// require('dotenv').config()
 var mysql = require('mysql')
 var sql = mysql.createConnection({
   host: process.env.DB_HOST,
@@ -19,12 +19,6 @@ router.post('/simpan-data-jawaban-pauli', function (req, res) {
   var angkaAtas = req.body.angkaAtas // array
   var angkaBawah = req.body.angkaBawah // array
   var jawaban = req.body.jawaban // array
-  
-
-
-
-
-
 })
 
 module.exports = router

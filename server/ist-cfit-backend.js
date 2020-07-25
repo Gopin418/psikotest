@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 // require('dotenv').config()
-var JWT = require('jwt-auth')
+var JWT = require('./jwt-auth')
 var mysql = require('mysql')
 var sql = mysql.createConnection({
   host: process.env.DB_HOST,
