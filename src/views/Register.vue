@@ -172,7 +172,7 @@ export default {
   data () {
     return {
       backendUrl: process.env.VUE_APP_BACKEND_URL,
-      educations: ['SD', 'SMP', 'SMA/K', 'Diploma 1', 'Diploma 2', 'Diploma 3', 'Strata 1', 'Strata 2', 'Strata 3'],
+      educations: ['Sekolah Dasar', 'Sekolah Lanjutan Tingkat Pertama', 'Sekolah Lanjutan Tingkat Atas', 'Diploma', 'Strata 1', 'Strata 2', 'Strata 3'],
       modal: false,
       step: 1,
       type: 'password',
