@@ -45,7 +45,7 @@
         large
         depressed
         v-show="currentInstruction[0] == false" :disabled="current == this.$store.state.numbers[1] ? false : true"
-        block>{{ this.$store.state.testNumber === 9 && test === 'ist' || testNumber === 4 && test === 'cfit' || test === 'survey' ? 'Selesai' : 'Lanjut ke IST ' + (this.next + 1) }}</v-btn>
+        block>{{ this.$store.state.testNumber === 9 && test === 'ist' || testNumber === 4 && test === 'cfit' || test === 'survey' ? 'Selesai' : 'Lanjut ke ' + test + ' Selanjutnya' }}</v-btn>
       </v-card-text>
     </v-card>
 
@@ -69,7 +69,7 @@
           large
           depressed
           v-show="currentInstruction[0] == false"
-          block>{{ this.$store.state.testNumber === 9 && test === 'ist' || testNumber === 4 && test === 'cfit' || test === 'survey' ? 'Selesai' : 'Lanjut ke IST ' + (this.next + 1) }}</v-btn>
+          block>{{ this.$store.state.testNumber === 9 && test === 'ist' || testNumber === 4 && test === 'cfit' || test === 'survey' ? 'Selesai' : 'Lanjut ke ' + test + ' Selanjutnya' }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -138,6 +138,9 @@ export default {
     },
     test () {
       return this.$store.state.testType
+    },
+    tesType () {
+      return this.$store.state.currentTest
     },
     answeredData () {
       return this.$store.state.answersData
@@ -245,7 +248,15 @@ export default {
         .then(response => {
           this.$store.commit('moveTest')
           this.next = this.testNumber
-          this.$root.$refs.answer.reset()
+          if (this.tesType === 'selection') {
+            this.$root.$refs.answer.reset()
+          } else if (this.testType === 'numeric') {
+            this.$root.$refs.numericAnswer.reset()
+          } else if (this.testType === 'fill') {
+            this.$root.$refs.fillAnswer.reset()
+          } else if (this.testType === 'image') {
+            this.$root.$refs.imageAnswer.reset()
+          }
           clearInterval(this.countdown)
           if (this.testNumber === 9) {
             this.$store.commit('startRemember')
