@@ -4,7 +4,7 @@ import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Menu from '../views/Menu.vue'
-import FirstTest from '../views/FirstTest.vue'
+import IST from '../views/IST.vue'
 import Pauli from '../views/Pauli.vue'
 import Cfit from '../views/CFIT.vue'
 import Surveys from '../views/Surveys.vue'
@@ -28,12 +28,12 @@ const routes = [
     component: Menu
   },
   {
-    path: '/first-test',
-    name: 'FirstTest',
-    component: FirstTest
+    path: '/ist',
+    name: 'IST',
+    component: IST
   },
   {
-    path: '/second-test',
+    path: '/pauli',
     name: 'Pauli',
     component: Pauli
   },
