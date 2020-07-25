@@ -1,17 +1,18 @@
 <template lang="html">
   <div class="">
     <Header/>
+    <Timer class="fixed" v-show="show" />
     <v-container>
       <v-row>
-        <v-col v-for="a in 15" :key="a">
+        <v-col v-for="(a, index) in this.pauli" :key="index">
           <table>
-            <tr v-for="i in 10" :key="i">
-              <td height="57" class="py-3">{{ Math.floor(Math.random() * 9) + 1 }}</td>
-              <td rowspan="10" v-if="i === 1">
+            <tr v-for="(i, indexes) in a" :key="indexes">
+              <td height="57" class="py-3">{{ i }}</td>
+              <td rowspan="10" v-if="indexes === 0">
                 <table class="my-4">
-                  <tr v-for="x in 9" :key="x" class="spaceUnder">
+                  <tr v-for="(x, indexing) in 9" :key="indexing" class="spaceUnder">
                     <td>
-                      <v-text-field maxlength="1" @keyup="keyUp" class="pa-0" outlined dense></v-text-field>
+                      <v-text-field maxlength="1" @keyup="keyUp(a[indexing], a[x], $event.target.value)" class="pa-0" outlined dense></v-text-field>
                     </td>
                   </tr>
                 </table>
@@ -21,23 +22,82 @@
         </v-col>
       </v-row>
     </v-container>
+
+    <v-dialog v-model="dialog" persistent max-width="430">
+      <v-card>
+        <v-card-title class="headline">
+          <p class="mx-auto">Tes Pauli</p>
+        </v-card-title>
+        <v-card-text class="text-center">Diberi waktu 15 menit untuk mengerjakan test.</v-card-text>
+        <v-card-actions>
+          <v-btn class="text-capitalize font-weight-regular mt-2"
+          @click="startTest()"
+          large
+          color="primary"
+          depressed
+          block>Mulai Tes</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
 <script>
 import Header from '../components/Header'
+import Timer from '../components/Timer'
+
+import axios from 'axios'
 
 export default {
   components: {
-    Header
+    Header,
+    Timer
   },
   data () {
     return {
-      answers: []
+      backendUrl: process.env.VUE_APP_BACKEND_URL,
+      answers: [],
+      show: false,
+      dialog: true,
+      pauli: [],
+      answersData: {
+        test_type: 'pauli',
+        test_number: 1,
+        upper_number: [],
+        bottom_number: [],
+        answers: []
+      }
     }
   },
-  mounted () {
-    this.timer()
+  created () {
+    var pauli = []
+    for (var i = 0; i < 15; i++) {
+      for (var x = 0; x < 10; x++) {
+        pauli.push(Math.floor(Math.random() * 9) + 1)
+      }
+      this.pauli.push(pauli)
+      pauli = []
+    }
+  },
+  computed: {
+    counter () {
+      return this.$store.state.timer
+    }
+  },
+  watch: {
+    counter (newCount, oldCount) {
+      if (newCount === 59) {
+        axios.post(this.backendUrl + '/api/answer', this.answerData)
+          .then(() => {
+            this.answersData.test_number += 1
+            this.answersData.upper_number = []
+            this.answersData.bottom_number = []
+            this.answersData.answers = []
+          }).catch(e => {
+            console.log(e)
+          })
+      }
+    }
   },
   methods: {
     timer () {
@@ -52,12 +112,19 @@ export default {
         this.timer()
       }, 10000)
     },
-    keyUp (answer) {
-      if (answer.keyCode >= 48 && answer.keyCode <= 57) {
-        this.answers.push(answer.key)
+    keyUp (upper, bottom, answer) {
+      for (var i = 0; i < 10; i++) {
+        if (answer === i.toString()) {
+          this.answersData.upper_number.push(upper)
+          this.answersData.bottom_number.push(bottom)
+          this.answersData.answers.push(answer)
+        }
       }
-      console.log(answer.key)
-      console.log(this.answers)
+      console.log(this.answersData)
+    },
+    startTest () {
+      this.dialog = false
+      this.$root.$refs.timer.timeSet()
     }
   }
 }
@@ -73,5 +140,16 @@ export default {
 tr.spaceUnder>td {
   padding-bottom: 8px;
   padding-top: 10px;
+}
+
+.fixed {
+  position: fixed
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>
