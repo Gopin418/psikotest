@@ -34,13 +34,19 @@ router.post('/simpan-data-jawaban-normal', function (req, res) {
   var waktu = req.body.time
   var jawaban = req.body.answer_data
 
-  var Query = ' INSERT INTO t_test (id_user, sesi, tipe_test, nomor_test, waktu) '
-  Query += ' VALUES (?, ?, ?, ?, ?) '
+  var Query1 = ' INSERT INTO t_test (id_user, sesi, tipe_test, nomor_test, waktu) '
+  Query1 += ' VALUES (?, ?, ?, ?, ?) '
+
+  var Query2 = ' UPDATE t_jawaban_normal pasti = 0 WHERE id_test = ? and nomor_soal = ? '
+  Query2 += ' VALUES (?, ?) '
+
+  var Query3 = ' INSERT INTO t_jawaban_normal (id_test, nomor_soal, index_soal, jawaban, pasti) '
+  Query3 += ' VALUES (?, ?, ?, ?, 1) '
 
   sql.beginTransaction(function (_err) {
     var data = [idUser, sesi, tipeTest, nomorTest, waktu]
 
-    sql.query(Query, data, function (_err, results, fields) {
+    sql.query(Query1, data, function (_err, results, fields) {
       console.log(_err)
       if (_err) {
         res.status(501).send({ error: 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin' })
@@ -51,27 +57,23 @@ router.post('/simpan-data-jawaban-normal', function (req, res) {
       var idTest = results.insertId
       console.log(idTest)
 
-      Query = ' UPDATE t_jawaban_normal pasti = 0 WHERE id_test = ? and nomor_soal = ? '
-      Query += ' VALUES (?, ?) '
       for (let i = 0; i < jawaban.length; i++) {
         var nomorSoal = jawaban[i][0]
         data = [idTest, nomorSoal]
-        var jalan = 1
-        for (let j = 1; j < 21 && jalan === 1; j++) {
-          var indexSoal = j
-          if (jawaban[indexSoal] === undefined) {
-            jalan = 0
+        sql.query(Query2, data, function (_err, results, fields) {
+          if (_err) {
+            res.status(501).send({ error: 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin' })
+            sql.rollback(function (_err) { })
+            throw _err
           }
-          sql.query(Query, data, function (_err, results, fields) {
-            if (_err) {
-              res.status(501).send({ error: 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin' })
-              sql.rollback(function (_err) { })
-              throw _err
+
+          for (let j = 1; j < 21; j++) {
+            var indexSoal = j
+            if (jawaban[indexSoal] === undefined) {
+              break
             }
-            Query = ' INSERT INTO t_jawaban_normal (id_test, nomor_soal, index_soal, jawaban, pasti) '
-            Query += ' VALUES (?, ?, ?, ?, 1) '
             data = [idTest, nomorSoal, indexSoal, jawaban]
-            sql.query(Query, data, function (_err, results, fields) {
+            sql.query(Query3, data, function (_err, results, fields) {
               console.log(_err)
               if (_err) {
                 res.status(501).send({ error: 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin' })
@@ -90,8 +92,8 @@ router.post('/simpan-data-jawaban-normal', function (req, res) {
                 })
               }
             })
-          })
-        }
+          }
+        })
       }
     })
   })

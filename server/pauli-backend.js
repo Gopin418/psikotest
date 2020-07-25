@@ -43,13 +43,16 @@ router.post('/simpan-data-jawaban-pauli', function (req, res) {
   var angkaBawah = req.body.bottom_number // array
   var jawaban = req.body.answers // array
 
-  var Query = ' INSERT INTO t_test (id_user, sesi, tipe_test, nomor_test, waktu) '
-  Query += ' VALUES (?, ?, ?, ?, ?) '
+  var Query1 = ' INSERT INTO t_test (id_user, sesi, tipe_test, nomor_test, waktu) '
+  Query1 += ' VALUES (?, ?, ?, ?, ?) '
+
+  var Query2 = ' INSERT INTO t_jawaban_normal (id_test, angka_atas, angka_bawah, jawaban, status) '
+  Query2 += ' VALUES (?, ?, ?, ?, ?, ?, ?, 1) '
 
   sql.beginTransaction(function (_err) {
     var data = [idUser, sesi, tipeTest, nomorTest, waktu]
 
-    sql.query(Query, data, function (_err, results, fields) {
+    sql.query(Query1, data, function (_err, results, fields) {
       console.log(_err)
       if (_err) {
         res.status(501).send({ error: 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin' })
@@ -60,8 +63,6 @@ router.post('/simpan-data-jawaban-pauli', function (req, res) {
       var idTest = results.insertId
       console.log(idTest)
 
-      Query = ' UPDATE t_jawaban_pauli pasti = 0 WHERE id_test = ? and nomor_soal = ? '
-      Query += ' VALUES (?, ?) '
       for (let i = 0; i < jawaban.length; i++) {
         var nomorSoal = jawaban[i][0]
         data = [idTest, nomorSoal]
@@ -71,34 +72,26 @@ router.post('/simpan-data-jawaban-pauli', function (req, res) {
 
         var status = (angkaAtas1 + angkaBawah1) === jawaban1 ? 1 : 0
 
-        sql.query(Query, data, function (_err, results, fields) {
+        data = [idTest, nomorSoal, angkaAtas1, angkaBawah1, jawaban1, status]
+
+        sql.query(Query2, data, function (_err, results, fields) {
+          console.log(_err)
           if (_err) {
             res.status(501).send({ error: 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin' })
             sql.rollback(function (_err) { })
             throw _err
           }
-          Query = ' INSERT INTO t_jawaban_normal (id_test, angka_atas, angka_bawah, jawaban, status) '
-          Query += ' VALUES (?, ?, ?, ?, ?, ?, ?, 1) '
-          data = [idTest, nomorSoal, angkaAtas1, angkaBawah1, jawaban1, status]
-          sql.query(Query, data, function (_err, results, fields) {
-            console.log(_err)
-            if (_err) {
-              res.status(501).send({ error: 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin' })
-              sql.rollback(function (_err) { })
-              throw _err
-            }
-            if (i >= jawaban.length - 1) {
-              sql.commit(function (_err) {
-                if (_err) {
-                  res.status(501).send({ error: 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin' })
-                  sql.rollback(function (_err) { })
-                  throw _err
-                }
-                console.log('success!')
-                res.send({ succes: 'success' })
-              })
-            }
-          })
+          if (i >= jawaban.length - 1) {
+            sql.commit(function (_err) {
+              if (_err) {
+                res.status(501).send({ error: 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin' })
+                sql.rollback(function (_err) { })
+                throw _err
+              }
+              console.log('success!')
+              res.send({ succes: 'success' })
+            })
+          }
         })
       }
     })
