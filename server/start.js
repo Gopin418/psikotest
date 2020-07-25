@@ -6,14 +6,14 @@ require('dotenv').config()
 var fs = require('fs')
 var express = require('express')
 var app = express()
-var compression = require('compression')
+// var compression = require('compression')
 var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser')
 // var HashMap = require('hashmap')
 // var Storage = require('node-storage')
-var webPush = require('web-push')
+// var webPush = require('web-push')
 var cors = require('cors')
-var fileUpload = require('express-fileupload')
+// var fileUpload = require('express-fileupload')
 
 var mysql = require('mysql')
 // var sql = mysql.createConnection({
@@ -30,12 +30,12 @@ var mysql = require('mysql')
 
 app.use(cors())
 // app.use(compression());
-app.use(fileUpload({
-  createParentPath: true,
-  fileSize: 5 * 1024 * 1024,
-  useTempFiles: true,
-  tempFileDir: '/tmp/'
-}))
+// app.use(fileUpload({
+//   createParentPath: true,
+//   fileSize: 5 * 1024 * 1024,
+//   useTempFiles: true,
+//   tempFileDir: '/tmp/'
+// }))
 app.use(bodyParser.json({ extended: true }))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())

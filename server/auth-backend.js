@@ -18,7 +18,6 @@ router.post('/auth/registrasi', function (req, res) {
 
     console.log(req.body)
 
-
     var email = req.body.email
     var password = req.body.email
     var fullname = req.body.fullname
