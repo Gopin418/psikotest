@@ -63,20 +63,20 @@ const router = new VueRouter({
   routes
 })
 
-const openRoutes = ['login', 'register']
+// const openRoutes = ['login', 'register']
 
-router.beforeEach((to, from, next) => {
-  if (openRoutes.includes(to.name)) {
-    if (!window.$cookies.get('token')) {
-      next()
-    } else {
-      next('/menu')
-    }
-  } else if (window.$cookies.get('token')) {
-    next()
-  } else {
-    next('/')
-  }
-})
+// router.beforeEach((to, from, next) => {
+//   if (openRoutes.includes(to.name)) {
+//     if (!window.$cookies.get('token')) {
+//       next()
+//     } else {
+//       next('/menu')
+//     }
+//   } else if (window.$cookies.get('token')) {
+//     next()
+//   } else {
+//     next('/')
+//   }
+// })
 
 export default router
