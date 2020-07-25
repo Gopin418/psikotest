@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 25, 2020 at 04:41 PM
+-- Generation Time: Jul 25, 2020 at 04:55 PM
 -- Server version: 10.5.4-MariaDB
 -- PHP Version: 7.2.7
 
@@ -133,7 +133,8 @@ ALTER TABLE `t_test`
 -- Indexes for table `t_users`
 --
 ALTER TABLE `t_users`
-  ADD PRIMARY KEY (`id_user`);
+  ADD PRIMARY KEY (`id_user`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- AUTO_INCREMENT for dumped tables

@@ -16,12 +16,26 @@ router.post('/auth/registrasi', function (req, res) {
     Query += ' tanggal_lahir, jenis_kelamin, jenjang_pendidikan, aktif) '
     Query += ' VALUES (?, ?, ?, ?, ?, ?, ?, 1)'
 
-    const data = [req.body.email, req.body.password, req.body.fullname,
-      req.body.city, req.body.birthdate, req.body.gender, req.body.education]
+    console.log(req.body)
+
+
+    var email = req.body.email
+    var password = req.body.email
+    var fullname = req.body.fullname
+    var city = req.body.city
+    var birthdate = req.body.birthdate
+    var gender = req.body.gender
+    var education = req.body.education
+
+    const data = [email, password, fullname, city, birthdate, gender, education]
 
     sql.query(Query, data, function (_err) {
       if (_err) {
-        res.status(501).send({ error: 'Gagal menyimpan data registrasi, silahkan coba lagi.' })
+        if (_err.code === 'ER_DUP_ENTRY') {
+          res.status(502).send({ error: 'Gagal menyimpan data registrasi, email sudah digunakan, silahkan ganti.' })
+        } else {
+          res.status(501).send({ error: 'Gagal menyimpan data registrasi, silahkan coba lagi.' })
+        }
         sql.rollback(function (_err) { })
         throw _err
       }
@@ -31,6 +45,7 @@ router.post('/auth/registrasi', function (req, res) {
           sql.rollback(function (_err) { })
           throw _err
         }
+        res.send({sucess: 'succes' })
       })
     })
   })
