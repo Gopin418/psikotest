@@ -7,17 +7,20 @@ import vuetify from './plugins/vuetify'
 import 'roboto-fontface/css/roboto/roboto-fontface.css'
 import '@mdi/font/css/materialdesignicons.css'
 import '@babel/polyfill'
+import axios from 'axios'
 import VueCookies from 'vue-cookies'
-import api from './api.js'
+import VueAxios from 'vue-axios'
+
+// import api from './api.js'
 
 Vue.use(VueCookies)
-
+Vue.use(VueAxios, axios)
 Vue.config.productionTip = false
 
-Vue.prototype.$http = api
-api.defaults.timeout = 10000
+// Vue.prototype.$http = api
 
-api.interceptors.request.use(
+axios.defaults.timeout = 10000
+axios.interceptors.request.use(
   config => {
     const token = window.$cookies.get('token')
     if (token) {
@@ -27,7 +30,8 @@ api.interceptors.request.use(
   },
   error => {
     return Promise.reject(error)
-  })
+  }
+)
 
 new Vue({
   router,

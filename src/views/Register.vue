@@ -166,7 +166,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 
 export default {
   data () {
@@ -228,7 +227,7 @@ export default {
     },
     register () {
       this.user.birthdate = new Date(this.user.birthdate).getTime()
-      axios.post(this.backendUrl + '/api/auth/registrasi', this.user)
+      this.axios.post(this.backendUrl + '/api/auth/registrasi', this.user)
         .then(response => {
           // expected 201 code before redirect to Login page
           if (response.data.messages.code === 201) {
