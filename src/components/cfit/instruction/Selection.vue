@@ -55,7 +55,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 
 export default {
   data () {
@@ -81,7 +80,7 @@ export default {
     }
   },
   mounted () {
-    axios.get(this.baseUrl + '/json/cfit/' + this.testNumber + '/instruction.json')
+    this.axios.get(this.baseUrl + '/json/cfit/' + this.testNumber + '/instruction.json')
       .then(response => {
         this.$store.commit('instructionDataUpdate', response.data)
         this.$store.commit('numAnswersUpdate', response.data)

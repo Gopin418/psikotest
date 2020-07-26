@@ -65,7 +65,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 
 export default {
   name: 'Login',
@@ -83,7 +82,7 @@ export default {
   },
   methods: {
     save () {
-      axios.post(this.backendUrl + '/api/auth/login', this.user)
+      this.axios.post(this.backendUrl + '/api/auth/login', this.user)
         .then(response => {
           console.log(response.data)
           // expected response with user profile data and session / token

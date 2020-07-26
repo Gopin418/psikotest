@@ -23,7 +23,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 
 export default {
   data () {
@@ -48,7 +47,7 @@ export default {
     }
   },
   mounted () {
-    axios.get(this.baseUrl + '/json/' + this.test + '/' + this.testNumber + '/test.json')
+    this.axios.get(this.baseUrl + '/json/' + this.test + '/' + this.testNumber + '/test.json')
       .then(response => {
         this.$store.commit('questionsDataUpdate', response.data)
       }).catch(e => {
