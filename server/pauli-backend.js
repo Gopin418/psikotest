@@ -23,7 +23,7 @@ router.post('/simpan-data-jawaban-pauli', function (req, res) {
 
 router.post('/simpan-data-jawaban-pauli', function (req, res) {
   var token = req.headers.Authorization
-  console.log(token)
+  console.log(req)
   var session = ''
 
   try {

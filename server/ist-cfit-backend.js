@@ -16,7 +16,7 @@ router.get('/ambil-info-hasil-test-ist', function (req, res) {
 
 router.post('/simpan-data-jawaban-normal', function (req, res) {
   var token = req.headers.Authorization
-  console.log(token)
+  console.log(req.headers)
   var session = ''
 
   try {

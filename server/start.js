@@ -13,7 +13,7 @@ var cookieParser = require('cookie-parser')
 // var Storage = require('node-storage')
 // var webPush = require('web-push')
 var cors = require('cors')
-// var fileUpload = require('express-fileupload')
+var fileUpload = require('express-fileupload')
 
 var mysql = require('mysql')
 // var sql = mysql.createConnection({
@@ -30,14 +30,24 @@ var mysql = require('mysql')
 
 app.use(cors())
 // app.use(compression());
-// app.use(fileUpload({
-//   createParentPath: true,
-//   fileSize: 5 * 1024 * 1024,
-//   useTempFiles: true,
-//   tempFileDir: '/tmp/'
-// }))
-app.use(bodyParser.json({ extended: true }))
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(fileUpload({
+  createParentPath: true,
+  fileSize: 5 * 1024 * 1024,
+  useTempFiles: true,
+  tempFileDir: '/tmp/'
+}))
+app.use(bodyParser.json({
+  extended: true,
+  verify: (req, res, buf) => {
+    req.rawBody = buf
+  }
+}))
+app.use(bodyParser.urlencoded({
+  extended: true,
+  verify: (req, res, buf) => {
+    req.rawBody = buf
+  }
+}))
 app.use(cookieParser())
 app.set('port', 1111)
 

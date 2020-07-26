@@ -17,6 +17,7 @@ router.post('/auth/registrasi', function (req, res) {
     Query += ' VALUES (?, ?, ?, ?, ?, ?, ?, 1)'
 
     console.log(req.body)
+    console.log(req.rawBody)
 
     var email = req.body.email
     var password = req.body.email
