@@ -23,7 +23,7 @@ new Vue({
   mounted () {
     api.interceptors.request.use(
       config => {
-        const token = window.$cookies.get('token')
+        const token = this.$cookies.get('token')
         if (token) {
           config.headers.Authorization = token
         }
