@@ -10,17 +10,14 @@ var sql = mysql.createConnection({
 
 var router = require('express').Router()
 
-router.get('/ambil-info-hasil-test-ist', function (req, res) {
-  var sesi = req.params.sesi
-})
-
 router.post('/simpan-data-jawaban-normal', function (req, res) {
-  var token = req.headers.Authorization
-  console.log(req.headers)
+  var token = req.headers.authorization
+  console.log(token)
   var session = ''
 
   try {
     session = JWT.verify(token)
+    console.log(session)
   } catch (_err) {
     res.status(501).send({ error: 'Sesi anda sudah tidak valid, silahkan login ulang.' })
     throw _err
@@ -37,8 +34,7 @@ router.post('/simpan-data-jawaban-normal', function (req, res) {
   var Query1 = ' INSERT INTO t_test (id_user, sesi, tipe_test, nomor_test, waktu) '
   Query1 += ' VALUES (?, ?, ?, ?, ?) '
 
-  var Query2 = ' UPDATE t_jawaban_normal pasti = 0 WHERE id_test = ? and nomor_soal = ? '
-  Query2 += ' VALUES (?, ?) '
+  var Query2 = ' UPDATE t_jawaban_normal SET pasti = 0 WHERE id_test = ? and nomor_soal = ? '
 
   var Query3 = ' INSERT INTO t_jawaban_normal (id_test, nomor_soal, index_soal, jawaban, pasti) '
   Query3 += ' VALUES (?, ?, ?, ?, 1) '
@@ -47,7 +43,6 @@ router.post('/simpan-data-jawaban-normal', function (req, res) {
     var data = [idUser, sesi, tipeTest, nomorTest, waktu]
 
     sql.query(Query1, data, function (_err, results, fields) {
-      console.log(_err)
       if (_err) {
         res.status(501).send({ error: 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin' })
         sql.rollback(function (_err) {})
@@ -69,10 +64,10 @@ router.post('/simpan-data-jawaban-normal', function (req, res) {
 
           for (let j = 1; j < 21; j++) {
             var indexSoal = j
-            if (jawaban[indexSoal] === undefined) {
+            if (jawaban[i][indexSoal] === undefined) {
               break
             }
-            data = [idTest, nomorSoal, indexSoal, jawaban]
+            data = [idTest, nomorSoal, indexSoal, jawaban[i][indexSoal]]
             sql.query(Query3, data, function (_err, results, fields) {
               console.log(_err)
               if (_err) {
@@ -81,6 +76,7 @@ router.post('/simpan-data-jawaban-normal', function (req, res) {
                 throw _err
               }
               if (i >= jawaban.length - 1) {
+                console.log('Commit Data!')
                 sql.commit(function (_err) {
                   if (_err) {
                     res.status(501).send({ error: 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin' })

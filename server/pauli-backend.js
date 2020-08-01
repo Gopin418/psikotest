@@ -64,15 +64,13 @@ router.post('/simpan-data-jawaban-pauli', function (req, res) {
       console.log(idTest)
 
       for (let i = 0; i < jawaban.length; i++) {
-        var nomorSoal = jawaban[i][0]
-        data = [idTest, nomorSoal]
         var angkaAtas1 = (angkaAtas[i] === undefined) ? null : angkaAtas[i]
         var angkaBawah1 = (angkaBawah[i] === undefined) ? null : angkaBawah[i]
         var jawaban1 = (jawaban[i] === undefined) ? null : jawaban[i]
 
         var status = (angkaAtas1 + angkaBawah1) === jawaban1 ? 1 : 0
 
-        data = [idTest, nomorSoal, angkaAtas1, angkaBawah1, jawaban1, status]
+        data = [idTest, angkaAtas1, angkaBawah1, jawaban1, status]
 
         sql.query(Query2, data, function (_err, results, fields) {
           console.log(_err)
