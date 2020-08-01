@@ -240,7 +240,7 @@ export default {
         time: this.timeUsed,
         answer_data: this.answeredData
       }
-      this.axios.post(this.backendUrl + '/api/answer', this.answerData)
+      this.axios.post(this.backendUrl + '/api/simpan-data-jawaban-normal', this.answerData)
         .then(response => {
           this.$store.commit('moveTest')
           this.next = this.testNumber
