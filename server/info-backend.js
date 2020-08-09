@@ -11,10 +11,6 @@ var sql = mysql.createConnection({
 
 var router = require('express').Router()
 
-router.get('/ambil-data-peserta', function (req, res) {
-
-})
-
 router.get('/ambil-kunci-jawaban-normal', function (req, res) {
   var session = JWT.check(req, res)
   if (session === null) {
@@ -38,6 +34,16 @@ router.get('/ambil-kunci-jawaban-normal', function (req, res) {
     }
     res.status(200).send(results)
   })
+})
+
+
+router.get('/ambil-data-peserta', function (req, res) {
+  var session = JWT.check(req, res)
+  if (session === null) {
+    return
+  }
+
+  
 })
 
 router.get('/ambil-data-test', function (req, res) {

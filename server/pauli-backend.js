@@ -54,22 +54,15 @@ router.post('/simpan-data-jawaban-pauli', function (req, res) {
   Query2 += ' VALUES (?, ?, ?, ?, ?, ?, ?, 1) '
 
   sql.beginTransaction(function (_err) {
-    // var data = [idUser, sesi]
-
-    // sql.query(Query0, data, function (_err, results, fields) {
-    //   if (results.length > 0) {
-    //     res.status(501).send({ error: 'Test ini sudah pernah dilakukan, tidak bisa lagi diulangi.' })
-    //     return
-    //   }
     var data = [idUser, sesi, tipeTest, nomorTest, waktu]
 
     sql.query(Query1, data, function (_err, results, fields) {
 
       if (_err) {
         if (_err.code === 'ER_DUP_ENTRY') {
-          pError.kirimPesanError(req, sql, _err, 'Test ini sudah pernah dilakukan, tidak bisa lagi diulangi.')
+          pError.kirimPesanError(res, sql, _err, 'Test ini sudah pernah dilakukan, tidak bisa lagi diulangi.')
         } else {
-          pError.kirimPesanError(req, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
+          pError.kirimPesanError(res, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
           return
         }
       }
@@ -89,13 +82,13 @@ router.post('/simpan-data-jawaban-pauli', function (req, res) {
         sql.query(Query2, data, function (_err, results, fields) {
           console.log(_err)
           if (_err) {
-            pError.kirimPesanError(req, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
+            pError.kirimPesanError(res, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
             return
           }
           if (i >= jawaban.length - 1) {
             sql.commit(function (_err) {
               if (_err) {
-                pError.kirimPesanError(req, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
+                pError.kirimPesanError(res, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
                 return
               }
               console.log('success!')

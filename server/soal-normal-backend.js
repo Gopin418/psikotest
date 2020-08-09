@@ -49,14 +49,14 @@ router.post('/simpan-data-jawaban-normal', function (req, res) {
     sql.query(Query1, data, function (_err, results, fields) {
       if (_err) {
         if (_err.code === 'ER_DUP_ENTRY') {
-          pError.kirimPesanError(req, sql, _err, 'Test ini sudah pernah dilakukan, tidak bisa lagi diulangi.')
+          pError.kirimPesanError(res, sql, _err, 'Test ini sudah pernah dilakukan, tidak bisa lagi diulangi.')
         } else {
-          pError.kirimPesanError(req, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
+          pError.kirimPesanError(res, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
           return
         }
       }
 
-      var idTest = results.INSERTId
+      var idTest = results.insertId
       console.log(idTest)
 
       for (let i = 0; i < jawaban.length; i++) {
@@ -64,7 +64,7 @@ router.post('/simpan-data-jawaban-normal', function (req, res) {
         data = [idTest, nomorSoal]
         sql.query(Query2, data, function (_err, results, fields) {
           if (_err) {
-            pError.kirimPesanError(req, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
+            pError.kirimPesanError(res, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
             return
           }
 
@@ -77,14 +77,14 @@ router.post('/simpan-data-jawaban-normal', function (req, res) {
             sql.query(Query3, data, function (_err, results, fields) {
               console.log(_err)
               if (_err) {
-                pError.kirimPesanError(req, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
+                pError.kirimPesanError(res, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
                 return
               }
               if (i >= jawaban.length - 1) {
                 console.log('Commit simpan-data-jawaban-normal')
                 sql.commit(function (_err) {
                   if (_err) {
-                    pError.kirimPesanError(req, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
+                    pError.kirimPesanError(res, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
                     return
                   }
                   console.log('success!')

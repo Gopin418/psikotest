@@ -54,7 +54,7 @@ router.post('/auth/registrasi', function (req, res) {
       }
       sql.commit(function (_err) {
         if (_err) {
-          pError.kirimPesanError(req, sql, _err, 'Gagal menyimpan sesi, silahkan coba lagi.')
+          pError.kirimPesanError(res, sql, _err, 'Gagal menyimpan sesi, silahkan coba lagi.')
           // res.status(501).send({ error: 'Gagal menyimpan sesi, silahkan coba lagi.' })
           // sql.rollback(function (_err) { })
           // console.error(_err)
@@ -86,7 +86,6 @@ router.post('/auth/logout-selesai-test', function (req, res) {
   var Query = ' UPDATE t_sesi_test SET tanggal_selesai = ? WHERE id_user = ? and sesi = ? '
 
   sql.beginTransaction(function (_err) {
-    var tanggalSelesai = Date.now()
     var data = [Date.now(), idUser, sesi]
     sql.query(Query, data, function (_err) {
       if (_err) {
@@ -97,7 +96,7 @@ router.post('/auth/logout-selesai-test', function (req, res) {
 
       sql.commit(function (_err) {
         if (_err) {
-          pError.kirimPesanError(req, sql, _err, 'Gagal menyimpan sesi, silahkan coba lagi.')
+          pError.kirimPesanError(res, sql, _err, 'Gagal menyimpan sesi, silahkan coba lagi.')
           return
         }
         console.log('success logout')
@@ -141,12 +140,12 @@ var login = function (req, res, tipe) {
       var data = [idUser, sesi, tanggalTest]
       sql.query(Query, data, function (_err) {
         if (_err) {
-          pError.kirimPesanError(req, sql, _err, 'Gagal menyimpan sesi, silahkan coba lagi.')
+          pError.kirimPesanError(res, sql, _err, 'Gagal menyimpan sesi, silahkan coba lagi.')
           return
         }
         sql.commit(function (_err) {
           if (_err) {
-            pError.kirimPesanError(req, sql, _err, 'Gagal menyimpan sesi, silahkan coba lagi.')
+            pError.kirimPesanError(res, sql, _err, 'Gagal menyimpan sesi, silahkan coba lagi.')
             return
           }
 

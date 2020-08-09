@@ -6,7 +6,7 @@ require('dotenv').config()
 var fs = require('fs')
 var express = require('express')
 var app = express()
-// var compression = require('compression')
+var compression = require('compression')
 var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser')
 // var HashMap = require('hashmap')
@@ -14,8 +14,8 @@ var cookieParser = require('cookie-parser')
 // var webPush = require('web-push')
 var cors = require('cors')
 var fileUpload = require('express-fileupload')
-
-var mysql = require('mysql')
+// var JWT = require('./jwt-auth')
+// var mysql = require('mysql')
 // var sql = mysql.createConnection({
 //   host: '127.0.0.1',
 //   user: 'root',
@@ -29,7 +29,7 @@ var mysql = require('mysql')
 // webPush.setVapidDetails('mailto:syamsu.', publicVapidKey, privateVapidKey)
 
 app.use(cors())
-// app.use(compression());
+app.use(compression())
 app.use(fileUpload({
   createParentPath: true,
   fileSize: 5 * 1024 * 1024,

@@ -57,13 +57,13 @@ router.post('/simpan-pengesahan-jawaban-normal', function (req, res) {
         data = [Date.now(), idUser, sesiSoal, tipeTest, nomorTest]
         sql.query(Query2, data, function (_err, results, fields) {
           if (_err) {
-            pError.kirimPesanError(req, sql, _err, 'Pengesahan gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
+            pError.kirimPesanError(res, sql, _err, 'Pengesahan gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
             return
           }
           console.log('Commit ubah simpan-pengesahan-jawaban-normal')
           sql.commit(function (_err) {
             if (_err) {
-              pError.kirimPesanError(req, sql, _err, 'Pengesahan gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
+              pError.kirimPesanError(res, sql, _err, 'Pengesahan gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
               return
             }
             console.log('success!')
@@ -111,13 +111,13 @@ router.post('/simpan-periksa-jawaban-normal', function (req, res) {
         data = [benar, salah, catatan, new Date().getTime(), idUser, sesiSoal, tipeTest, nomorTest]
         sql.query(Query2, data, function (_err, results, fields) {
           if (_err) {
-            pError.kirimPesanError(req, sql, _err, 'Pemeriksaan gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
+            pError.kirimPesanError(res, sql, _err, 'Pemeriksaan gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
             return
           }
           console.log('Commit ubah simpan-periksa-jawaban-normal')
           sql.commit(function (_err) {
             if (_err) {
-              pError.kirimPesanError(req, sql, _err, 'Pemeriksaan gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
+              pError.kirimPesanError(res, sql, _err, 'Pemeriksaan gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
               return
             }
             console.log('success!')
@@ -128,13 +128,13 @@ router.post('/simpan-periksa-jawaban-normal', function (req, res) {
         data = [sesiSoal, tipeTest, nomorTest, benar, salah, catatan, new Date().getTime(), idUser]
         sql.query(Query3, data, function (_err, results, fields) {
           if (_err) {
-            pError.kirimPesanError(req, sql, _err, 'Pemeriksaan gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
+            pError.kirimPesanError(res, sql, _err, 'Pemeriksaan gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
             return
           }
           console.log('Commit tambah simpan-periksa-jawaban-normal')
           sql.commit(function (_err) {
             if (_err) {
-              pError.kirimPesanError(req, sql, _err, 'Pemeriksaan gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
+              pError.kirimPesanError(res, sql, _err, 'Pemeriksaan gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
               return
             }
             console.log('success!')
