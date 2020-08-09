@@ -32,7 +32,7 @@ router.post('/simpan-kunci-jawaban-normal', function (req, res) {
   var data = []
   sql.beginTransaction(function (_err) {
     for (let i = 0; i < kunciJawaban.length; i++) {
-      if (kunciJawaban[i][0] < 1) {
+      if (kunciJawaban[i].id_kunci < 1) {
         Query = Query1
         data = [kunciJawaban[i].tipe_test, kunciJawaban[i].nomor_test, kunciJawaban[i].nomor_soal,
           kunciJawaban[i].index_jawaban, kunciJawaban[i].tipe_kunci_jawaban, kunciJawaban[i].kunci_jawaban,
