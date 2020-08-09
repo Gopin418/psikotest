@@ -54,7 +54,7 @@ router.post('/simpan-pengesahan-jawaban-normal', function (req, res) {
     var data = [sesiSoal, tipeTest, nomorTest]
     sql.query(Query1, data, function (_err, results, fields) {
       if (results.length > 0) { // UPDATE
-        data = [new Date().getTime(), idUser, sesiSoal, tipeTest, nomorTest]
+        data = [Date.now(), idUser, sesiSoal, tipeTest, nomorTest]
         sql.query(Query2, data, function (_err, results, fields) {
           if (_err) {
             pError.kirimPesanError(req, sql, _err, 'Pengesahan gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')

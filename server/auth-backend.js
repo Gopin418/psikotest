@@ -74,6 +74,39 @@ router.post('/auth/login-admin', function (req, res) {
   login(req, res, '1')
 })
 
+router.post('/auth/logout-selesai-test', function (req, res) {
+  var session = JWT.check(req, res)
+  if (session === null) {
+    return
+  }
+
+  var idUser = session.idUser
+  var sesi = session.sesi
+
+  var Query = ' UPDATE t_sesi_test SET tanggal_selesai = ? WHERE id_user = ? and sesi = ? '
+
+  sql.beginTransaction(function (_err) {
+    var tanggalSelesai = Date.now()
+    var data = [Date.now(), idUser, sesi]
+    sql.query(Query, data, function (_err) {
+      if (_err) {
+        res.status(501).send({ error: 'Tidak bisa mengakhiri sesi, silahkan ulangi.' })
+        console.error(_err)
+        return
+      }
+
+      sql.commit(function (_err) {
+        if (_err) {
+          pError.kirimPesanError(req, sql, _err, 'Gagal menyimpan sesi, silahkan coba lagi.')
+          return
+        }
+        console.log('success logout')
+        res.send({ succes: 'success' })
+      })
+    })
+  })
+})
+
 var login = function (req, res, tipe) {
   var email = req.body.email
   var password = req.body.password

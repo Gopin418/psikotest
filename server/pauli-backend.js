@@ -67,7 +67,7 @@ router.post('/simpan-data-jawaban-pauli', function (req, res) {
 
       if (_err) {
         if (_err.code === 'ER_DUP_ENTRY') {
-          res.status(501).send({ error: 'Test ini sudah pernah dilakukan, tidak bisa lagi diulangi.' })
+          pError.kirimPesanError(req, sql, _err, 'Test ini sudah pernah dilakukan, tidak bisa lagi diulangi.')
         } else {
           pError.kirimPesanError(req, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
           return
