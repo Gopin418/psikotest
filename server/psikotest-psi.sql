@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 09, 2020 at 12:39 PM
+-- Generation Time: Aug 09, 2020 at 01:28 PM
 -- Server version: 10.5.4-MariaDB
 -- PHP Version: 7.2.7
 
@@ -66,7 +66,7 @@ CREATE TABLE `t_jawaban_pauli` (
   `angka_atas` int(11) NOT NULL,
   `angka_bawah` int(11) NOT NULL,
   `jawaban` int(11) NOT NULL,
-  `status` char(1) NOT NULL
+  `benar_salah` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -95,7 +95,8 @@ CREATE TABLE `t_kunci_jawaban_normal` (
 CREATE TABLE `t_sesi_test` (
   `id_user` int(11) NOT NULL,
   `sesi` varchar(255) NOT NULL,
-  `tanggal_test` bigint(20) NOT NULL
+  `tanggal_test` bigint(20) NOT NULL,
+  `tanggal_selesai` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

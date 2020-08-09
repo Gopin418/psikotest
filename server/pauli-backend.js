@@ -50,7 +50,7 @@ router.post('/simpan-data-jawaban-pauli', function (req, res) {
   var Query1 = ' INSERT INTO t_test (id_user, sesi, tipe_test, nomor_test, waktu) '
   Query1 += ' VALUES (?, ?, ?, ?, ?) '
 
-  var Query2 = ' INSERT INTO t_jawaban_normal (id_test, angka_atas, angka_bawah, jawaban, status) '
+  var Query2 = ' INSERT INTO t_jawaban_normal (id_test, angka_atas, angka_bawah, jawaban, benar_salah) '
   Query2 += ' VALUES (?, ?, ?, ?, ?, ?, ?, 1) '
 
   sql.beginTransaction(function (_err) {
@@ -75,9 +75,9 @@ router.post('/simpan-data-jawaban-pauli', function (req, res) {
         var angkaBawah1 = (angkaBawah[i] === undefined) ? null : angkaBawah[i]
         var jawaban1 = (jawaban[i] === undefined) ? null : jawaban[i]
 
-        var status = (angkaAtas1 + angkaBawah1) === jawaban1 ? 1 : 0
+        var benarSalah = (angkaAtas1 + angkaBawah1) === jawaban1 ? 1 : 0
 
-        data = [idTest, angkaAtas1, angkaBawah1, jawaban1, status]
+        data = [idTest, angkaAtas1, angkaBawah1, jawaban1, benarSalah]
 
         sql.query(Query2, data, function (_err, results, fields) {
           console.log(_err)
