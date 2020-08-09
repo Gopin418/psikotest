@@ -37,18 +37,18 @@ new Vue({
   router,
   store,
   vuetify,
-  mounted () {
-    api.interceptors.request.use(
-      config => {
-        const token = this.$cookies.get('token')
-        if (token) {
-          config.headers.Authorization = token
-        }
-        return config
-      },
-      error => {
-        return Promise.reject(error)
-      })
-  },
+  // mounted () {
+  //   api.interceptors.request.use(
+  //     config => {
+  //       const token = this.$cookies.get('token')
+  //       if (token) {
+  //         config.headers.Authorization = token
+  //       }
+  //       return config
+  //     },
+  //     error => {
+  //       return Promise.reject(error)
+  //     })
+  // },
   render: h => h(App)
 }).$mount('#app')
