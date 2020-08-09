@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 09, 2020 at 02:21 PM
+-- Generation Time: Aug 09, 2020 at 03:16 PM
 -- Server version: 10.5.4-MariaDB
 -- PHP Version: 7.2.7
 
@@ -23,26 +23,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `t_hasil_penilaian_normal`
---
-
-CREATE TABLE `t_hasil_penilaian_normal` (
-  `id_hasil_penilaian_normal` int(11) NOT NULL,
-  `sesi_soal` varchar(255) NOT NULL,
-  `tipe_test` varchar(255) NOT NULL,
-  `nomor_test` int(11) NOT NULL,
-  `benar` int(11) DEFAULT NULL,
-  `salah` int(11) DEFAULT NULL,
-  `catatan` text DEFAULT NULL,
-  `tanggal_periksa` int(11) NOT NULL,
-  `id_user_pemeriksa` int(11) NOT NULL,
-  `tanggal_pengesahan` int(11) DEFAULT NULL,
-  `id_user_yang_mengesahkan` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `t_jawaban_normal`
 --
 
@@ -50,7 +30,7 @@ CREATE TABLE `t_jawaban_normal` (
   `id_test` int(11) NOT NULL,
   `nomor_soal` int(11) NOT NULL,
   `index_jawaban` int(11) DEFAULT NULL,
-  `jawaban` varchar(255) DEFAULT NULL,
+  `jawaban` text DEFAULT NULL,
   `jawaban_terakhir` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -162,12 +142,6 @@ INSERT INTO `t_users` (`id_user`, `email`, `password`, `nama_user`, `tempat_lahi
 --
 
 --
--- Indexes for table `t_hasil_penilaian_normal`
---
-ALTER TABLE `t_hasil_penilaian_normal`
-  ADD PRIMARY KEY (`id_hasil_penilaian_normal`);
-
---
 -- Indexes for table `t_kunci_jawaban_normal`
 --
 ALTER TABLE `t_kunci_jawaban_normal`
@@ -197,11 +171,6 @@ ALTER TABLE `t_users`
 -- AUTO_INCREMENT for dumped tables
 --
 
---
--- AUTO_INCREMENT for table `t_hasil_penilaian_normal`
---
-ALTER TABLE `t_hasil_penilaian_normal`
-  MODIFY `id_hasil_penilaian_normal` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `t_kunci_jawaban_normal`
 --

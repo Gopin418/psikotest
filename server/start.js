@@ -14,19 +14,16 @@ var cookieParser = require('cookie-parser')
 // var webPush = require('web-push')
 var cors = require('cors')
 var fileUpload = require('express-fileupload')
-// var JWT = require('./jwt-auth')
-// var mysql = require('mysql')
-// var sql = mysql.createConnection({
-//   host: '127.0.0.1',
-//   user: 'root',
-//   password: 'root',
-//   database: 'psikotest-psi'
-// })
+
+const swaggerUi = require('swagger-ui-express')
+const swaggerDocument = require('./swagger')
 
 // const publicVapidKey = 'BKg-JjiryYZNMJSb2VrmVhchqVMQh048v0uaktugBPmDNMIBVkGk_XJh6804nYr7ih5TQy6ShM4iI9KPeqLw2XM'
 // const privateVapidKey = 'QhlzIkne0CoBTte09KIcWcGqyEtHbm0bQCY4tC1P1kY'
 
 // webPush.setVapidDetails('mailto:syamsu.', publicVapidKey, privateVapidKey)
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 app.use(cors())
 app.use(compression())

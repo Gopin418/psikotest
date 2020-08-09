@@ -36,7 +36,6 @@ router.get('/ambil-kunci-jawaban-normal', function (req, res) {
   })
 })
 
-
 router.get('/ambil-data-peserta', function (req, res) {
   var session = JWT.check(req, res)
   if (session === null) {
@@ -172,7 +171,9 @@ router.get('/ambil-hasil-pemeriksaan-normal', function (req, res) {
 
     var kunciJawaban = results
 
-    sql.query(QueryKunci, data, function (_err, results, fields) {
+    data = [sesiSoal, tipeTest, nomorTest]
+
+    sql.query(QueryTest, data, function (_err, results, fields) {
       if (_err) {
         res.status(501).send({ error: 'Mengambil jawaban test gagal, silahkan ulangi.' })
         console.error(_err)
