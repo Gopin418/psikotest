@@ -64,10 +64,14 @@ router.post('/simpan-data-jawaban-pauli', function (req, res) {
     var data = [idUser, sesi, tipeTest, nomorTest, waktu]
 
     sql.query(Query1, data, function (_err, results, fields) {
-      console.log(_err)
+
       if (_err) {
-        pError.kirimPesanError(req, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
-        return
+        if (_err.code === 'ER_DUP_ENTRY') {
+          res.status(501).send({ error: 'Test ini sudah pernah dilakukan, tidak bisa lagi diulangi.' })
+        } else {
+          pError.kirimPesanError(req, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
+          return
+        }
       }
 
       var idTest = results.insertId
