@@ -66,12 +66,12 @@ router.get('/ambil-data-test', function (req, res) {
   var tanggalAwal = req.params.tglAwal
   var tanggalAkhir = req.params.tglAkhir
 
-  var Query = ' SELECT a.FROM, a.nama_user, a.tempat_lahir, a.tanggal_lahir, a.jenjang_pendidikan, '
+  var Query = ' SELECT a.id_user, a.nama_user, a.tempat_lahir, a.tanggal_lahir, a.jenjang_pendidikan, '
   Query += ' a.jenis_kelamin, b.sesi, b.tanggal_test, c.id_test, c.tipe_test,  c.nomor_test, c.waktu '
   Query += ' FROM t_users a JOIN  t_sesi_test b ON a.FROM = b.FROM '
   Query += ' JOIN t_test c ON a.FROM = c.FROM and b.sesi = c.sesi '
-  Query += ' WHERE a.FROM = ? and c.tipe_test = ? and b.tanggal_test between ? and ? '
-  Query += ' ORDER BY a.FROM, c.tipe_test, c.nomor_test '
+  Query += ' WHERE a.id_user = ? and c.tipe_test = ? and b.tanggal_test between ? and ? '
+  Query += ' ORDER BY a.id_user, c.tipe_test, c.nomor_test '
 
   var data = [idUser, tipeTest, tanggalAwal, tanggalAkhir]
 
@@ -169,8 +169,12 @@ router.get('/ambil-hasil-pemeriksaan-normal', function (req, res) {
       res.status(501).send({ error: 'Kunci jawaban tidak ditemukan, silahkan isi kunci jawabannya terlebih dahulu.' })
     }
 
-    var kunciJawaban = results
-
+    var kunciJawaban = {
+      total_benar: 0,
+      total_salah: 0,
+      total_score: 0,
+      data: results
+    }
     data = [sesiSoal, tipeTest, nomorTest]
 
     sql.query(QueryTest, data, function (_err, results, fields) {
@@ -186,21 +190,36 @@ router.get('/ambil-hasil-pemeriksaan-normal', function (req, res) {
 
       var jawaban = results
 
-      for (let i = 0; i < kunciJawaban.length; i++) {
+      for (let i = 0; i < kunciJawaban.data.length; i++) {
+        kunciJawaban.data[i].hasil_score = 0
+        kunciJawaban.data[i].benar = 0
+        kunciJawaban.data[i].salah = 1
         for (let j = 0; j < jawaban.length; j++) {
-          if (jawaban[j].tipe_test === kunciJawaban[i].tipe_test &&
-            jawaban[j].nomor_test === kunciJawaban[i].nomor_test &&
-            jawaban[j].index_jawaban === kunciJawaban[i].index_jawaban) {
-            if (kunciJawaban[i].tipe_kunci_jawaban === '1') {
-              kunciJawaban[i].benar = (kunciJawaban[i].kunci_jawaban.trim() === jawaban[j].jawaban.trim()) ? 1 : 0
-              kunciJawaban[i].salah = (kunciJawaban[i].kunci_jawaban.trim() !== jawaban[j].jawaban.trim()) ? 0 : 1
+          if (jawaban[j].tipe_test === kunciJawaban.data[i].tipe_test &&
+            jawaban[j].nomor_test === kunciJawaban.data[i].nomor_test &&
+            jawaban[j].index_jawaban === kunciJawaban.data[i].index_jawaban) {
+            if (kunciJawaban.data[i].tipe_kunci_jawaban === '1') {
+              kunciJawaban.data[i].benar = (kunciJawaban.data[i].kunci_jawaban.trim() === jawaban[j].jawaban.trim()) ? 1 : 0
+              kunciJawaban.data[i].salah = (kunciJawaban.data[i].kunci_jawaban.trim() !== jawaban[j].jawaban.trim()) ? 0 : 1
             } else {
-              kunciJawaban[i].benar = (kunciJawaban[i].kunci_jawaban.split(',').includes(jawaban[j].jawaban.trim())) ? 1 : 0
-              kunciJawaban[i].salah = (kunciJawaban[i].kunci_jawaban.split(',').includes(jawaban[j].jawaban.trim())) ? 0 : 1
+              kunciJawaban.data[i].benar = (kunciJawaban.data[i].kunci_jawaban.split(',').includes(jawaban[j].jawaban.trim())) ? 1 : 0
+              kunciJawaban.data[i].salah = (kunciJawaban.data[i].kunci_jawaban.split(',').includes(jawaban[j].jawaban.trim())) ? 0 : 1
             }
+            kunciJawaban.data[i].hasil_score = (kunciJawaban.data[i].benar === 1) ? kunciJawaban.data[i].hasil_score = kunciJawaban.data[i].nilai_score : 0
           }
         }
       }
+
+      kunciJawaban.total_benar = 0
+      kunciJawaban.total_salah = 0
+      kunciJawaban.total_score = 0
+      for (let i = 0; i < kunciJawaban.length; i++) {
+        kunciJawaban.total_benar += kunciJawaban.data[i].benar
+        kunciJawaban.total_benar += kunciJawaban.data[i].salah
+        kunciJawaban.total_score += kunciJawaban.data[i].hasil_score
+      }
+
+      res.status(200).send(kunciJawaban)
     })
   })
 })
