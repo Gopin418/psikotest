@@ -8,7 +8,6 @@ import QuestionBank from '../views/Dashboard/QuestionBank.vue'
 import Answers from '../views/Dashboard/Answers.vue'
 import UserView from '../views/Dashboard/UsersView.vue'
 import UserList from '../views/Dashboard/Users.vue'
-import UserDetail from '../views/Dashboard/UserDetail.vue'
 
 Vue.use(VueRouter)
 
@@ -56,11 +55,6 @@ const routes = [
             path: '',
             name: 'User List',
             component: UserList
-          },
-          {
-            path: ':name',
-            name: 'User Detail',
-            component: UserDetail
           }
         ]
       }

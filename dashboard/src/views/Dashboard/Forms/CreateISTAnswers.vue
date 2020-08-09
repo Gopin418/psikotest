@@ -34,13 +34,21 @@
                 dense></v-text-field>
 
                 <v-textarea
-                v-if="answersType === 'Banyak'"
+                v-if="answersType === 'Dua'"
                 :label="'Kunci ' + a"
+                v-model="questionNumber[x]"
                 name="answers"
                 auto-grow
                 outlined
                 persistent-hint
                 hint="Tekan Enter untuk kunci jawaban berikutnya"></v-textarea>
+
+                <v-text-field
+                :label="'Score ' + a"
+                v-model="score[x]"
+                name="answers"
+                outlined
+                dense></v-text-field>
             </v-col>
           </v-row>
         </div>
@@ -58,15 +66,18 @@ export default {
   props: [
     'answersType',
     'answersData',
+    'testNumber',
     'createAnswers'
   ],
   data () {
     return {
       keyCount: [],
+      score: [],
       newAnswers: false,
       answers: 0,
       questionNumber: [],
-      keys: []
+      keys: [],
+      data: []
     }
   },
   created () {
@@ -82,6 +93,17 @@ export default {
     }
   },
   methods: {
+    save () {
+      this.data = [{
+        id_kunci: this.keys ? this.keys : 0,
+        tipe_test: this.testType,
+        nomor_test: this.testNumber,
+        nomor_soal: this.questionNumber,
+        index_jawaban: 1,
+        kunci_jawaban: 'kunci_jawaban',
+        nilai_score: this.score
+      }]
+    },
     createAnswer () {
       this.newAnswers = true
       this.answers += 1
