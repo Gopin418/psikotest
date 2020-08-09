@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 09, 2020 at 05:36 PM
+-- Generation Time: Aug 09, 2020 at 05:52 PM
 -- Server version: 10.5.4-MariaDB
 -- PHP Version: 7.2.7
 
@@ -154,7 +154,7 @@ CREATE TABLE `t_test` (
 --
 
 INSERT INTO `t_test` (`id_test`, `id_user`, `sesi`, `tipe_test`, `nomor_test`, `waktu`, `benar`, `salah`, `catatan_pemeriksa`, `id_user_pemeriksa`, `catatan_yang_mengesahkan`, `id_user_yang_mengesahkan`, `tanggal_periksa`, `tanggal_pengesahan`) VALUES
-(1, 1, 'da193091af902ca7159699209105829849814', 'ist', 1, 13, NULL, NULL, NULL, 1, NULL, 1, NULL, NULL),
+(1, 1, 'da193091af902ca7159699209105829849814', 'ist', 1, 13, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2, 1, 'da193091af902ca7159699209105829849814', 'ist', 2, 29, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (3, 1, 'da193091af902ca7159699209105829849814', 'ist', 3, 39, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
