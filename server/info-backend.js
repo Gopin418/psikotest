@@ -17,9 +17,9 @@ router.get('/ambil-kunci-jawaban-normal', function (req, res) {
     return
   }
 
-  var tipeTest = req.params.tipeTest
-  var nomorTest = req.params.nomorTest
-  var nomorSoal = req.params.nomorSoal
+  var tipeTest = req.query.tipeTest
+  var nomorTest = req.query.nomorTest
+  var nomorSoal = req.query.nomorSoal
 
   var Query = 'SELECT * FROM t_kunci_jawaban_normal '
   Query += ' WHERE tipe_test = ? and nomor_test = ? and nomor_soal = ? '
@@ -61,10 +61,10 @@ router.get('/ambil-data-test', function (req, res) {
     return
   }
 
-  var idUser = req.params.idUser
-  var tipeTest = req.params.tipeTest
-  var tanggalAwal = req.params.tglAwal
-  var tanggalAkhir = req.params.tglAkhir
+  var idUser = req.query.idUser
+  var tipeTest = req.query.tipeTest
+  var tanggalAwal = req.query.tglAwal
+  var tanggalAkhir = req.query.tglAkhir
 
   var Query = ' SELECT a.id_user, a.nama_user, a.tempat_lahir, a.tanggal_lahir, a.jenjang_pendidikan, '
   Query += ' a.jenis_kelamin, b.sesi, b.tanggal_test, c.id_test, c.tipe_test,  c.nomor_test, c.waktu '
@@ -92,7 +92,7 @@ router.get('/ambil-detil-data-test-normal', function (req, res) {
     return
   }
 
-  var idTest = req.params.idTest
+  var idTest = req.query.idTest
 
   var Query = ' SELECT * FROM t_jawaban_normal '
   Query += ' WHERE id_test = ? '
@@ -118,7 +118,7 @@ router.get('/ambil-detil-data-test-pauli', function (req, res) {
     return
   }
 
-  var idTest = req.params.idTest
+  var idTest = req.query.idTest
 
   var Query = ' SELECT * FROM t_jawaban_pauli '
   Query += ' WHERE id_test = ? '
@@ -143,9 +143,9 @@ router.get('/ambil-hasil-pemeriksaan-normal', function (req, res) {
     return
   }
 
-  var sesiSoal = req.params.sesiSoal
-  var tipeTest = req.params.tipeTest
-  var nomorTest = req.params.nomorTest
+  var sesiSoal = req.query.sesiSoal
+  var tipeTest = req.query.tipeTest
+  var nomorTest = req.query.nomorTest
 
   var QueryKunci = 'SELECT * FROM t_kunci_jawaban_normal '
   QueryKunci += ' WHERE tipe_test = ? , nomor_test = ? '
