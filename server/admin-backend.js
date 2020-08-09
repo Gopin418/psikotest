@@ -50,24 +50,34 @@ router.post('/simpan-pengesahan-jawaban-normal', function (req, res) {
   Query2 += ' SET tanggal_pengesahan = ?, id_user_yang_mengesahkan = ?  '
   Query2 += ' WHERE sesi_soal = ? and tipe_test = ? and nomor_test = ? '
 
+  var Query21 = 'UPDATE t_test '
+  Query21 += ' SET tanggal_pengesahan = ? '
+  Query21 += ' WHERE sesi = ? and tipe_test = ? and nomor_test = ? '
+
+  var tanggal = Date.now()
+
   sql.beginTransaction(function (_err) {
     var data = [sesiSoal, tipeTest, nomorTest]
     sql.query(Query1, data, function (_err, results, fields) {
       if (results.length > 0) { // UPDATE
-        data = [Date.now(), idUser, sesiSoal, tipeTest, nomorTest]
-        sql.query(Query2, data, function (_err, results, fields) {
+        data = [tanggal, idUser, sesiSoal, tipeTest, nomorTest]
+        sql.query(Query2, data, function (_err) {
           if (_err) {
             pError.kirimPesanError(res, sql, _err, 'Pengesahan gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
             return
           }
-          console.log('Commit ubah simpan-pengesahan-jawaban-normal')
-          sql.commit(function (_err) {
-            if (_err) {
-              pError.kirimPesanError(res, sql, _err, 'Pengesahan gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
-              return
-            }
-            console.log('success!')
-            res.send({ succes: 'success' })
+
+          data = [tanggal, sesiSoal, tipeTest, nomorTest]
+          sql.query(Query21, data, function (_err) {
+            console.log('Commit ubah simpan-pengesahan-jawaban-normal')
+            sql.commit(function (_err) {
+              if (_err) {
+                pError.kirimPesanError(res, sql, _err, 'Pengesahan gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
+                return
+              }
+              console.log('success!')
+              res.send({ succes: 'success' })
+            })
           })
         })
       } else { // INSERT
@@ -100,33 +110,43 @@ router.post('/simpan-periksa-jawaban-normal', function (req, res) {
   Query2 += ' SET benar = ?, salah = ?, catatan = ?,  tanggal_periksa = ?, id_user_pemeriksa = ?  '
   Query2 += ' WHERE sesi_soal = ? and tipe_test = ? and nomor_test = ? '
 
+  var Query21 = 'UPDATE t_test '
+  Query21 += ' SET tanggal_periksa = ? '
+  Query21 += ' WHERE sesi = ? and tipe_test = ? and nomor_test = ? '
+
   var Query3 = 'INSERT INTO t_hasil_penilaian_normal '
   Query3 += ' (sesi_soal, tipe_test, nomor_test, benar, salah, catatan, tanggal_periksa, id_user_pemeriksa) '
   Query3 += ' VALUES (?, ?, ?, ?, ?, ?, ?, ?) '
+
+  var tanggal = Date.now()
 
   sql.beginTransaction(function (_err) {
     var data = [sesiSoal, tipeTest, nomorTest]
     sql.query(Query1, data, function (_err, results, fields) {
       if (results.length > 0) { // UPDATE
-        data = [benar, salah, catatan, new Date().getTime(), idUser, sesiSoal, tipeTest, nomorTest]
-        sql.query(Query2, data, function (_err, results, fields) {
+        data = [benar, salah, catatan, tanggal, idUser, sesiSoal, tipeTest, nomorTest]
+        sql.query(Query2, data, function (_err) {
           if (_err) {
             pError.kirimPesanError(res, sql, _err, 'Pemeriksaan gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
             return
           }
-          console.log('Commit ubah simpan-periksa-jawaban-normal')
-          sql.commit(function (_err) {
-            if (_err) {
-              pError.kirimPesanError(res, sql, _err, 'Pemeriksaan gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
-              return
-            }
-            console.log('success!')
-            res.send({ succes: 'success' })
+
+          data = [tanggal, sesiSoal, tipeTest, nomorTest]
+          sql.query(Query21, data, function (_err) {
+            console.log('Commit ubah simpan-periksa-jawaban-normal')
+            sql.commit(function (_err) {
+              if (_err) {
+                pError.kirimPesanError(res, sql, _err, 'Pemeriksaan gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
+                return
+              }
+              console.log('success!')
+              res.send({ succes: 'success' })
+            })
           })
         })
       } else { // INSERT
-        data = [sesiSoal, tipeTest, nomorTest, benar, salah, catatan, new Date().getTime(), idUser]
-        sql.query(Query3, data, function (_err, results, fields) {
+        data = [sesiSoal, tipeTest, nomorTest, benar, salah, catatan, tanggal, idUser]
+        sql.query(Query3, data, function (_err) {
           if (_err) {
             pError.kirimPesanError(res, sql, _err, 'Pemeriksaan gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
             return
