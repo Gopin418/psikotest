@@ -121,7 +121,7 @@ var login = function (req, res, tipe) {
 
     sql.beginTransaction(function (_err) {
       var tanggalTest = Date.now()
-      var sesi = require('crypto').randomBytes(10).toString('hex')
+      var sesi = require('crypto').randomBytes(8).toString('hex') + tanggalTest + require('crypto').randomBytes(4).toString('hex')
       // res.send(results[0])
       var idUser = results[0].id_user
       var namaUser = results[0].nama_user
