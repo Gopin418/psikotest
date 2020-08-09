@@ -116,23 +116,24 @@ var login = function (req, res, tipe) {
       return
     }
 
+    var idUser = results[0].id_user
+    var namaUser = results[0].nama_user
+    var tempatLahir = results[0].tempat_lahir
+    var tanggalLahir = results[0].tanggal_lahir
+    var jenisKelamin = results[0].jenis_kelamin
+    var jenjangPendidikan = results[0].jenjang_pendidikan
+    var tipeUser = results[0].tipe_user
+
+    var tanggalTest = Date.now()
+    var sesi = require('crypto').randomBytes(8).toString('hex') + tanggalTest + require('crypto').randomBytes(4).toString('hex')
+
+    var payload = {
+      idUser: idUser,
+      sesi: sesi
+    }
+
     sql.beginTransaction(function (_err) {
-      var tanggalTest = Date.now()
-      var sesi = require('crypto').randomBytes(8).toString('hex') + tanggalTest + require('crypto').randomBytes(4).toString('hex')
       // res.send(results[0])
-      var idUser = results[0].id_user
-      var namaUser = results[0].nama_user
-      var tempatLahir = results[0].tempat_lahir
-      var tanggalLahir = results[0].tanggal_lahir
-      var jenisKelamin = results[0].jenis_kelamin
-      var jenjangPendidikan = results[0].jenjang_pendidikan
-      var tipeUser = results[0].tipe_user
-
-      var payload = {
-        idUser: idUser,
-        sesi: sesi
-      }
-
       var Query = 'INSERT INTO t_sesi_test (id_user, sesi, tanggal_test) VALUES (?, ?, ?)'
       var data = [idUser, sesi, tanggalTest]
       sql.query(Query, data, function (_err) {
