@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 09, 2020 at 01:53 PM
+-- Generation Time: Aug 09, 2020 at 02:21 PM
 -- Server version: 10.5.4-MariaDB
 -- PHP Version: 7.2.7
 
@@ -99,6 +99,13 @@ CREATE TABLE `t_sesi_test` (
   `tanggal_selesai` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `t_sesi_test`
+--
+
+INSERT INTO `t_sesi_test` (`id_user`, `sesi`, `tanggal_test`, `tanggal_selesai`) VALUES
+(1, '6d575967ef501f831596981547127188c6d47', 1596981547127, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -112,6 +119,12 @@ CREATE TABLE `t_test` (
   `tipe_test` varchar(255) NOT NULL,
   `nomor_test` int(11) NOT NULL,
   `waktu` int(11) NOT NULL,
+  `benar` int(11) DEFAULT NULL,
+  `salah` int(11) DEFAULT NULL,
+  `catatan_pemeriksa` text DEFAULT NULL,
+  `id_user_pemeriksa` int(11) DEFAULT NULL,
+  `catatan_yang_mengesahkan` text DEFAULT NULL,
+  `id_user_yang_mengesahkan` int(11) DEFAULT NULL,
   `tanggal_periksa` int(11) DEFAULT NULL,
   `tanggal_pengesahan` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
