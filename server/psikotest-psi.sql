@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 09, 2020 at 03:50 PM
+-- Generation Time: Aug 09, 2020 at 05:36 PM
 -- Server version: 10.5.4-MariaDB
 -- PHP Version: 7.2.7
 
@@ -23,6 +23,24 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `t_cfit_iq`
+--
+
+CREATE TABLE `t_cfit_iq` (
+  `id_cfit_iq` int(11) NOT NULL,
+  `total_raw_score_min` int(11) NOT NULL,
+  `total_raw_score_max` int(11) NOT NULL,
+  `umur_tahun_min` int(11) NOT NULL,
+  `umur_tahun_max` int(11) NOT NULL,
+  `umur_bulan_min` int(11) NOT NULL,
+  `umur_bulan_max` int(11) NOT NULL,
+  `score_iq` int(11) NOT NULL,
+  `aktif` char(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `t_jawaban_normal`
 --
 
@@ -31,8 +49,29 @@ CREATE TABLE `t_jawaban_normal` (
   `nomor_soal` int(11) NOT NULL,
   `index_jawaban` int(11) DEFAULT NULL,
   `jawaban` text DEFAULT NULL,
+  `nilai_score` int(11) NOT NULL DEFAULT 1,
   `jawaban_terakhir` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `t_jawaban_normal`
+--
+
+INSERT INTO `t_jawaban_normal` (`id_test`, `nomor_soal`, `index_jawaban`, `jawaban`, `nilai_score`, `jawaban_terakhir`) VALUES
+(1, 20, 1, 'Kewibawaan', 1, '1'),
+(1, 20, 1, 'Kaya', 1, '1'),
+(1, 20, 1, 'Salju', 1, '1'),
+(1, 20, 1, 'Khianat', 1, '1'),
+(1, 20, 1, '115', 1, '1'),
+(2, 40, 1, 'Busur', 1, '1'),
+(2, 40, 1, 'Menggergaji', 1, '1'),
+(2, 40, 1, 'Panjang', 1, '1'),
+(2, 40, 1, 'Patung', 1, '1'),
+(2, 40, 1, 'Gunting', 1, '1'),
+(2, 40, 1, 'karet', 1, '1'),
+(3, 60, 1, 'Berpikir', 1, '1'),
+(3, 60, 1, 'Sangkar', 1, '1'),
+(3, 60, 1, 'Lautan api', 1, '1');
 
 -- --------------------------------------------------------
 
@@ -84,7 +123,8 @@ CREATE TABLE `t_sesi_test` (
 --
 
 INSERT INTO `t_sesi_test` (`id_user`, `sesi`, `tanggal_test`, `tanggal_selesai`) VALUES
-(1, '6d575967ef501f831596981547127188c6d47', 1596981547127, NULL);
+(1, '6d575967ef501f831596981547127188c6d47', 1596981547127, NULL),
+(1, 'da193091af902ca7159699209105829849814', 1596992091058, NULL);
 
 -- --------------------------------------------------------
 
@@ -108,6 +148,15 @@ CREATE TABLE `t_test` (
   `tanggal_periksa` int(11) DEFAULT NULL,
   `tanggal_pengesahan` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `t_test`
+--
+
+INSERT INTO `t_test` (`id_test`, `id_user`, `sesi`, `tipe_test`, `nomor_test`, `waktu`, `benar`, `salah`, `catatan_pemeriksa`, `id_user_pemeriksa`, `catatan_yang_mengesahkan`, `id_user_yang_mengesahkan`, `tanggal_periksa`, `tanggal_pengesahan`) VALUES
+(1, 1, 'da193091af902ca7159699209105829849814', 'ist', 1, 13, NULL, NULL, NULL, 1, NULL, 1, NULL, NULL),
+(2, 1, 'da193091af902ca7159699209105829849814', 'ist', 2, 29, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 1, 'da193091af902ca7159699209105829849814', 'ist', 3, 39, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -142,6 +191,12 @@ INSERT INTO `t_users` (`id_user`, `email`, `password`, `nama_user`, `tempat_lahi
 --
 
 --
+-- Indexes for table `t_cfit_iq`
+--
+ALTER TABLE `t_cfit_iq`
+  ADD PRIMARY KEY (`id_cfit_iq`);
+
+--
 -- Indexes for table `t_kunci_jawaban_normal`
 --
 ALTER TABLE `t_kunci_jawaban_normal`
@@ -172,6 +227,11 @@ ALTER TABLE `t_users`
 --
 
 --
+-- AUTO_INCREMENT for table `t_cfit_iq`
+--
+ALTER TABLE `t_cfit_iq`
+  MODIFY `id_cfit_iq` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `t_kunci_jawaban_normal`
 --
 ALTER TABLE `t_kunci_jawaban_normal`
@@ -180,7 +240,7 @@ ALTER TABLE `t_kunci_jawaban_normal`
 -- AUTO_INCREMENT for table `t_test`
 --
 ALTER TABLE `t_test`
-  MODIFY `id_test` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_test` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `t_users`
 --
