@@ -169,6 +169,39 @@ export default {
         })
       this.$forceUpdate()
     },
+    postData () {
+      this.axios.post(this.backendUrl + '/api/simpan-data-jawaban-normal', this.answerData)
+        .then(response => {
+          this.$store.commit('moveTest')
+          this.next = this.testNumber
+          if (this.tesType === 'selection') {
+            this.$root.$refs.answer.reset()
+          } else if (this.testType === 'numeric') {
+            this.$root.$refs.numericAnswer.reset()
+          } else if (this.testType === 'fill') {
+            this.$root.$refs.fillAnswer.reset()
+          } else if (this.testType === 'image') {
+            this.$root.$refs.imageAnswer.reset()
+          }
+          clearInterval(this.countdown)
+          if (this.testNumber === 9) {
+            this.$store.commit('startRemember')
+            this.getRememberData()
+          } else {
+            this.getData()
+          }
+
+          if (this.testNumber === 9 && this.rememberStatus === false) {
+            this.$store.commit('rememberEnable')
+          } else if (this.testNumber === 9 && this.rememberStatus === true) {
+            this.$store.commit('rememberDisable')
+            this.getData()
+          }
+          this.instructionUpdate()
+        }).catch(e => {
+          console.log(e)
+        })
+    },
     getData () {
       this.$store.commit('questionsDataReset')
       this.$store.commit('instructionDataReset')
@@ -240,40 +273,11 @@ export default {
         time: this.timeUsed,
         answer_data: this.answeredData
       }
-      this.axios.post(this.backendUrl + '/api/simpan-data-jawaban-normal', this.answerData)
-        .then(response => {
-          this.$store.commit('moveTest')
-          this.next = this.testNumber
-          if (this.tesType === 'selection') {
-            this.$root.$refs.answer.reset()
-          } else if (this.testType === 'numeric') {
-            this.$root.$refs.numericAnswer.reset()
-          } else if (this.testType === 'fill') {
-            this.$root.$refs.fillAnswer.reset()
-          } else if (this.testType === 'image') {
-            this.$root.$refs.imageAnswer.reset()
-          }
-          clearInterval(this.countdown)
-          if (this.testNumber === 9) {
-            this.$store.commit('startRemember')
-            this.getRememberData()
-          } else {
-            this.getData()
-          }
-
-          if (this.testNumber === 9 && this.rememberStatus === false) {
-            this.$store.commit('rememberEnable')
-          } else if (this.testNumber === 9 && this.rememberStatus === true) {
-            this.$store.commit('rememberDisable')
-            this.getData()
-          }
-          this.instructionUpdate()
-        }).catch(e => {
-          console.log(e)
-        })
+      this.postData()
       this.$forceUpdate()
     },
     finish () {
+      this.postData()
       clearInterval(this.countdown)
       this.$cookies.remove('user')
       this.$router.push('/menu')

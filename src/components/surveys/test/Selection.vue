@@ -13,6 +13,7 @@
             dense
             chips
             color="primary"
+            @change="answering(question.number, $event, index)"
             :items="numbers"></v-select>
         </v-col>
       </v-row>
@@ -29,6 +30,7 @@ export default {
     return {
       numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
       answers: [],
+      answersData: [],
       baseUrl: process.env.VUE_APP_BASE_URL
     }
   },
@@ -44,6 +46,9 @@ export default {
     },
     test () {
       return this.$store.state.testType
+    },
+    instruction () {
+      return this.$store.state.instructionStatus
     }
   },
   mounted () {
@@ -53,41 +58,42 @@ export default {
       }).catch(e => {
         console.log(e)
       })
+    console.log(this.answersData)
+  },
+  watch: {
+    current (oldValue, newValue) {
+      if (this.instruction === false && oldValue > 1) {
+        this.answersData.push(this.answers)
+        this.$store.commit('saveAnswer', this.answersData)
+        console.log(this.answersData)
+      }
+    }
   },
   methods: {
-    elevate (data, number, mark) {
-      let elevate = '0'
-      for (var i = 0; i < data.length; i++) {
-        if (data[i][1] === number && data[i][0] === mark) {
-          elevate = '12'
+    answering (number, answer, index) {
+      index += 1
+      if (this.answers[0] !== this.current) {
+        this.answers = []
+        for (var x = 0; x < 13; x++) {
+          if (x === 0) {
+            this.answers.push(number)
+          } else {
+            this.answers.push(null)
+          }
         }
-      }
-      return elevate
-    },
-    color (data, number, mark) {
-      let color = ''
-      for (var i = 0; i < data.length; i++) {
-        if (data[i][1] === number && data[i][0] === mark) {
-          color = 'primary'
+        for (var n = 1; n < this.answers.length; n++) {
+          if (n === index) {
+            this.answers[n] = answer
+          }
         }
-      }
-      return color
-    },
-    answering (data, length) {
-      if (this.answers.length === 0) {
-        this.answers.push(data)
-      } else {
-        for (var i = 0; i < this.answers.length; i++) {
-          if (this.answers[i][1] === data[1]) {
-            this.answers[i] = data
-          } else if (this.answers[i + 1] === undefined) {
-            this.answers.push(data)
-            if (this.answers.length > length) {
-              this.answers.shift()
-            }
+      } else if (this.answers[0] === this.current) {
+        for (var i = 1; i < this.answers.length; i++) {
+          if (i === index) {
+            this.answers[i] = answer
           }
         }
       }
+      console.log(this.answers)
       this.$forceUpdate()
     }
   }

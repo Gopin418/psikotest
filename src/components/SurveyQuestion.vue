@@ -3,7 +3,7 @@
     <v-card outlined>
       <v-card-text>
 
-        <div v-if="this.$store.state.currentTest == 'survey'">
+        <div v-if="this.$store.state.currentTest == 'rmib'">
           <InstructionSelection v-show="this.$store.state.instructionStatus == true"/>
           <TestSelection v-show="this.$store.state.instructionStatus == false"/>
         </div>

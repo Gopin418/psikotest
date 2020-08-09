@@ -93,12 +93,12 @@
                           <v-dialog
                             ref="dialog"
                             v-model="modal"
-                            :return-value.sync="user.birthdate"
+                            :return-value.sync="date"
                             persistent
                             width="290px">
                               <template v-slot:activator="{ on, attrs }">
                                 <v-text-field
-                                v-model="user.birthdate"
+                                v-model="date"
                                 label="Tanggal lahir"
                                 outlined
                                 readonly
@@ -108,13 +108,13 @@
                               </template>
                               <v-date-picker
                               ref="picker"
-                              v-model="user.birthdate"
+                              v-model="date"
                               scrollable
                               :max="new Date().toISOString().substr(0, 10)"
                               min="1950-01-01">
                                 <v-spacer></v-spacer>
                                 <v-btn text color="primary" @click="modal = false">Batal</v-btn>
-                                <v-btn text color="primary" @click="$refs.dialog.save(user.birthdate)">Simpan</v-btn>
+                                <v-btn text color="primary" @click="$refs.dialog.save(date)">Simpan</v-btn>
                               </v-date-picker>
                             </v-dialog>
                         </v-col>
@@ -177,10 +177,11 @@ export default {
       type: 'password',
       icon: 'eye-off',
       subtitle: 'Buat akun dan lanjutkan ke PSI',
+      date: '',
       user: {
         fullname: '',
         city: '',
-        birthdate: '',
+        birthdate: 0,
         education: '',
         gender: '',
         email: '',
