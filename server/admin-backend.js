@@ -11,7 +11,7 @@ var sql = mysql.createConnection({
 
 var router = require('express').Router()
 
-router.post('/tambah-kunci-jawaban-normal', function (req, res) {
+router.post('/simpan-kunci-jawaban-normal', function (req, res) {
   var session = JWT.check(req, res)
   if (session === null) {
     return
@@ -20,14 +20,42 @@ router.post('/tambah-kunci-jawaban-normal', function (req, res) {
   var kunciJawaban = req.body.kunciJawaban
 
   var Query1 = ' INSERT INTO  t_kunci_jawaban_normal '
-  Query1 += ' (tipe_test, )'
+  Query1 += ' (tipe_test, nomor_test, nomor_soal, index_jawaban, tipe_kunci_jawaban,  kunci_jawaban, aktif) '
+  Query1 += ' VALUES (?, ?, ?, ?, ?, ?, 1) '
 
+  var Query2 = ' UPDATE t_kunci_jawaban_normal '
+  Query2 += ' SET tipe_test = ?, nomor_test = ?, nomor_soal = ?, index_jawaban = ?, tipe_kunci_jawaban = ?,  kunci_jawaban = ? '
+  Query2 += ' WHERE id_kunci_jawaban_normal = ? '
+
+  var Query = ''
+  var data = []
   sql.beginTransaction(function (_err) {
     for (let i = 0; i < kunciJawaban.length; i++) {
-
+      if (kunciJawaban[i][0] < 1) {
+        Query = Query1
+        data = [kunciJawaban[i][1], kunciJawaban[i][2], kunciJawaban[i][3], kunciJawaban[i][4], 
+          kunciJawaban[i][5], kunciJawaban[i][6]]
+      } else {
+        Query = Query2
+        data = [kunciJawaban[i][1], kunciJawaban[i][2], kunciJawaban[i][3], kunciJawaban[i][4],
+          kunciJawaban[i][5], kunciJawaban[i][6], kunciJawaban[i][0]]
+      }
+      sql.query(Query, data, function (_err) {
+        console.log('Commit ubah simpan-kunci-jawaban-normal')
+        sql.commit(function (_err) {
+          if (_err) {
+            pError.kirimPesanError(res, sql, _err, 'Simpan kunci jawaban gagal, harap periksa kembali')
+            return
+          }
+          console.log('success!')
+          res.send({ succes: 'success' })
+        })
+      })
     }
   })
 })
+
+
 
 router.post('/simpan-pengesahan-jawaban-normal', function (req, res) {
   var session = JWT.check(req, res)
