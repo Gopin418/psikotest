@@ -45,7 +45,7 @@
         block>Tambah Jawaban</v-btn>
       </v-col>
     </v-row>
-      <CreateIST v-if="selected === 'IST'" :answersType="selectedAnswerType" :answersData="answersData" />
+      <CreateIST v-if="selected === 'IST'" :answersType="selectedAnswerType" :testNumber="selectedTestNumber" :answersData="answersData" />
       <CreateCFIT v-if="selected === 'CFIT'" />
     <v-row>
     </v-row>

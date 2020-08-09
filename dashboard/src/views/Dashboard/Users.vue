@@ -92,11 +92,7 @@
                   <v-btn icon dark @click="summaryDialog = false">
                     <v-icon>mdi-close</v-icon>
                   </v-btn>
-                  <v-toolbar-title>Hasil Tes {{ new Date().getTime() }}</v-toolbar-title>
-                  <v-spacer></v-spacer>
-                  <v-toolbar-items>
-                    <v-btn dark text @click="dialog = false">Save</v-btn>
-                  </v-toolbar-items>
+                  <v-toolbar-title>Hasil Tes</v-toolbar-title>
                 </v-toolbar>
                 <v-card-text>
                   <v-data-table
@@ -106,8 +102,35 @@
                   :items-per-page="5"
                   item-key="id_test">
                   <template v-slot:item.id_test="{ item }">
-                    <v-btn class="text-capitalize" color="primary" depressed outlined small @click="getDetail(item.id_test)">Detail</v-btn>
-                    &nbsp;
+                    <v-dialog v-model="detailDialog" fullscreen hide-overlay transition="dialog-bottom-transition">
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                          small
+                          color="primary"
+                          v-bind="attrs"
+                          v-on="on"
+                          @click="getDetail(item.id_test)"
+                          :key="item.detail"
+                          depressed>Detail</v-btn>
+                      </template>
+                      <v-card>
+                        <v-toolbar dark color="primary">
+                          <v-btn icon dark @click="detailDialog = false">
+                            <v-icon>mdi-close</v-icon>
+                          </v-btn>
+                          <v-toolbar-title>Detail Tes</v-toolbar-title>
+                        </v-toolbar>
+                        <v-card-text>
+                          <v-data-table
+                          :headers="detailHeader"
+                          :items="dataDetail"
+                          :loading="loading"
+                          :items-per-page="5"
+                          item-key="id_test">
+                        </v-data-table>
+                        </v-card-text>
+                      </v-card>
+                    </v-dialog>
                     &nbsp;
                     &nbsp;
                     <v-btn class="text-capitalize" color="primary" depressed small>Periksa</v-btn>
@@ -239,11 +262,14 @@ export default {
               nomor_soal: a.nomor_soal,
               index_jawaban: a.index_jawaban,
               jawaban: a.jawaban,
-              jawaban_terakhir: a.jawaban_terakhir
+              jawaban_terakhir: a.jawaban_terakhir === '1' ? 'Ya' : 'Tidak'
             }
           })
+          console.log(this.dataDetail)
+        }).catch(e => {
+          console.log(e)
         })
-    }
+    },
     getSummary () {
       this.axios.get(this.baseUrl + '/api/ambil-data-test?idUser=1&tipeTest=ist&tglAwal=' + new Date(this.startDate).getTime() + '&tglAkhir=' + new Date(this.endDate).getTime())
         .then(response => {
