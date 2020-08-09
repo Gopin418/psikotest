@@ -12,7 +12,6 @@ var sql = mysql.createConnection({
 var router = require('express').Router()
 
 router.post('/auth/ubah-registrasi', function (req, res) {
-
   var idUser = req.body.idUser
   var email = req.body.email
   var password = req.body.password
@@ -21,9 +20,6 @@ router.post('/auth/ubah-registrasi', function (req, res) {
   var birthdate = req.body.birthdate
   var gender = req.body.gender
   var education = req.body.education
-
-
-
 })
 
 router.post('/auth/registrasi', function (req, res) {
@@ -45,7 +41,6 @@ router.post('/auth/registrasi', function (req, res) {
   const data = [email, password, fullname, city, birthdate, gender, education]
 
   sql.beginTransaction(function (_err) {
-
     sql.query(Query, data, function (_err) {
       if (_err) {
         if (_err.code === 'ER_DUP_ENTRY') {
@@ -65,18 +60,26 @@ router.post('/auth/registrasi', function (req, res) {
           // console.error(_err)
           return
         }
-        res.send({sucess: 'succes' })
+        res.send({ sucess: 'succes' })
       })
     })
   })
 })
 
 router.post('/auth/login', function (req, res) {
+  login(req, res, '0')
+})
+
+router.post('/auth/login-admin', function (req, res) {
+  login(req, res, '1')
+})
+
+var login = function (req, res, tipe) {
   var email = req.body.email
   var password = req.body.password
 
-  var user = [email, password]
-  var Query = 'SELECT * FROM t_users WHERE email = ? and password = ? and aktif = 1'
+  var user = [email, password, tipe]
+  var Query = 'SELECT * FROM t_users WHERE email = ? and password = ? and tipe_user = ? and aktif = 1'
   sql.query(Query, user, function (_err, results, fields) {
     if (_err) {
       res.status(501).send({ error: 'E-Mail atau password tidak dikenal, silahkan coba lagi.' })
@@ -130,6 +133,6 @@ router.post('/auth/login', function (req, res) {
       })
     })
   })
-})
+}
 
 module.exports = router

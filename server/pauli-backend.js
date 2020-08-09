@@ -45,6 +45,8 @@ router.post('/simpan-data-jawaban-pauli', function (req, res) {
   var angkaBawah = req.body.bottom_number // array
   var jawaban = req.body.answers // array
 
+  //  var Query0 = ' SELECT id_test, sesi FROM t_test WHERE id_user = ? and sesi = ? '
+
   var Query1 = ' INSERT INTO t_test (id_user, sesi, tipe_test, nomor_test, waktu) '
   Query1 += ' VALUES (?, ?, ?, ?, ?) '
 
@@ -52,6 +54,13 @@ router.post('/simpan-data-jawaban-pauli', function (req, res) {
   Query2 += ' VALUES (?, ?, ?, ?, ?, ?, ?, 1) '
 
   sql.beginTransaction(function (_err) {
+    // var data = [idUser, sesi]
+
+    // sql.query(Query0, data, function (_err, results, fields) {
+    //   if (results.length > 0) {
+    //     res.status(501).send({ error: 'Test ini sudah pernah dilakukan, tidak bisa lagi diulangi.' })
+    //     return
+    //   }
     var data = [idUser, sesi, tipeTest, nomorTest, waktu]
 
     sql.query(Query1, data, function (_err, results, fields) {
@@ -93,6 +102,7 @@ router.post('/simpan-data-jawaban-pauli', function (req, res) {
       }
     })
   })
+//  })
 })
 
 module.exports = router
