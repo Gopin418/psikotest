@@ -30,7 +30,8 @@ router.post('/simpan-data-jawaban-pauli', function (req, res) {
     session = JWT.verify(token)
   } catch (_err) {
     res.status(501).send({ error: 'Sesi anda sudah tidak valid, silahkan login ulang.' })
-    throw _err
+    console.error(_err)
+    return
   }
 
   var idUser = session.idUser
@@ -57,7 +58,8 @@ router.post('/simpan-data-jawaban-pauli', function (req, res) {
       if (_err) {
         res.status(501).send({ error: 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin' })
         sql.rollback(function (_err) { })
-        throw _err
+        console.error(_err)
+        return
       }
 
       var idTest = results.insertId
@@ -77,14 +79,16 @@ router.post('/simpan-data-jawaban-pauli', function (req, res) {
           if (_err) {
             res.status(501).send({ error: 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin' })
             sql.rollback(function (_err) { })
-            throw _err
+            console.error(_err)
+            return
           }
           if (i >= jawaban.length - 1) {
             sql.commit(function (_err) {
               if (_err) {
                 res.status(501).send({ error: 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin' })
                 sql.rollback(function (_err) { })
-                throw _err
+                console.error(_err)
+                return
               }
               console.log('success!')
               res.send({ succes: 'success' })

@@ -29,9 +29,9 @@ SET time_zone = "+00:00";
 CREATE TABLE `t_jawaban_normal` (
   `id_test` int(11) NOT NULL,
   `nomor_soal` int(11) NOT NULL,
-  `index_soal` int(11) DEFAULT NULL,
+  `index_jawaban` int(11) DEFAULT NULL,
   `jawaban` int(11) DEFAULT NULL,
-  `pasti` char(1) NOT NULL
+  `jawaban_terakhir` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

@@ -77,7 +77,7 @@ server.listen(app.get('port'), function () {
 /// //////////////////////
 
 var auth = require('./auth-backend')
-var ist = require('./ist-cfit-backend')
+var ist = require('./soal-normal-backend')
 var pauli = require('./pauli-backend')
 
 app.use('/api', auth)

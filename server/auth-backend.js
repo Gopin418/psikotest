@@ -37,13 +37,15 @@ router.post('/auth/registrasi', function (req, res) {
           res.status(501).send({ error: 'Gagal menyimpan data registrasi, silahkan coba lagi.' })
         }
         sql.rollback(function (_err) { })
-        throw _err
+        console.error(_err)
+        return
       }
       sql.commit(function (_err) {
         if (_err) {
           res.status(501).send({ error: 'Gagal menyimpan sesi, silahkan coba lagi.' })
           sql.rollback(function (_err) { })
-          throw _err
+          console.error(_err)
+          return
         }
         res.send({sucess: 'succes' })
       })
@@ -60,7 +62,8 @@ router.post('/auth/login', function (req, res) {
   sql.query(Query, user, function (_err, results, fields) {
     if (_err) {
       res.status(501).send({ error: 'E-Mail atau password tidak dikenal, silahkan coba lagi.' })
-      throw _err
+      console.error(_err)
+      return
     }
 
     sql.beginTransaction(function (_err) {
@@ -73,6 +76,8 @@ router.post('/auth/login', function (req, res) {
       var tanggalLahir = results[0].tanggal_lahir
       var jenisKelamin = results[0].jenis_kelamin
       var jenjangPendidikan = results[0].jenjang_pendidikan
+      var tipeUser = results[0].tipe_user
+
       var payload = {
         idUser: idUser,
         sesi: sesi
@@ -84,14 +89,17 @@ router.post('/auth/login', function (req, res) {
         if (_err) {
           res.status(501).send({ error: 'Gagal menyimpan sesi, silahkan coba lagi.' })
           sql.rollback(function (_err) {})
-          throw _err
+          console.error(_err)
+          return
         }
         sql.commit(function (_err) {
           if (_err) {
             res.status(501).send({ error: 'Gagal menyimpan sesi, silahkan coba lagi.' })
             sql.rollback(function (_err) {})
-            throw _err
+            console.error(_err)
+            return
           }
+
           var token = {
             token: JWT.sign(payload),
             namaUser: namaUser,
@@ -99,7 +107,8 @@ router.post('/auth/login', function (req, res) {
             tanggalLahir: tanggalLahir,
             jenisKelamin: jenisKelamin,
             jenjangPendidikan: jenjangPendidikan,
-            tanggalTest: tanggalTest
+            tanggalTest: tanggalTest,
+            tipeUser: tipeUser
           }
 
           res.send(token)
