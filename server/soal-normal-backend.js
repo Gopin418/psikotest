@@ -25,6 +25,8 @@ router.post('/simpan-data-jawaban-normal', function (req, res) {
   var waktu = req.body.time
   var jawaban = req.body.answer_data
 
+  var Query0 = ' SELECT id_test, sesi FROM t_test WHERE id_user = ? and sesi = ? '
+
   var Query1 = ' INSERT INTO t_test (id_user, sesi, tipe_test, nomor_test, waktu) '
   Query1 += ' VALUES (?, ?, ?, ?, ?) '
 
@@ -34,53 +36,61 @@ router.post('/simpan-data-jawaban-normal', function (req, res) {
   Query3 += ' VALUES (?, ?, ?, ?, \'1\') '
 
   sql.beginTransaction(function (_err) {
-    var data = [idUser, sesi, tipeTest, nomorTest, waktu]
-
+    var data = [idUser, sesi]
     sql.query(Query1, data, function (_err, results, fields) {
-      if (_err) {
-        pError.kirimPesanError(req, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
+      if (results.length > 0) {
+        res.status(501).send({ error: 'Test ini sudah pernah dilakukan, tidak bisa lagi diulangi.' })
         return
       }
 
-      var idTest = results.INSERTId
-      console.log(idTest)
+      data = [idUser, sesi, tipeTest, nomorTest, waktu]
 
-      for (let i = 0; i < jawaban.length; i++) {
-        var nomorSoal = jawaban[i][0]
-        data = [idTest, nomorSoal]
-        sql.query(Query2, data, function (_err, results, fields) {
-          if (_err) {
-            pError.kirimPesanError(req, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
-            return
-          }
+      sql.query(Query1, data, function (_err, results, fields) {
+        if (_err) {
+          pError.kirimPesanError(req, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
+          return
+        }
 
-          for (let j = 1; j < 21; j++) {
-            var indexJawaban = j
-            if (jawaban[i][indexJawaban] === undefined) {
-              break
+        var idTest = results.INSERTId
+        console.log(idTest)
+
+        for (let i = 0; i < jawaban.length; i++) {
+          var nomorSoal = jawaban[i][0]
+          data = [idTest, nomorSoal]
+          sql.query(Query2, data, function (_err, results, fields) {
+            if (_err) {
+              pError.kirimPesanError(req, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
+              return
             }
-            data = [idTest, nomorSoal, indexJawaban, jawaban[i][indexJawaban]]
-            sql.query(Query3, data, function (_err, results, fields) {
-              console.log(_err)
-              if (_err) {
-                pError.kirimPesanError(req, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
-                return
+
+            for (let j = 1; j < 21; j++) {
+              var indexJawaban = j
+              if (jawaban[i][indexJawaban] === undefined) {
+                break
               }
-              if (i >= jawaban.length - 1) {
-                console.log('Commit simpan-data-jawaban-normal')
-                sql.commit(function (_err) {
-                  if (_err) {
-                    pError.kirimPesanError(req, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
-                    return
-                  }
-                  console.log('success!')
-                  res.send({ succes: 'success' })
-                })
-              }
-            })
-          }
-        })
-      }
+              data = [idTest, nomorSoal, indexJawaban, jawaban[i][indexJawaban]]
+              sql.query(Query3, data, function (_err, results, fields) {
+                console.log(_err)
+                if (_err) {
+                  pError.kirimPesanError(req, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
+                  return
+                }
+                if (i >= jawaban.length - 1) {
+                  console.log('Commit simpan-data-jawaban-normal')
+                  sql.commit(function (_err) {
+                    if (_err) {
+                      pError.kirimPesanError(req, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
+                      return
+                    }
+                    console.log('success!')
+                    res.send({ succes: 'success' })
+                  })
+                }
+              })
+            }
+          })
+        }
+      })
     })
   })
 })
