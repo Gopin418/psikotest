@@ -17,14 +17,15 @@ router.post('/simpan-kunci-jawaban-normal', function (req, res) {
     return
   }
 
-  var kunciJawaban = req.body.kunciJawaban
+  var kunciJawaban = req.body.data
 
   var Query1 = ' INSERT INTO  t_kunci_jawaban_normal '
-  Query1 += ' (tipe_test, nomor_test, nomor_soal, index_jawaban, tipe_kunci_jawaban,  kunci_jawaban, aktif) '
-  Query1 += ' VALUES (?, ?, ?, ?, ?, ?, 1) '
+  Query1 += ' (tipe_test, nomor_test, nomor_soal, index_jawaban, tipe_kunci_jawaban,  kunci_jawaban, nilai_score, aktif) '
+  Query1 += ' VALUES (?, ?, ?, ?, ?, ?, ?, 1) '
 
   var Query2 = ' UPDATE t_kunci_jawaban_normal '
-  Query2 += ' SET tipe_test = ?, nomor_test = ?, nomor_soal = ?, index_jawaban = ?, tipe_kunci_jawaban = ?,  kunci_jawaban = ? '
+  Query2 += ' SET tipe_test = ?, nomor_test = ?, nomor_soal = ?, index_jawaban = ?, '
+  Query2 += ' tipe_kunci_jawaban = ?, kunci_jawaban = ?, nilai_score = ? '
   Query2 += ' WHERE id_kunci_jawaban_normal = ? '
 
   var Query = ''
@@ -33,12 +34,14 @@ router.post('/simpan-kunci-jawaban-normal', function (req, res) {
     for (let i = 0; i < kunciJawaban.length; i++) {
       if (kunciJawaban[i][0] < 1) {
         Query = Query1
-        data = [kunciJawaban[i][1], kunciJawaban[i][2], kunciJawaban[i][3], kunciJawaban[i][4], 
-          kunciJawaban[i][5], kunciJawaban[i][6]]
+        data = [kunciJawaban[i].tipe_test, kunciJawaban[i].nomor_test, kunciJawaban[i].nomor_soal,
+          kunciJawaban[i].index_jawaban, kunciJawaban[i].tipe_kunci_jawaban, kunciJawaban[i].kunci_jawaban,
+          kunciJawaban[i].nilai_score]
       } else {
         Query = Query2
-        data = [kunciJawaban[i][1], kunciJawaban[i][2], kunciJawaban[i][3], kunciJawaban[i][4],
-          kunciJawaban[i][5], kunciJawaban[i][6], kunciJawaban[i][0]]
+        data = [kunciJawaban[i].tipe_test, kunciJawaban[i].nomor_test, kunciJawaban[i].nomor_soal,
+          kunciJawaban[i].index_jawaban, kunciJawaban[i].tipe_kunci_jawaban, kunciJawaban[i].kunci_jawaban,
+          kunciJawaban[i].nilai_score, kunciJawaban[i].id_kunci]
       }
       sql.query(Query, data, function (_err) {
         console.log('Commit ubah simpan-kunci-jawaban-normal')
@@ -70,7 +73,7 @@ router.post('/simpan-pengesahan-jawaban-normal', function (req, res) {
 
   var Query1 = 'SELECT id_test '
   Query1 += ' FROM t_test '
-  Query1 += ' WHERE sesi = ? and tipe_test = ? and nomor_test = ? ' 
+  Query1 += ' WHERE sesi = ? and tipe_test = ? and nomor_test = ? '
   Query1 += ' and tanggal_periksa is not null and id_user_pemeriksa is not null '
 
   var Query21 = 'UPDATE t_test '
