@@ -116,6 +116,11 @@ var login = function (req, res, tipe) {
       return
     }
 
+    if (results.length < 1) {
+      res.status(501).send({ error: 'E-Mail atau password tidak dikenal, silahkan coba lagi.' })
+      return
+    }
+
     var idUser = results[0].id_user
     var namaUser = results[0].nama_user
     var tempatLahir = results[0].tempat_lahir
