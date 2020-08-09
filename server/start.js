@@ -77,12 +77,16 @@ server.listen(app.get('port'), function () {
 /// //////////////////////
 
 var auth = require('./auth-backend')
-var ist = require('./soal-normal-backend')
+var normal = require('./soal-normal-backend')
 var pauli = require('./pauli-backend')
+var admin = require('./admin-backend')
+var info = require('./info-backend')
 
 app.use('/api', auth)
-app.use('/api', ist)
+app.use('/api', normal)
 app.use('/api', pauli)
+app.use('/api', admin)
+app.use('/api', info)
 
 // app.use('/swagger-ui.html', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 // var io = require('socket.io')(server)
