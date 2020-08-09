@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 09, 2020 at 01:44 PM
+-- Generation Time: Aug 09, 2020 at 01:53 PM
 -- Server version: 10.5.4-MariaDB
 -- PHP Version: 7.2.7
 
@@ -112,8 +112,8 @@ CREATE TABLE `t_test` (
   `tipe_test` varchar(255) NOT NULL,
   `nomor_test` int(11) NOT NULL,
   `waktu` int(11) NOT NULL,
-  `sudah_diperiksa` char(1) NOT NULL DEFAULT '0',
-  `sudah_disahkan` char(1) NOT NULL DEFAULT '0'
+  `tanggal_periksa` int(11) DEFAULT NULL,
+  `tanggal_pengesahan` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -171,7 +171,7 @@ ALTER TABLE `t_sesi_test`
 --
 ALTER TABLE `t_test`
   ADD PRIMARY KEY (`id_test`),
-  ADD UNIQUE KEY `id_user` (`id_user`,`sesi`,`tipe_test`,`nomor_test`);
+  ADD UNIQUE KEY `sesi` (`sesi`,`tipe_test`,`nomor_test`);
 
 --
 -- Indexes for table `t_users`
