@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+var pError = require('./ada-error')
 var JWT = require('./jwt-auth')
 var mysql = require('mysql')
 var sql = mysql.createConnection({
@@ -57,17 +58,13 @@ router.post('/simpan-periksa-jawaban-normal', function (req, res) {
         data = [benar, salah, catatan, new Date().getTime(), idUser, sesiSoal, tipeTest, nomorTest]
         sql.query(Query2, data, function (_err, results, fields) {
           if (_err) {
-            res.status(501).send({ error: 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin' })
-            sql.rollback(function (_err) { })
-            console.error(_err)
+            pError.kirimPesanError(req, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
             return
           }
           console.log('Commit ubah simpan-periksa-jawaban-normal')
           sql.commit(function (_err) {
             if (_err) {
-              res.status(501).send({ error: 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin' })
-              sql.rollback(function (_err) { })
-              console.error(_err)
+              pError.kirimPesanError(req, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
               return
             }
             console.log('success!')
@@ -78,17 +75,13 @@ router.post('/simpan-periksa-jawaban-normal', function (req, res) {
         data = [sesiSoal, tipeTest, nomorTest, benar, salah, catatan, new Date().getTime(), idUser]
         sql.query(Query3, data, function (_err, results, fields) {
           if (_err) {
-            res.status(501).send({ error: 'Pemeriksaan gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin' })
-            sql.rollback(function (_err) { })
-            console.error(_err)
+            pError.kirimPesanError(req, sql, _err, 'Pemeriksaan gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
             return
           }
           console.log('Commit tambah simpan-periksa-jawaban-normal')
           sql.commit(function (_err) {
             if (_err) {
-              res.status(501).send({ error: 'Pemeriksaan gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin' })
-              sql.rollback(function (_err) { })
-              console.error(_err)
+              pError.kirimPesanError(req, sql, _err, 'Pemeriksaan gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
               return
             }
             console.log('success!')
@@ -127,9 +120,7 @@ router.post('/simpan-data-jawaban-normal', function (req, res) {
 
     sql.query(Query1, data, function (_err, results, fields) {
       if (_err) {
-        res.status(501).send({ error: 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin' })
-        sql.rollback(function (_err) {})
-        console.error(_err)
+        pError.kirimPesanError(req, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
         return
       }
 
@@ -141,9 +132,7 @@ router.post('/simpan-data-jawaban-normal', function (req, res) {
         data = [idTest, nomorSoal]
         sql.query(Query2, data, function (_err, results, fields) {
           if (_err) {
-            res.status(501).send({ error: 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin' })
-            sql.rollback(function (_err) { })
-            console.error(_err)
+            pError.kirimPesanError(req, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
             return
           }
 
@@ -156,18 +145,14 @@ router.post('/simpan-data-jawaban-normal', function (req, res) {
             sql.query(Query3, data, function (_err, results, fields) {
               console.log(_err)
               if (_err) {
-                res.status(501).send({ error: 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin' })
-                sql.rollback(function (_err) { })
-                console.error(_err)
+                pError.kirimPesanError(req, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
                 return
               }
               if (i >= jawaban.length - 1) {
                 console.log('Commit simpan-data-jawaban-normal')
                 sql.commit(function (_err) {
                   if (_err) {
-                    res.status(501).send({ error: 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin' })
-                    sql.rollback(function (_err) { })
-                    console.error(_err)
+                    pError.kirimPesanError(req, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
                     return
                   }
                   console.log('success!')

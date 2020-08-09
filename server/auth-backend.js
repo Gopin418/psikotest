@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+var pError = require('./ada-error')
 var JWT = require('./jwt-auth')
 var mysql = require('mysql')
 var sql = mysql.createConnection({
@@ -42,9 +43,10 @@ router.post('/auth/registrasi', function (req, res) {
       }
       sql.commit(function (_err) {
         if (_err) {
-          res.status(501).send({ error: 'Gagal menyimpan sesi, silahkan coba lagi.' })
-          sql.rollback(function (_err) { })
-          console.error(_err)
+          pError.kirimPesanError(req, sql, _err, 'Gagal menyimpan sesi, silahkan coba lagi.')
+          // res.status(501).send({ error: 'Gagal menyimpan sesi, silahkan coba lagi.' })
+          // sql.rollback(function (_err) { })
+          // console.error(_err)
           return
         }
         res.send({sucess: 'succes' })
@@ -87,16 +89,12 @@ router.post('/auth/login', function (req, res) {
       var data = [idUser, sesi, tanggalTest]
       sql.query(Query, data, function (_err) {
         if (_err) {
-          res.status(501).send({ error: 'Gagal menyimpan sesi, silahkan coba lagi.' })
-          sql.rollback(function (_err) {})
-          console.error(_err)
+          pError.kirimPesanError(req, sql, _err, 'Gagal menyimpan sesi, silahkan coba lagi.')
           return
         }
         sql.commit(function (_err) {
           if (_err) {
-            res.status(501).send({ error: 'Gagal menyimpan sesi, silahkan coba lagi.' })
-            sql.rollback(function (_err) {})
-            console.error(_err)
+            pError.kirimPesanError(req, sql, _err, 'Gagal menyimpan sesi, silahkan coba lagi.')
             return
           }
 

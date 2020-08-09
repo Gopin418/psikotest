@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+var pError = require('./ada-error')
 var JWT = require('./jwt-auth')
 var mysql = require('mysql')
 var sql = mysql.createConnection({
@@ -56,9 +57,7 @@ router.post('/simpan-data-jawaban-pauli', function (req, res) {
     sql.query(Query1, data, function (_err, results, fields) {
       console.log(_err)
       if (_err) {
-        res.status(501).send({ error: 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin' })
-        sql.rollback(function (_err) { })
-        console.error(_err)
+        pError.kirimPesanError(req, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
         return
       }
 
@@ -77,17 +76,13 @@ router.post('/simpan-data-jawaban-pauli', function (req, res) {
         sql.query(Query2, data, function (_err, results, fields) {
           console.log(_err)
           if (_err) {
-            res.status(501).send({ error: 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin' })
-            sql.rollback(function (_err) { })
-            console.error(_err)
+            pError.kirimPesanError(req, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
             return
           }
           if (i >= jawaban.length - 1) {
             sql.commit(function (_err) {
               if (_err) {
-                res.status(501).send({ error: 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin' })
-                sql.rollback(function (_err) { })
-                console.error(_err)
+                pError.kirimPesanError(req, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
                 return
               }
               console.log('success!')

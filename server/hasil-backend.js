@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+var pError = require('./ada-error')
 var JWT = require('./jwt-auth')
 var mysql = require('mysql')
 var sql = mysql.createConnection({
