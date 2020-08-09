@@ -43,7 +43,16 @@ router.get('/ambil-data-peserta', function (req, res) {
     return
   }
 
-  
+  var Query = 'SELECT * FROM t_users WHERE tipe_user = 0'
+
+  sql.query(Query, function (_err, results, fields) {
+    if (_err) {
+      res.status(200).send([])
+      console.error(_err)
+      return
+    }
+    res.status(200).send(results)
+  })
 })
 
 router.get('/ambil-data-test', function (req, res) {
@@ -54,9 +63,9 @@ router.get('/ambil-data-test', function (req, res) {
   }
 
   var idUser = req.params.idUser
-  var tipeTest = req.params.tanggalAkhir
-  var tanggalAwal = req.params.tanggalAwal
-  var tanggalAkhir = req.params.tanggalAkhir
+  var tipeTest = req.params.tipeTest
+  var tanggalAwal = req.params.tglAwal
+  var tanggalAkhir = req.params.tglAkhir
 
   var Query = ' SELECT a.id_user, a.nama_user, a.tempat_lahir, a.tanggal_lahir, a.jenjang_pendidikan, '
   Query += ' a.jenis_kelamin, b.sesi, b.tanggal_test, c.id_test, c.tipe_test,  c.nomor_test, c.waktu '

@@ -57,7 +57,6 @@ router.post('/simpan-data-jawaban-normal', function (req, res) {
       }
 
       var idTest = results.insertId
-      console.log(idTest)
 
       for (let i = 0; i < jawaban.length; i++) {
         var nomorSoal = jawaban[i][0]
@@ -75,7 +74,6 @@ router.post('/simpan-data-jawaban-normal', function (req, res) {
             }
             data = [idTest, nomorSoal, indexJawaban, jawaban[i][indexJawaban]]
             sql.query(Query3, data, function (_err, results, fields) {
-              console.log(_err)
               if (_err) {
                 pError.kirimPesanError(res, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
                 return

@@ -27,8 +27,8 @@ router.post('/auth/registrasi', function (req, res) {
   Query += ' tanggal_lahir, jenis_kelamin, jenjang_pendidikan, aktif) '
   Query += ' VALUES (?, ?, ?, ?, ?, ?, ?, 1)'
 
-  console.log(req.body)
-  console.log(req.rawBody)
+  // console.log(req.body)
+  // console.log(req.rawBody)
 
   var email = req.body.email
   var password = req.body.email
@@ -55,9 +55,6 @@ router.post('/auth/registrasi', function (req, res) {
       sql.commit(function (_err) {
         if (_err) {
           pError.kirimPesanError(res, sql, _err, 'Gagal menyimpan sesi, silahkan coba lagi.')
-          // res.status(501).send({ error: 'Gagal menyimpan sesi, silahkan coba lagi.' })
-          // sql.rollback(function (_err) { })
-          // console.error(_err)
           return
         }
         res.send({ sucess: 'succes' })

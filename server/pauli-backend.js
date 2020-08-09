@@ -68,7 +68,6 @@ router.post('/simpan-data-jawaban-pauli', function (req, res) {
       }
 
       var idTest = results.insertId
-      console.log(idTest)
 
       for (let i = 0; i < jawaban.length; i++) {
         var angkaAtas1 = (angkaAtas[i] === undefined) ? null : angkaAtas[i]
@@ -80,7 +79,6 @@ router.post('/simpan-data-jawaban-pauli', function (req, res) {
         data = [idTest, angkaAtas1, angkaBawah1, jawaban1, benarSalah]
 
         sql.query(Query2, data, function (_err, results, fields) {
-          console.log(_err)
           if (_err) {
             pError.kirimPesanError(res, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
             return
