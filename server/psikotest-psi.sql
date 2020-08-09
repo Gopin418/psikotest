@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 09, 2020 at 05:36 PM
+-- Generation Time: Aug 09, 2020 at 06:10 PM
 -- Server version: 10.5.4-MariaDB
 -- PHP Version: 7.2.7
 
@@ -49,7 +49,6 @@ CREATE TABLE `t_jawaban_normal` (
   `nomor_soal` int(11) NOT NULL,
   `index_jawaban` int(11) DEFAULT NULL,
   `jawaban` text DEFAULT NULL,
-  `nilai_score` int(11) NOT NULL DEFAULT 1,
   `jawaban_terakhir` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -57,21 +56,21 @@ CREATE TABLE `t_jawaban_normal` (
 -- Dumping data for table `t_jawaban_normal`
 --
 
-INSERT INTO `t_jawaban_normal` (`id_test`, `nomor_soal`, `index_jawaban`, `jawaban`, `nilai_score`, `jawaban_terakhir`) VALUES
-(1, 20, 1, 'Kewibawaan', 1, '1'),
-(1, 20, 1, 'Kaya', 1, '1'),
-(1, 20, 1, 'Salju', 1, '1'),
-(1, 20, 1, 'Khianat', 1, '1'),
-(1, 20, 1, '115', 1, '1'),
-(2, 40, 1, 'Busur', 1, '1'),
-(2, 40, 1, 'Menggergaji', 1, '1'),
-(2, 40, 1, 'Panjang', 1, '1'),
-(2, 40, 1, 'Patung', 1, '1'),
-(2, 40, 1, 'Gunting', 1, '1'),
-(2, 40, 1, 'karet', 1, '1'),
-(3, 60, 1, 'Berpikir', 1, '1'),
-(3, 60, 1, 'Sangkar', 1, '1'),
-(3, 60, 1, 'Lautan api', 1, '1');
+INSERT INTO `t_jawaban_normal` (`id_test`, `nomor_soal`, `index_jawaban`, `jawaban`, `jawaban_terakhir`) VALUES
+(1, 20, 1, 'Kewibawaan', '1'),
+(1, 20, 1, 'Kaya', '1'),
+(1, 20, 1, 'Salju', '1'),
+(1, 20, 1, 'Khianat', '1'),
+(1, 20, 1, '115', '1'),
+(2, 40, 1, 'Busur', '1'),
+(2, 40, 1, 'Menggergaji', '1'),
+(2, 40, 1, 'Panjang', '1'),
+(2, 40, 1, 'Patung', '1'),
+(2, 40, 1, 'Gunting', '1'),
+(2, 40, 1, 'karet', '1'),
+(3, 60, 1, 'Berpikir', '1'),
+(3, 60, 1, 'Sangkar', '1'),
+(3, 60, 1, 'Lautan api', '1');
 
 -- --------------------------------------------------------
 
@@ -102,6 +101,7 @@ CREATE TABLE `t_kunci_jawaban_normal` (
   `index_jawaban` int(11) NOT NULL,
   `tipe_kunci_jawaban` char(1) NOT NULL,
   `kunci_jawaban` text NOT NULL,
+  `nilai_score` int(11) NOT NULL DEFAULT 1,
   `aktif` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -154,7 +154,7 @@ CREATE TABLE `t_test` (
 --
 
 INSERT INTO `t_test` (`id_test`, `id_user`, `sesi`, `tipe_test`, `nomor_test`, `waktu`, `benar`, `salah`, `catatan_pemeriksa`, `id_user_pemeriksa`, `catatan_yang_mengesahkan`, `id_user_yang_mengesahkan`, `tanggal_periksa`, `tanggal_pengesahan`) VALUES
-(1, 1, 'da193091af902ca7159699209105829849814', 'ist', 1, 13, NULL, NULL, NULL, 1, NULL, 1, NULL, NULL),
+(1, 1, 'da193091af902ca7159699209105829849814', 'ist', 1, 13, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2, 1, 'da193091af902ca7159699209105829849814', 'ist', 2, 29, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (3, 1, 'da193091af902ca7159699209105829849814', 'ist', 3, 39, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 

@@ -74,7 +74,8 @@ router.get('/ambil-data-test', function (req, res) {
   // console.log(tanggalAkhir)
 
   var Query = ' SELECT a.id_user, a.nama_user, a.tempat_lahir, a.tanggal_lahir, a.jenjang_pendidikan, '
-  Query += ' a.jenis_kelamin, b.sesi, b.tanggal_test, c.catatan_pemeriksa, c.catatan_yang_mengesahkan, '
+  Query += ' a.jenis_kelamin, b.sesi, b.tanggal_test, b.tanggal_selesai, '
+  Query += ' c.catatan_pemeriksa, c.catatan_yang_mengesahkan, '
   Query += ' c.tanggal_periksa, c.tanggal_pengesahan, '
   Query += ' (select nama_user from t_users where id_user = c.id_user_pemeriksa) as nama_pemeriksa, '
   Query += ' (select nama_user from t_users where id_user = c.id_user_yang_mengesahkan) as nama_yang_mengesahkan, '
