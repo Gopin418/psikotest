@@ -66,6 +66,13 @@ router.get('/ambil-data-test', function (req, res) {
   var tanggalAwal = req.query.tglAwal
   var tanggalAkhir = req.query.tglAkhir
 
+  // console.log(req.query)
+
+  // console.log(idUser)
+  // console.log(tipeTest)
+  // console.log(tanggalAwal)
+  // console.log(tanggalAkhir)
+
   var Query = ' SELECT a.id_user, a.nama_user, a.tempat_lahir, a.tanggal_lahir, a.jenjang_pendidikan, '
   Query += ' a.jenis_kelamin, b.sesi, b.tanggal_test, c.id_test, c.tipe_test,  c.nomor_test, c.waktu '
   Query += ' FROM t_users a JOIN  t_sesi_test b ON a.id_user = b.id_user '
