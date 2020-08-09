@@ -70,7 +70,8 @@ router.post('/simpan-pengesahan-jawaban-normal', function (req, res) {
 
   var Query1 = 'SELECT id_test '
   Query1 += ' FROM t_test '
-  Query1 += ' WHERE sesi = ? and tipe_test = ? and nomor_test = ? '
+  Query1 += ' WHERE sesi = ? and tipe_test = ? and nomor_test = ? ' 
+  Query1 += ' and tanggal_periksa is not null and id_user_pemeriksa is not null '
 
   var Query21 = 'UPDATE t_test '
   Query21 += ' SET catatan_yang_mengesahkan = ?, tanggal_pengesahan = ?, id_user_yang_mengesahkan = ? '
