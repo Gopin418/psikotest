@@ -9,6 +9,7 @@
             <v-col cols="2">
               <v-text-field
               label="Nomor Soal"
+              v-model="questionNumber[x]"
               name="question_number"
               outlined
               dense></v-text-field>
@@ -28,7 +29,7 @@
               <v-text-field
                 v-if="answersType === 'Satu'"
                 :label="'Kunci ' + a"
-                v-model="questionNumber[x]"
+                v-model="keyAnswers[x][a]"
                 name="answers"
                 outlined
                 dense></v-text-field>
@@ -36,7 +37,7 @@
                 <v-textarea
                 v-if="answersType === 'Dua'"
                 :label="'Kunci ' + a"
-                v-model="questionNumber[x]"
+                v-model="keyAnswers[x][a]"
                 name="answers"
                 auto-grow
                 outlined
@@ -45,7 +46,7 @@
 
                 <v-text-field
                 :label="'Score ' + a"
-                v-model="score[x]"
+                v-model="score[a]"
                 name="answers"
                 outlined
                 dense></v-text-field>
@@ -55,7 +56,7 @@
       </v-card-text>
       <v-card-actions v-if="newAnswers === true">
         <v-spacer></v-spacer>
-        <v-btn class="text-capitalize px-8 py-5" color="primary" depressed>Simpan</v-btn>
+        <v-btn class="text-capitalize px-8 py-5" color="primary" @click="save()" depressed>Simpan</v-btn>
       </v-card-actions>
     </v-card>
   </div>
@@ -72,6 +73,7 @@ export default {
   data () {
     return {
       keyCount: [],
+      keyAnswers: [],
       score: [],
       newAnswers: false,
       answers: 0,
@@ -103,6 +105,7 @@ export default {
         kunci_jawaban: 'kunci_jawaban',
         nilai_score: this.score
       }]
+      console.log(this.data)
     },
     createAnswer () {
       this.newAnswers = true

@@ -62,7 +62,7 @@ router.post('/simpan-data-jawaban-normal', function (req, res) {
             if (jawaban[i][indexJawaban] === undefined) {
               break
             }
-            data = [idTest, nomorSoal, indexJawaban, jawaban[i][indexJawaban]]
+            data = [idTest, jawaban[i][0], indexJawaban, jawaban[i][indexJawaban]]
             sql.query(Query3, data, function (_err, results, fields) {
               if (_err) {
                 pError.kirimPesanError(res, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')

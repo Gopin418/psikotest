@@ -172,6 +172,7 @@ export default {
     postData () {
       this.axios.post(this.backendUrl + '/api/simpan-data-jawaban-normal', this.answerData)
         .then(response => {
+          console.log(this.answerData)
           this.$store.commit('moveTest')
           this.next = this.testNumber
           if (this.tesType === 'selection') {

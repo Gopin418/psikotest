@@ -102,13 +102,13 @@
                   :items-per-page="5"
                   item-key="id_test">
                   <template v-slot:item.id_test="{ item }">
-                    <v-dialog v-model="detailDialog" fullscreen hide-overlay transition="dialog-bottom-transition">
-                      <template v-slot:activator="{ on, attrs }">
+                    <v-dialog v-model="detailDialog" transition="dialog-bottom-transition">
+                      <template v-slot:activator="{ on2, attrs2 }">
                         <v-btn
                           small
                           color="primary"
-                          v-bind="attrs"
-                          v-on="on"
+                          v-bind="attrs2"
+                          v-on="on2"
                           @click="getDetail(item.id_test)"
                           :key="item.detail"
                           depressed>Detail</v-btn>
@@ -133,7 +133,35 @@
                     </v-dialog>
                     &nbsp;
                     &nbsp;
-                    <v-btn class="text-capitalize" color="primary" depressed small>Periksa</v-btn>
+                      <v-dialog v-model="detailDialog" transition="dialog-bottom-transition">
+                        <template v-slot:activator="{ on3, attrs3 }">
+                          <v-btn
+                            small
+                            color="primary"
+                            v-bind="attrs3"
+                            v-on="on3"
+                            @click="getPeriksa(item.id_test)"
+                            :key="item.detail"
+                            depressed>Periksa</v-btn>
+                        </template>
+                        <v-card>
+                          <v-toolbar dark color="primary">
+                            <v-btn icon dark @click="periksaDialog = false">
+                              <v-icon>mdi-close</v-icon>
+                            </v-btn>
+                            <v-toolbar-title>Periksa test</v-toolbar-title>
+                          </v-toolbar>
+                          <v-card-text>
+                            <v-data-table
+                            :headers="periksaHeader"
+                            :items="dataPeriksa"
+                            :loading="loading"
+                            :items-per-page="5"
+                            item-key="id_test">
+                          </v-data-table>
+                          </v-card-text>
+                        </v-card>
+                      </v-dialog>
                   </template>
                 </v-data-table>
                 </v-card-text>
@@ -156,6 +184,7 @@ export default {
     return {
       summaryDialog: false,
       detailDialog: false,
+      periksaDialog: false,
       baseUrl: process.env.VUE_APP_LOCAL_BACKEND,
       tests: ['IST', 'PAULI', 'CFIT', 'RMIB'],
       startDateModal: false,
@@ -247,6 +276,10 @@ export default {
           text: 'Jawaban Terakhir',
           value: 'jawaban_terakhir'
         }
+      ],
+      dataPeriksa: [],
+      periksaHeader: [
+        {}
       ]
     }
   },
@@ -254,6 +287,9 @@ export default {
     this.getData()
   },
   methods: {
+    getPeriksa (id) {
+      dataPeriksa
+    },
     getDetail (id) {
       this.axios.get(this.baseUrl + '/api/ambil-detil-data-test-normal?idTest=' + id)
         .then(response => {
