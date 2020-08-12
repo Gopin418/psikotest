@@ -5,6 +5,7 @@
         <v-select
         label="Jenis Tes"
         :items="tests"
+        v-model="testType"
         outlined
         dense></v-select>
       </v-col>
@@ -72,10 +73,10 @@
           :headers="headers"
           :items="users"
           :loading="loading"
-          :items-per-page="5"
+          :items-per-page="10"
           item-key="name">
           <template v-slot:item.detail="{ item }">
-            <v-dialog v-model="summaryDialog" fullscreen hide-overlay transition="dialog-bottom-transition">
+            <v-dialog v-model="summaryDialog" persistent fullscreen hide-overlay transition="dialog-bottom-transition">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
                   small
@@ -83,7 +84,7 @@
                   rounded
                   v-bind="attrs"
                   v-on="on"
-                  @click="getSummary()"
+                  @click="getSummary(item.detail)"
                   :key="item.detail"
                   depressed>Lihat Hasil Tes</v-btn>
               </template>
@@ -99,71 +100,61 @@
                   :headers="summaryHeaders"
                   :items="summaryData"
                   :loading="loading"
-                  :items-per-page="5"
+                  :item-per-page="5"
                   item-key="id_test">
                   <template v-slot:item.id_test="{ item }">
-                    <v-dialog v-model="detailDialog" transition="dialog-bottom-transition">
-                      <template v-slot:activator="{ on2, attrs2 }">
-                        <v-btn
-                          small
-                          color="primary"
-                          v-bind="attrs2"
-                          v-on="on2"
-                          @click="getDetail(item.id_test)"
-                          :key="item.detail"
-                          depressed>Detail</v-btn>
-                      </template>
-                      <v-card>
-                        <v-toolbar dark color="primary">
-                          <v-btn icon dark @click="detailDialog = false">
-                            <v-icon>mdi-close</v-icon>
-                          </v-btn>
-                          <v-toolbar-title>Detail Tes</v-toolbar-title>
-                        </v-toolbar>
-                        <v-card-text>
-                          <v-data-table
-                          :headers="detailHeader"
-                          :items="dataDetail"
-                          :loading="loading"
-                          :items-per-page="5"
-                          item-key="id_test">
-                        </v-data-table>
-                        </v-card-text>
-                      </v-card>
-                    </v-dialog>
+                    <v-btn
+                      small
+                      color="primary"
+                      @click="getDetail(item.id_test)"
+                      :key="item.detail"
+                      depressed>Detail</v-btn>
                     &nbsp;
                     &nbsp;
-                      <v-dialog v-model="detailDialog" transition="dialog-bottom-transition">
-                        <template v-slot:activator="{ on3, attrs3 }">
-                          <v-btn
-                            small
-                            color="primary"
-                            v-bind="attrs3"
-                            v-on="on3"
-                            @click="getPeriksa(item.id_test)"
-                            :key="item.detail"
-                            depressed>Periksa</v-btn>
-                        </template>
-                        <v-card>
-                          <v-toolbar dark color="primary">
-                            <v-btn icon dark @click="periksaDialog = false">
-                              <v-icon>mdi-close</v-icon>
-                            </v-btn>
-                            <v-toolbar-title>Periksa test</v-toolbar-title>
-                          </v-toolbar>
-                          <v-card-text>
-                            <v-data-table
-                            :headers="periksaHeader"
-                            :items="dataPeriksa"
-                            :loading="loading"
-                            :items-per-page="5"
-                            item-key="id_test">
-                          </v-data-table>
-                          </v-card-text>
-                        </v-card>
-                      </v-dialog>
+                    <v-btn
+                      small
+                      color="primary"
+                      @click="getPeriksa(item.sesi, item.nomor_test)"
+                      :key="item.detail"
+                      depressed>Periksa</v-btn>
                   </template>
                 </v-data-table>
+                </v-card-text>
+              </v-card>
+            </v-dialog>
+            <v-dialog v-model="detailDialog" persistent fullscreen transition="dialog-bottom-transition">
+              <v-card>
+                <v-toolbar dark color="primary">
+                  <v-btn icon dark @click="detailDialog = false">
+                    <v-icon>mdi-close</v-icon>
+                  </v-btn>
+                  <v-toolbar-title>Detail Tes</v-toolbar-title>
+                </v-toolbar>
+                <v-card-text>
+                  <v-data-table
+                  :headers="detailHeader"
+                  :items="dataDetail"
+                  :loading="loading"
+                  :items-per-page="5"
+                  item-key="id_test">
+                </v-data-table>
+                </v-card-text>
+              </v-card>
+            </v-dialog>
+            <v-dialog v-model="periksaDialog" width="400" persistentz>
+              <v-card>
+                <v-toolbar dark color="primary">
+                  <v-btn icon dark @click="periksaDialog = false">
+                    <v-icon>mdi-close</v-icon>
+                  </v-btn>
+                  <v-toolbar-title>Periksa Tes</v-toolbar-title>
+                </v-toolbar>
+                <v-card-text>
+                  <v-card class="mt-4" v-for="(data, index) in dataPeriksa" :key="index" outlined>
+                    <v-card-text>
+                      {{ data }}
+                    </v-card-text>
+                  </v-card>
                 </v-card-text>
               </v-card>
             </v-dialog>
@@ -185,8 +176,13 @@ export default {
       summaryDialog: false,
       detailDialog: false,
       periksaDialog: false,
+      userId: '',
+      testNumber: '',
+      testId: '',
+      testSession: '',
       baseUrl: process.env.VUE_APP_LOCAL_BACKEND,
-      tests: ['IST', 'PAULI', 'CFIT', 'RMIB'],
+      tests: ['ist', 'pauli', 'cfit', 'rmib'],
+      testType: '',
       startDateModal: false,
       endDateModal: false,
       startDate: '',
@@ -278,19 +274,25 @@ export default {
         }
       ],
       dataPeriksa: [],
-      periksaHeader: [
-        {}
-      ]
+      sliceDataUser: [],
+      sliceDataSummary: []
     }
   },
   mounted () {
     this.getData()
   },
   methods: {
-    getPeriksa (id) {
-      dataPeriksa
+    getPeriksa (session, number) {
+      this.periksaDialog = !this.periksaDialog
+      this.axios.get(this.baseUrl + '/api/ambil-hasil-pemeriksaan-normal?sesiSoal' + session + '&tipeTest' + this.testType + '&nomorTest' + number)
+        .then(response => {
+          console.log(response)
+        }).catch(e => {
+          console.log(e)
+        })
     },
     getDetail (id) {
+      this.detailDialog = !this.detailDialog
       this.axios.get(this.baseUrl + '/api/ambil-detil-data-test-normal?idTest=' + id)
         .then(response => {
           this.dataDetail = response.data.map(a => {
@@ -301,13 +303,14 @@ export default {
               jawaban_terakhir: a.jawaban_terakhir === '1' ? 'Ya' : 'Tidak'
             }
           })
-          console.log(this.dataDetail)
         }).catch(e => {
           console.log(e)
         })
     },
-    getSummary () {
-      this.axios.get(this.baseUrl + '/api/ambil-data-test?idUser=1&tipeTest=ist&tglAwal=' + new Date(this.startDate).getTime() + '&tglAkhir=' + new Date(this.endDate).getTime())
+    getSummary (id) {
+      this.testId = id
+      this.summaryDialog = !this.summaryDialog
+      this.axios.get(this.baseUrl + '/api/ambil-data-test?idUser=' + id + '&tipeTest=' + this.testType + '&tglAwal=' + new Date(this.startDate).getTime() + '&tglAkhir=' + new Date(this.endDate).getTime())
         .then(response => {
           console.log(response)
           this.summaryData = response.data.map(a => {
