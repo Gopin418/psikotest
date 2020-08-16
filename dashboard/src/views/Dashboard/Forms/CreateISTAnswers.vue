@@ -9,7 +9,7 @@
             <v-col cols="2">
               <v-text-field
               label="Nomor Soal"
-              v-model="questionNumber[x]"
+              v-model="questionNumber[index]"
               name="question_number"
               outlined
               dense></v-text-field>
@@ -20,16 +20,18 @@
               :items="keyCount[index]"
               v-model="keys[index]"
               outlined
-              @change="refresh()"
               dense></v-select>
+            </v-col>
+            <v-col cols="3">
+              <v-btn class="text-capitalize" color="primary" depressed @click="createKey(index, keys[index])">Buat</v-btn>
             </v-col>
           </v-row>
           <v-row>
-            <v-col v-for="a in keys[index]" :key="a" cols="2">
+            <v-col v-for="(answeres, indexes) in keyAnswers[index]" :key="indexes" cols="2">
               <v-text-field
                 v-if="answersType === 'Satu'"
-                :label="'Kunci ' + a"
-                v-model="keyAnswers[x][a]"
+                :label="'Kunci ' + (indexes + 1)"
+                @keyup="keyAnswers[index][indexes] = $event.target.value"
                 name="answers"
                 outlined
                 dense></v-text-field>
@@ -37,7 +39,7 @@
                 <v-textarea
                 v-if="answersType === 'Dua'"
                 :label="'Kunci ' + a"
-                v-model="keyAnswers[x][a]"
+                @keyup="keyAnswers[index][indexes] = $event.target.value"
                 name="answers"
                 auto-grow
                 outlined
@@ -45,9 +47,9 @@
                 hint="Tekan Enter untuk kunci jawaban berikutnya"></v-textarea>
 
                 <v-text-field
-                :label="'Score ' + a"
-                v-model="score[a]"
-                name="answers"
+                :label="'Score ' + (indexes + 1)"
+                @keyup="score[index][indexes] = $event.target.value"
+                name="score"
                 outlined
                 dense></v-text-field>
             </v-col>
@@ -65,6 +67,7 @@
 <script>
 export default {
   props: [
+    'testType',
     'answersType',
     'answersData',
     'testNumber',
@@ -72,6 +75,7 @@ export default {
   ],
   data () {
     return {
+      baseUrl: process.env.VUE_APP_LOCAL_BACKEND,
       keyCount: [],
       keyAnswers: [],
       score: [],
@@ -102,10 +106,26 @@ export default {
         nomor_test: this.testNumber,
         nomor_soal: this.questionNumber,
         index_jawaban: 1,
-        kunci_jawaban: 'kunci_jawaban',
+        kunci_jawaban: this.keyAnswers,
         nilai_score: this.score
       }]
+      this.axios.post(this.baseUrl + '/api/simpan-kunci-jawaban-normal', this.data)
       console.log(this.data)
+    },
+    createKey (index, answers) {
+      console.log(index + ' : ' + answers)
+      this.keyAnswers[index] = new Array(answers)
+      this.score[index] = new Array(answers)
+      this.refresh()
+    },
+    createArray (length) {
+      var arr = new Array(length || 0)
+      var i = length
+      if (arguments.length > 1) {
+        var args = Array.prototype.slice.call(arguments, 1)
+        while (i--) arr[(length - 1) - i] = this.createArray.apply(this, args)
+      }
+      return arr
     },
     createAnswer () {
       this.newAnswers = true
