@@ -86,7 +86,7 @@ export default {
   },
   watch: {
     counter (newCount, oldCount) {
-      if (newCount === 59) {
+      if (newCount === 179) {
         this.axios.post(this.backendUrl + '/api/simpan-data-jawaban-pauli', this.answerData)
           .then(() => {
             this.answersData.test_number += 1

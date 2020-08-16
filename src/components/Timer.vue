@@ -16,7 +16,7 @@ export default {
     return {
       timeout: '',
       timeText: '',
-      countdown: moment(15, 'minutes'),
+      countdown: moment(60, 'minutes'),
       count: 0
     }
   },
@@ -36,13 +36,13 @@ export default {
         this.$store.commit('setTime', this.count)
         this.countdown = moment(this.countdown).subtract(1, 'seconds')
         this.timeText = this.countdown.format('mm:ss')
-        if (this.counter === 60) {
+        if (this.counter === 180) {
           this.count = 0
           this.$store.commit('setTime', 0)
         }
         if (this.timeText === '00:00') {
           clearInterval(this.timout)
-          this.countdown = moment(15, 'minutes')
+          this.countdown = moment(60, 'minutes')
         }
       }, 1000)
     }

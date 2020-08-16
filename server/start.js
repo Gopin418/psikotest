@@ -21,7 +21,7 @@ var fileUpload = require('express-fileupload')
 // webPush.setVapidDetails('mailto:syamsu.', publicVapidKey, privateVapidKey)
 
 app.use(cors())
-app.use(compression())
+// app.use(compression())
 app.use(fileUpload({
   createParentPath: true,
   fileSize: 5 * 1024 * 1024,

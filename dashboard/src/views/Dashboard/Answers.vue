@@ -87,11 +87,14 @@ export default {
     show () {
       this.selected = this.selectedTestType
 
-      this.axios.get(this.baseUrl + '/api/ambil-kunci-jawaban-normal?tipeTest=' + this.selectedTestType + '&nomorTest=' + this.selectedTestNumber)
+      this.axios.get(this.baseUrl + '/api/ambil-kunci-jawaban-normal?tipeTest=' + this.selected + '&nomorTest=' + this.selectedTestNumber)
         .then(response => {
           this.answersData = response.data
+          if (this.answersData.length > 0) {
+            this.$root.$refs.createIST.createAnswer()
+          }
         }).catch(e => {
-          console.log(e)
+          console.log(e.response.data.error)
         })
     }
   }

@@ -76,7 +76,7 @@
           :items-per-page="10"
           item-key="name">
           <template v-slot:item.detail="{ item }">
-            <v-dialog v-model="summaryDialog" persistent fullscreen hide-overlay transition="dialog-bottom-transition">
+            <v-dialog v-model="summaryDialog" width="700" scrollable persistent transition="dialog-bottom-transition">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
                   small
@@ -95,12 +95,44 @@
                   </v-btn>
                   <v-toolbar-title>Hasil Tes</v-toolbar-title>
                 </v-toolbar>
-                <v-card-text>
+                 <v-card-text class="pt-6">
+                <!--  <v-card outlined>
+                    <v-card-text>
+                      <p>Biodata Peserta</p>
+                      <table>
+                        <tr>
+                          <td>Nomor</td>
+                          <td>:</td>
+                          <td>{{ item.nama_user }}</td>
+                        </tr>
+                        <tr>
+                          <td>Nama Lengkap</td>
+                          <td>:</td>
+                          <td>Alvin Ardiansyah Maulana</td>
+                        </tr>
+                        <tr>
+                          <td>Tempat, Tanggal Lahir</td>
+                          <td>:</td>
+                          <td>Bandung, 18 Apirl 2000</td>
+                        </tr>
+                        <tr>
+                          <td>Jenis Kelamin</td>
+                          <td>:</td>
+                          <td>Laki-laki</td>
+                        </tr>
+                        <tr>
+                          <td>Pendidikan</td>
+                          <td>:</td>
+                          <td>Sekolah Lanjutan Tingkat Atas</td>
+                        </tr>
+                      </table>
+                    </v-card-text>
+                  </v-card> -->
                   <v-data-table
                   :headers="summaryHeaders"
                   :items="summaryData"
                   :loading="loading"
-                  :item-per-page="5"
+                  :item-per-page="10"
                   item-key="id_test">
                   <template v-slot:item.id_test="{ item }">
                     <v-btn
@@ -122,7 +154,7 @@
                 </v-card-text>
               </v-card>
             </v-dialog>
-            <v-dialog v-model="detailDialog" persistent fullscreen transition="dialog-bottom-transition">
+            <v-dialog v-model="detailDialog" persistent width="600" scrollable>
               <v-card>
                 <v-toolbar dark color="primary">
                   <v-btn icon dark @click="detailDialog = false">
@@ -135,7 +167,7 @@
                   :headers="detailHeader"
                   :items="dataDetail"
                   :loading="loading"
-                  :items-per-page="5"
+                  :items-per-page="10"
                   item-key="id_test">
                 </v-data-table>
                 </v-card-text>
@@ -150,9 +182,9 @@
                   <v-toolbar-title>Periksa Tes</v-toolbar-title>
                 </v-toolbar>
                 <v-card-text>
-                  <v-card class="mt-4" v-for="(data, index) in dataPeriksa" :key="index" outlined>
+                  <v-card class="mt-4" outlined>
                     <v-card-text>
-                      {{ data }}
+                      <p>{{ error }}</p>
                     </v-card-text>
                   </v-card>
                 </v-card-text>
@@ -275,7 +307,9 @@ export default {
       ],
       dataPeriksa: [],
       sliceDataUser: [],
-      sliceDataSummary: []
+      sliceDataSummary: [],
+      error: '',
+      hasilPeriksa: []
     }
   },
   mounted () {
@@ -284,11 +318,11 @@ export default {
   methods: {
     getPeriksa (session, number) {
       this.periksaDialog = !this.periksaDialog
-      this.axios.get(this.baseUrl + '/api/ambil-hasil-pemeriksaan-normal?sesiSoal' + session + '&tipeTest' + this.testType + '&nomorTest' + number)
+      this.axios.get(this.baseUrl + '/api/ambil-hasil-pemeriksaan-normal?sesiSoal=' + session + '&tipeTest=' + this.testType + '&nomorTest=' + number)
         .then(response => {
-          console.log(response)
+          this.hasilPeriksa = response.data
         }).catch(e => {
-          console.log(e)
+          this.error = e.response.data.error
         })
     },
     getDetail (id) {
