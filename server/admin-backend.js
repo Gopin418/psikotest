@@ -17,7 +17,7 @@ router.post('/simpan-kunci-jawaban-normal', function (req, res) {
     return
   }
 
-  var kunciJawaban = req.body.data
+  var kunciJawaban = req.body
 
   var Query1 = ' INSERT INTO  t_kunci_jawaban_normal '
   Query1 += ' (tipe_test, nomor_test, nomor_soal, index_jawaban, tipe_kunci_jawaban,  kunci_jawaban, nilai_score, aktif) '

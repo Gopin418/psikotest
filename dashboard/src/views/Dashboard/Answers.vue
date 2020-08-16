@@ -45,8 +45,12 @@
         block>Tambah Jawaban</v-btn>
       </v-col>
     </v-row>
-      <CreateIST v-if="selected === 'IST'" :answersType="selectedAnswerType" :testNumber="selectedTestNumber" :answersData="answersData" />
-      <CreateCFIT v-if="selected === 'CFIT'" />
+      <CreateIST v-if="selected === 'ist'"
+      :answersType="selectedAnswerType"
+      :testNumber="selectedTestNumber"
+      :answersData="answersData"
+      :testType="selected" />
+      <CreateCFIT v-if="selected === 'cfit'" />
     <v-row>
     </v-row>
   </div>
@@ -66,7 +70,7 @@ export default {
       baseUrl: process.env.VUE_APP_LOCAL_BACKEND,
       testNumber: [],
       selectedTestNumber: null,
-      testType: ['IST', 'CFIT'],
+      testType: ['ist', 'cfit'],
       selectedTestType: null,
       answersType: ['Satu', 'Dua'],
       selectedAnswerType: null,
