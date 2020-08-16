@@ -65,7 +65,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 
 export default {
   name: 'Login',
@@ -83,14 +82,14 @@ export default {
   },
   methods: {
     save () {
-      axios.post(this.backendUrl + '/api/auth/login', this.user)
+      this.axios.post(this.backendUrl + '/api/auth/login', this.user)
         .then(response => {
           console.log(response.data)
           // expected response with user profile data and session / token
           // this.$router.push('/menu')
-          this.$cookies.set('name', response.data.namaUser)
-          this.$cookies.set('number', response.data.tanggalLahir)
-          this.$cookies.set('token', response.data.token)
+          this.$cookies.set('name', response.data.namaUser, null, null, null, null, 'lax')
+          this.$cookies.set('number', response.data.tanggalLahir, null, null, null, null, 'lax')
+          this.$cookies.set('token', response.data.token, null, null, null, null, 'lax')
           this.$router.push('/menu')
         }).catch(e => {
           console.log(e)

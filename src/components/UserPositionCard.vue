@@ -78,7 +78,6 @@
 
 <script>
 import moment from 'moment'
-import axios from 'axios'
 
 export default {
   data () {
@@ -157,7 +156,7 @@ export default {
       this.currentInstruction = this.currentInstruction.flat()
     },
     getRememberData () {
-      axios.get(this.baseUrl + '/json/' + this.test + '/' + this.testNumber + '/remember.json')
+      this.axios.get(this.baseUrl + '/json/' + this.test + '/' + this.testNumber + '/remember.json')
         .then(response => {
           this.timeOption = this.instructions.map(x => {
             return x.timer
@@ -171,7 +170,7 @@ export default {
       this.$forceUpdate()
     },
     postData () {
-      axios.post(this.backendUrl + '/api/simpan-data-jawaban-normal', this.answerData)
+      this.axios.post(this.backendUrl + '/api/simpan-data-jawaban-normal', this.answerData)
         .then(response => {
           this.$store.commit('moveTest')
           this.next = this.testNumber
@@ -207,7 +206,7 @@ export default {
       this.$store.commit('questionsDataReset')
       this.$store.commit('instructionDataReset')
       this.$store.commit('setTest', this.$cookies.get('type'))
-      axios.get(this.baseUrl + '/json/' + this.test + '/' + this.testNumber + '/instruction.json')
+      this.axios.get(this.baseUrl + '/json/' + this.test + '/' + this.testNumber + '/instruction.json')
         .then(response => {
           this.$store.commit('instructionDataUpdate', response.data)
           this.$store.commit('numAnswersUpdate', response.data)
@@ -219,7 +218,7 @@ export default {
           console.log(e)
         })
 
-      axios.get(this.baseUrl + '/json/' + this.test + '/' + this.testNumber + '/test.json')
+      this.axios.get(this.baseUrl + '/json/' + this.test + '/' + this.testNumber + '/test.json')
         .then(response => {
           this.$store.commit('questionsDataUpdate', response.data)
           this.questionTime = response.data.map(x => {
