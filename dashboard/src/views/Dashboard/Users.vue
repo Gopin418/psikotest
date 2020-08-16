@@ -76,7 +76,7 @@
           :items-per-page="10"
           item-key="name">
           <template v-slot:item.detail="{ item }">
-            <v-dialog v-model="summaryDialog" width="700" scrollable persistent transition="dialog-bottom-transition">
+            <v-dialog v-model="summaryDialog" width="980" scrollable persistent transition="dialog-bottom-transition">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
                   small
@@ -89,16 +89,15 @@
                   depressed>Lihat Hasil Tes</v-btn>
               </template>
               <v-card>
-                <v-toolbar dark color="primary">
+                <v-toolbar dark flat color="primary">
                   <v-btn icon dark @click="summaryDialog = false">
                     <v-icon>mdi-close</v-icon>
                   </v-btn>
-                  <v-toolbar-title>Hasil Tes</v-toolbar-title>
+                  <v-toolbar-title>Ringkasan IST</v-toolbar-title>
                 </v-toolbar>
                  <v-card-text class="pt-6">
                  <v-card outlined>
                     <v-card-text>
-                      <p>Biodata Peserta</p>
                       <table>
                         <tr>
                           <td>Nomor</td>
@@ -113,7 +112,7 @@
                         <tr>
                           <td>Tempat, Tanggal Lahir</td>
                           <td class="px-4">:</td>
-                          <td>Bandung, 18 Apirl 2000</td>
+                          <td>Bandung, 18 April 2000</td>
                         </tr>
                         <tr>
                           <td>Jenis Kelamin</td>
@@ -124,6 +123,11 @@
                           <td>Pendidikan</td>
                           <td class="px-4">:</td>
                           <td>Sekolah Lanjutan Tingkat Atas</td>
+                        </tr>
+                        <tr>
+                          <td>Tanggal Test</td>
+                          <td class="px-4">:</td>
+                          <td>23 Maret 2020</td>
                         </tr>
                       </table>
                     </v-card-text>
