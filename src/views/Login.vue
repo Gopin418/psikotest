@@ -27,6 +27,7 @@
                     label="Email"
                     name="email"
                     outlined
+                    :error-messages="error"
                     autofocus
                     color="primary"
                     v-model="user.email"
@@ -37,6 +38,7 @@
                     label="Kata sandi"
                     name="password"
                     outlined
+                    :error="error != '' ? true : false"
                     color="primary"
                     v-model="user.password"
                     type="password"
@@ -77,6 +79,7 @@ export default {
         email: '',
         password: ''
       },
+      error: '',
       backendUrl: process.env.VUE_APP_BACKEND_URL
     }
   },
@@ -92,7 +95,8 @@ export default {
           this.$cookies.set('token', response.data.token, null, null, null, null, 'lax')
           this.$router.push('/menu')
         }).catch(e => {
-          console.log(e)
+          console.log(e.response.data.error)
+          this.error = e.response.data.error
         })
     }
   }

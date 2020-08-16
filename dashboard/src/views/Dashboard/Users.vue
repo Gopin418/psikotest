@@ -96,39 +96,39 @@
                   <v-toolbar-title>Hasil Tes</v-toolbar-title>
                 </v-toolbar>
                  <v-card-text class="pt-6">
-                <!--  <v-card outlined>
+                 <v-card outlined>
                     <v-card-text>
                       <p>Biodata Peserta</p>
                       <table>
                         <tr>
                           <td>Nomor</td>
-                          <td>:</td>
-                          <td>{{ item.nama_user }}</td>
+                          <td class="px-4">:</td>
+                          <td>{{ item.detail }}</td>
                         </tr>
                         <tr>
                           <td>Nama Lengkap</td>
-                          <td>:</td>
+                          <td class="px-4">:</td>
                           <td>Alvin Ardiansyah Maulana</td>
                         </tr>
                         <tr>
                           <td>Tempat, Tanggal Lahir</td>
-                          <td>:</td>
+                          <td class="px-4">:</td>
                           <td>Bandung, 18 Apirl 2000</td>
                         </tr>
                         <tr>
                           <td>Jenis Kelamin</td>
-                          <td>:</td>
+                          <td class="px-4">:</td>
                           <td>Laki-laki</td>
                         </tr>
                         <tr>
                           <td>Pendidikan</td>
-                          <td>:</td>
+                          <td class="px-4">:</td>
                           <td>Sekolah Lanjutan Tingkat Atas</td>
                         </tr>
                       </table>
                     </v-card-text>
-                  </v-card> -->
-                  <v-data-table
+                  </v-card>
+                  <!-- <v-data-table
                   :headers="summaryHeaders"
                   :items="summaryData"
                   :loading="loading"
@@ -150,7 +150,8 @@
                       :key="item.detail"
                       depressed>Periksa</v-btn>
                   </template>
-                </v-data-table>
+                </v-data-table> -->
+                  <ISTReport />
                 </v-card-text>
               </v-card>
             </v-dialog>
@@ -202,7 +203,12 @@
 </template>
 
 <script>
+import ISTReport from './Report/IST.vue'
+
 export default {
+  components: {
+    ISTReport
+  },
   data () {
     return {
       summaryDialog: false,
