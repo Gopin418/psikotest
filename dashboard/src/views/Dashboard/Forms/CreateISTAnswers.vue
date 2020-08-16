@@ -83,6 +83,7 @@ export default {
       answers: 0,
       questionNumber: [],
       keys: [],
+      keysId: [],
       data: []
     }
   },
@@ -101,16 +102,21 @@ export default {
   methods: {
     save () {
       this.data = [{
-        id_kunci: this.keys ? this.keys : 0,
+        id_kunci: this.keysId ? this.keysId : 0,
         tipe_test: this.testType,
         nomor_test: this.testNumber,
+        tipe_kunci_jawaban: this.answersType === 'Satu' ? 1 : 2,
         nomor_soal: this.questionNumber,
         index_jawaban: 1,
         kunci_jawaban: this.keyAnswers,
         nilai_score: this.score
       }]
       this.axios.post(this.baseUrl + '/api/simpan-kunci-jawaban-normal', this.data)
-      console.log(this.data)
+        .then(response => {
+          console.log(response)
+        }).catch(e => {
+          console.log(e.response.data.error)
+        })
     },
     createKey (index, answers) {
       console.log(index + ' : ' + answers)
@@ -128,9 +134,19 @@ export default {
       return arr
     },
     createAnswer () {
-      this.newAnswers = true
-      this.answers += 1
-      this.refresh()
+      if (this.answersData.length < 1) {
+        this.newAnswers = true
+        this.answers += 1
+        this.refresh()
+      } else {
+        for (var i = 0; i < this.answersData.length; i++) {
+          this.keyAnswers[i] = new Array(this.answersData[i].kunci_jawaban)
+          this.score[i] = new Array(JSON.stringify(this.answersData[i].nilai_score))
+          this.keysId[i] = this.answersData[i].id_kunci_jawaban_normal
+          this.questionNumber = new Array(JSON.stringify(this.answersData[i].nomor_soal))
+        }
+      }
+      console.log(this.questionNumber)
     },
     refresh () {
       this.$forceUpdate()

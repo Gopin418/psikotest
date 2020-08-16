@@ -19,7 +19,6 @@ router.get('/ambil-kunci-jawaban-normal', function (req, res) {
 
   var tipeTest = req.query.tipeTest
   var nomorTest = req.query.nomorTest
-  var nomorSoal = req.query.nomorSoal
 
   if (tipeTest == null) {
     res.status(501).send({ error: 'Tipe Test tidak boleh NULL' })
@@ -37,10 +36,10 @@ router.get('/ambil-kunci-jawaban-normal', function (req, res) {
   }
 
   var Query = 'SELECT * FROM t_kunci_jawaban_normal '
-  Query += ' WHERE tipe_test = ? and nomor_test = ? and nomor_soal = ? '
+  Query += ' WHERE tipe_test = ? and nomor_test = ? '
   Query += ' ORDER BY nomor_soal, index_jawaban '
 
-  var data = [tipeTest, nomorTest, nomorSoal]
+  var data = [tipeTest, nomorTest]
   sql.query(Query, data, function (_err, results, fields) {
     if (_err) {
       res.status(200).send([])
@@ -175,8 +174,8 @@ router.get('/ambil-hasil-pemeriksaan-normal', function (req, res) {
   var nomorTest = req.query.nomorTest
 
   var QueryKunci = 'SELECT * FROM t_kunci_jawaban_normal '
-  QueryKunci += ' WHERE tipe_test = ? , nomor_test = ? '
-  QueryKunci += ' ORDER BY nomor_soal, index_jawaban '
+  QueryKunci += 'WHERE tipe_test = ? and nomor_test = ? '
+  QueryKunci += 'ORDER BY nomor_soal, index_jawaban '
 
   var QueryTest = 'SELECT  a.sesi, a.tipe_test, a.nomor_test, b.nomor_soal, b.index_jawaban, b.jawaban '
   QueryTest += ' FROM t_test a '
@@ -203,7 +202,6 @@ router.get('/ambil-hasil-pemeriksaan-normal', function (req, res) {
       data: results
     }
     data = [sesiSoal, tipeTest, nomorTest]
-
     sql.query(QueryTest, data, function (_err, results, fields) {
       if (_err) {
         res.status(501).send({ error: 'Mengambil jawaban test gagal, silahkan ulangi.' })
@@ -217,6 +215,7 @@ router.get('/ambil-hasil-pemeriksaan-normal', function (req, res) {
 
       var jawaban = results
 
+      console.log(kunciJawaban)
       for (let i = 0; i < kunciJawaban.data.length; i++) {
         kunciJawaban.data[i].hasil_score = 0
         kunciJawaban.data[i].benar = 0

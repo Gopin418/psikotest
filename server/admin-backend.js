@@ -31,19 +31,20 @@ router.post('/simpan-kunci-jawaban-normal', function (req, res) {
   var Query = ''
   var data = []
   sql.beginTransaction(function (_err) {
-    for (let i = 0; i < kunciJawaban.length; i++) {
-      if (kunciJawaban[i].id_kunci < 1) {
+    for (let i = 0; i < kunciJawaban[0].kunci_jawaban.length; i++) {
+      if (kunciJawaban[0].id_kunci[i] == undefined) {
         Query = Query1
-        data = [kunciJawaban[i].tipe_test, kunciJawaban[i].nomor_test, kunciJawaban[i].nomor_soal,
-          kunciJawaban[i].index_jawaban, kunciJawaban[i].tipe_kunci_jawaban, kunciJawaban[i].kunci_jawaban,
-          kunciJawaban[i].nilai_score]
+        data = [kunciJawaban[0].tipe_test, kunciJawaban[0].nomor_test, kunciJawaban[0].nomor_soal[i],
+          kunciJawaban[0].index_jawaban, kunciJawaban[0].tipe_kunci_jawaban, kunciJawaban[0].kunci_jawaban[i][0],
+          kunciJawaban[0].nilai_score[i][0]]
       } else {
         Query = Query2
-        data = [kunciJawaban[i].tipe_test, kunciJawaban[i].nomor_test, kunciJawaban[i].nomor_soal,
-          kunciJawaban[i].index_jawaban, kunciJawaban[i].tipe_kunci_jawaban, kunciJawaban[i].kunci_jawaban,
-          kunciJawaban[i].nilai_score, kunciJawaban[i].id_kunci]
+        data = [kunciJawaban[0].tipe_test, kunciJawaban[0].nomor_test, kunciJawaban[0].nomor_soal[i],
+          kunciJawaban[0].index_jawaban, kunciJawaban[0].tipe_kunci_jawaban, kunciJawaban[0].kunci_jawaban[i][0],
+          kunciJawaban[0].nilai_score[i][0], kunciJawaban[0].id_kunci]
       }
-      sql.query(Query, data, function (_err) {
+      console.log(Query)
+      sql.query(Query, data, function (_err, results) {
         console.log('Commit ubah simpan-kunci-jawaban-normal')
         sql.commit(function (_err) {
           if (_err) {
