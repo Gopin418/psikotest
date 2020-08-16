@@ -21,6 +21,21 @@ router.get('/ambil-kunci-jawaban-normal', function (req, res) {
   var nomorTest = req.query.nomorTest
   var nomorSoal = req.query.nomorSoal
 
+  if (tipeTest == null) {
+    res.status(501).send({ error: 'Tipe Test tidak boleh NULL' })
+    return
+  }
+
+  if (nomorTest == null) {
+    res.status(501).send({ error: 'Nomor Test tidak boleh NULL' })
+    return
+  }
+
+  if (nomorSoal == null) {
+    res.status(501).send({ error: 'Nomor Soal tidak boleh NULL' })
+    return
+  }
+
   var Query = 'SELECT * FROM t_kunci_jawaban_normal '
   Query += ' WHERE tipe_test = ? and nomor_test = ? and nomor_soal = ? '
   Query += ' ORDER BY nomor_soal, index_jawaban '
