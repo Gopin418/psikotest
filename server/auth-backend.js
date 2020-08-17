@@ -31,7 +31,7 @@ router.post('/auth/registrasi', function (req, res) {
   // console.log(req.rawBody)
 
   var email = req.body.email
-  var password = req.body.email
+  var password = req.body.password
   var fullname = req.body.fullname
   var city = req.body.city
   var birthdate = req.body.birthdate

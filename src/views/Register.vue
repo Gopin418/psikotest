@@ -14,6 +14,18 @@
             sm="8"
             md="5"
           >
+          <v-alert
+          dense
+          v-if="error"
+          type="error">
+          {{ error }}
+          </v-alert>
+          <v-alert
+          dense
+          v-if="error === 'succes'"
+          type="success">
+          Registrasi berhasil, silahkan masuk
+          </v-alert>
             <v-card class="rounded-lg pa-2" outlined>
                 <v-card-title>Buat Akun</v-card-title>
                 <v-card-subtitle>{{ subtitle }}</v-card-subtitle>
@@ -160,7 +172,6 @@
           </v-col>
         </v-row>
       </v-container>
-      color="primary"
     </v-main>
   </v-app>
 </template>
@@ -186,6 +197,7 @@ export default {
         email: '',
         password: ''
       },
+      error: '',
       confirmation: ''
     }
   },
@@ -226,17 +238,13 @@ export default {
       this.subtitle = this.user.email
     },
     register () {
-      this.user.birthdate = new Date(this.user.birthdate).getTime()
+      this.user.birthdate = new Date(this.date).getTime()
       this.axios.post(this.backendUrl + '/api/auth/registrasi', this.user)
         .then(response => {
-          // expected 201 code before redirect to Login page
-          if (response.data.messages.code === 201) {
-            this.$router.push('/login')
-          } else {
-            console.log(response.data.messages.message)
-          }
+          this.error = response.data.succes
+          this.$router.push('/')
         }).catch(e => {
-          console.log(e)
+          this.error = e.response.data.error
         })
     }
   }
