@@ -155,7 +155,6 @@ router.get('/ambil-detil-data-test-pauli', function (req, res) {
     }
     res.status(200).send(results)
   })
-
 })
 
 router.get('/ambil-hasil-pemeriksaan-normal', function (req, res) {

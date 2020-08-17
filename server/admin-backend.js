@@ -34,7 +34,7 @@ router.post('/simpan-kunci-jawaban-normal', function (req, res) {
     for (let i = 0; i < kunciJawaban[0].kunci_jawaban.length; i++) {
       console.log(kunciJawaban[0].kunci_jawaban[i])
       for (let x = 0; x < kunciJawaban[0].kunci_jawaban[i].length; x++) {
-        if (kunciJawaban[0].id_kunci[i] == undefined) {
+        if (kunciJawaban[0].id_kunci[i] === undefined || kunciJawaban[0].id_kunci[i] === null || kunciJawaban[0].id_kunci[i] === 0) {
           Query = Query1
           data = [kunciJawaban[0].tipe_test, kunciJawaban[0].nomor_test, kunciJawaban[0].nomor_soal[i],
             kunciJawaban[0].index_jawaban, kunciJawaban[0].tipe_kunci_jawaban, kunciJawaban[0].kunci_jawaban[i][x],
