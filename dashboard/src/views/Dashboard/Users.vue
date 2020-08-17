@@ -127,7 +127,17 @@
                         <tr>
                           <td>Tanggal Test</td>
                           <td class="px-4">:</td>
-                          <td>23 Maret 2020</td>
+                          <td>
+                            <v-row>
+                              <v-col cols="8">
+                                <v-select
+                                  label="Tanggal Test"
+                                  :items="testDate"
+                                  outlined
+                                  dense></v-select>
+                              </v-col>
+                            </v-row>
+                          </td>
                         </tr>
                       </table>
                     </v-card-text>
@@ -222,6 +232,7 @@ export default {
       testNumber: '',
       testId: '',
       testSession: '',
+      testDate: ['23 Juli 2020', '31 Agustus 2019'],
       baseUrl: process.env.VUE_APP_LOCAL_BACKEND,
       tests: ['ist', 'pauli', 'cfit', 'rmib'],
       testType: '',

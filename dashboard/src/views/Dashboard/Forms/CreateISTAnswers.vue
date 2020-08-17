@@ -38,7 +38,7 @@
 
                 <v-textarea
                 v-if="answersType === 'Dua'"
-                :label="'Kunci ' + a"
+                :label="'Kunci ' + (indexes + 1)"
                 @keyup="keyAnswers[index][indexes] = $event.target.value"
                 name="answers"
                 auto-grow
@@ -58,9 +58,21 @@
       </v-card-text>
       <v-card-actions v-if="newAnswers === true">
         <v-spacer></v-spacer>
-        <v-btn class="text-capitalize px-8 py-5" color="primary" @click="save()" depressed>Simpan</v-btn>
+        <v-btn class="text-capitalize px-8 py-5" color="primary" @click="confirmationDialog = true" depressed>Simpan</v-btn>
       </v-card-actions>
     </v-card>
+    <v-dialog v-model="confirmationDialog" persistent width="400" scrollable>
+      <v-card>
+        <v-card-title>
+          <p>Simpan Kunci Jawaban ?</p>
+        </v-card-title>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn text color="primary" class="text-capitalize" @click="confirmationDialog = false">Batal</v-btn>
+          <v-btn depressed color="primary" class="px-7 text-capitalize" @click="save()">Simpan</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -76,6 +88,8 @@ export default {
   data () {
     return {
       baseUrl: process.env.VUE_APP_LOCAL_BACKEND,
+      confirmationDialog: false,
+      confirmationText: 'Simpan Kunci Jawaban ?',
       keyCount: [],
       keyAnswers: [],
       score: [],
@@ -113,9 +127,14 @@ export default {
       }]
       this.axios.post(this.baseUrl + '/api/simpan-kunci-jawaban-normal', this.data)
         .then(response => {
-          console.log(response)
+          this.questionNumber = []
+          this.keyAnswers = []
+          this.score = []
+          this.answers = 1
+          this.refresh()
+          this.confirmationDialog = false
         }).catch(e => {
-          console.log(e.response.data.error)
+          console.log(e)
         })
     },
     createKey (index, answers) {
