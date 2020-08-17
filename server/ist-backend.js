@@ -80,11 +80,17 @@ router.get('/ambil-hasil-sw-ist', function (req, res) {
   var mode = req.query.mode
   var nilaiRw = req.query.nilaiRW
 
-  var umur = 10
+  var dateSelesai = new Date(tanggalSelesaiTest)
+  var dateLahir = new Date(tanggalLahir)
+  var antara = (dateSelesai - dateLahir) 
+  var epoch = new Date('1970-01-01 00:00:00+0700')
+  var umur = antara.getYear() - epoch.getYear()
 
   var Query = 'SELECT sw FROM t_ist_info '
   Query += ' WHERE mode = ? and nilaiRw = ? '
   Query += ' and (? between umur_min and umur_max) '
+
+  var data = [mode, nilaiRw, umur]
 
   sql.query(Query, function (_err, results, fields) {
     if (_err) {

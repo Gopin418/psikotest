@@ -74,6 +74,7 @@ var pauli = require('./pauli-backend')
 var admin = require('./admin-backend')
 var info = require('./info-backend')
 var ist = require('./ist-backend')
+var cfit = require('./cfit-backend')
 
 app.use('/api', auth)
 app.use('/api', normal)
@@ -81,6 +82,7 @@ app.use('/api', pauli)
 app.use('/api', admin)
 app.use('/api', info)
 app.use('/api/ist', ist)
+app.use('/api/cfit', cfit)
 
 // app.use('/swagger-ui.html', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 // var io = require('socket.io')(server)
