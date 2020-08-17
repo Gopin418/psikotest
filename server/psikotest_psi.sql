@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 17, 2020 at 11:48 AM
+-- Generation Time: Aug 17, 2020 at 12:24 PM
 -- Server version: 10.4.12-MariaDB
 -- PHP Version: 7.2.33
 
@@ -38,6 +38,14 @@ CREATE TABLE `t_cfit_iq` (
   `score_iq` int(11) NOT NULL,
   `aktif` char(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `t_cfit_iq`
+--
+
+INSERT INTO `t_cfit_iq` (`id_cfit_iq`, `total_raw_score_min`, `total_raw_score_max`, `umur_tahun_min`, `umur_tahun_max`, `umur_bulan_min`, `umur_bulan_max`, `score_iq`, `aktif`) VALUES
+(1, 0, 30, 13, 13, 0, 4, 136, '1'),
+(2, 31, 31, 13, 13, 0, 4, 137, '1');
 
 -- --------------------------------------------------------
 
@@ -505,7 +513,7 @@ ALTER TABLE `t_users`
 -- AUTO_INCREMENT for table `t_cfit_iq`
 --
 ALTER TABLE `t_cfit_iq`
-  MODIFY `id_cfit_iq` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_cfit_iq` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `t_ist_info`
