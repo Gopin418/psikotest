@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Aug 17, 2020 at 09:49 AM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.1
+-- Host: localhost
+-- Generation Time: Aug 17, 2020 at 11:48 AM
+-- Server version: 10.4.12-MariaDB
+-- PHP Version: 7.2.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -43,6 +42,80 @@ CREATE TABLE `t_cfit_iq` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `t_ist_info`
+--
+
+CREATE TABLE `t_ist_info` (
+  `id_ist_info` int(11) NOT NULL,
+  `mode` varchar(255) NOT NULL,
+  `umur_min` double NOT NULL,
+  `umur_max` double NOT NULL,
+  `rw` int(11) NOT NULL,
+  `sw` int(11) NOT NULL,
+  `m` double DEFAULT NULL,
+  `s` double DEFAULT NULL,
+  `aktif` char(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `t_ist_info`
+--
+
+INSERT INTO `t_ist_info` (`id_ist_info`, `mode`, `umur_min`, `umur_max`, `rw`, `sw`, `m`, `s`, `aktif`) VALUES
+(1, 'SE', 0, 12, 0, 74, NULL, NULL, '1'),
+(2, 'SE', 0, 12, 1, 78, NULL, NULL, '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `t_ist_iq`
+--
+
+CREATE TABLE `t_ist_iq` (
+  `id_ist_iq` int(11) NOT NULL,
+  `sw` int(11) NOT NULL,
+  `iq` int(11) NOT NULL,
+  `prosentase` int(11) NOT NULL,
+  `aktif` char(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `t_ist_iq`
+--
+
+INSERT INTO `t_ist_iq` (`id_ist_iq`, `sw`, `iq`, `prosentase`, `aktif`) VALUES
+(1, 58, 37, 0, '1'),
+(2, 60, 40, 0, '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `t_ist_norm_ge`
+--
+
+CREATE TABLE `t_ist_norm_ge` (
+  `id_ist_norm_ge` int(11) NOT NULL,
+  `nilai_atas` int(11) NOT NULL,
+  `nilai_bawah` int(11) NOT NULL,
+  `rw` int(11) NOT NULL,
+  `aktif` char(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `t_ist_norm_ge`
+--
+
+INSERT INTO `t_ist_norm_ge` (`id_ist_norm_ge`, `nilai_atas`, `nilai_bawah`, `rw`, `aktif`) VALUES
+(1, 1, -100000, 1, '1'),
+(2, 2, 2, 2, '1'),
+(3, 3, 3, 3, '1'),
+(4, 4, 4, 4, '1'),
+(5, 6, 5, 5, '1'),
+(6, 8, 7, 6, '1');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `t_jawaban_normal`
 --
 
@@ -53,6 +126,8 @@ CREATE TABLE `t_jawaban_normal` (
   `jawaban` text DEFAULT NULL,
   `jawaban_terakhir` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `t_jawaban_pauli`
@@ -311,6 +386,15 @@ CREATE TABLE `t_sesi_test` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Dumping data for table `t_sesi_test`
+--
+
+INSERT INTO `t_sesi_test` (`id_user`, `sesi`, `tanggal_test`, `tanggal_selesai`) VALUES
+(5, '41f6b34acd81eb371597654837492a7febe7a', 1597654837492, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `t_test`
 --
 
@@ -330,6 +414,8 @@ CREATE TABLE `t_test` (
   `tanggal_periksa` int(11) DEFAULT NULL,
   `tanggal_pengesahan` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `t_users`
@@ -368,6 +454,24 @@ ALTER TABLE `t_cfit_iq`
   ADD PRIMARY KEY (`id_cfit_iq`);
 
 --
+-- Indexes for table `t_ist_info`
+--
+ALTER TABLE `t_ist_info`
+  ADD PRIMARY KEY (`id_ist_info`);
+
+--
+-- Indexes for table `t_ist_iq`
+--
+ALTER TABLE `t_ist_iq`
+  ADD PRIMARY KEY (`id_ist_iq`);
+
+--
+-- Indexes for table `t_ist_norm_ge`
+--
+ALTER TABLE `t_ist_norm_ge`
+  ADD PRIMARY KEY (`id_ist_norm_ge`);
+
+--
 -- Indexes for table `t_kunci_jawaban_normal`
 --
 ALTER TABLE `t_kunci_jawaban_normal`
@@ -402,6 +506,24 @@ ALTER TABLE `t_users`
 --
 ALTER TABLE `t_cfit_iq`
   MODIFY `id_cfit_iq` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `t_ist_info`
+--
+ALTER TABLE `t_ist_info`
+  MODIFY `id_ist_info` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `t_ist_iq`
+--
+ALTER TABLE `t_ist_iq`
+  MODIFY `id_ist_iq` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `t_ist_norm_ge`
+--
+ALTER TABLE `t_ist_norm_ge`
+  MODIFY `id_ist_norm_ge` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `t_kunci_jawaban_normal`

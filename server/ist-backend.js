@@ -143,7 +143,7 @@ router.post('/simpan-norman-ge-ist', function (req, res) {
 
   var Query1 = ' INSERT INTO  t_ist_info '
   Query1 += ' (nilai_atas, nilai_bawah, rw, aktif) '
-  Query1 += ' VALUES (?, ?, ?, ?, 1) '
+  Query1 += ' VALUES (?, ?, ?, 1) '
 
   var Query2 = ' UPDATE t_ist_info '
   Query2 += ' SET nilai_atas = ?, nilai_bawah = ?, rw = ? '
@@ -166,6 +166,85 @@ router.post('/simpan-norman-ge-ist', function (req, res) {
       sql.commit(function (_err) {
         if (_err) {
           pError.kirimPesanError(res, sql, _err, 'Simpan data GE IST gagal, harap periksa kembali')
+          return
+        }
+        console.log('success!')
+        res.send({ succes: 'success' })
+      })
+    })
+  })
+})
+
+// ////////////////////////////////////
+// //////////// IQ IST /////////////
+
+router.get('/ambil-hasil-sw-iq-ist', function (req, res) {
+  var session = JWT.check(req, res)
+  if (session === null) {
+    return
+  }
+
+  var nilaiRw = req.query.nilaiRW
+
+  var Query = 'SELECT iq, prosentase FROM t_ist_iq '
+  Query += ' WHERE sw = ? '
+
+  var data = [nilaiRw]
+
+  sql.query(Query, data, function (_err, results, fields) {
+    if (_err) {
+      res.status(200).send([])
+      console.error(_err)
+      return
+    }
+    res.status(200).send(results)
+  })
+})
+
+router.get('/ambil-data-iq-ist', function (req, res) {
+  var Query = 'SELECT * FROM t_ist_iq'
+
+  sql.query(Query, function (_err, results, fields) {
+    if (_err) {
+      res.status(200).send([])
+      console.error(_err)
+      return
+    }
+    res.status(200).send(results)
+  })
+})
+
+router.post('/simpan-iq-ist', function (req, res) {
+  var idIstIq = req.body.id_ist_iq
+  var sw = req.body.sw
+  var iq = req.body.iq
+  var prosentase = req.body.prosentase
+
+  var Query1 = ' INSERT INTO  t_ist_iq '
+  Query1 += ' (sw, iq, rw, prosentase, aktif) '
+  Query1 += ' VALUES (?, ?, ?, ?, 1) '
+
+  var Query2 = ' UPDATE t_ist_iq '
+  Query2 += ' SET sw = ?, iq = ?, rw = ?, prosentase = ? '
+  Query2 += ' WHERE id_ist_iq  = ? '
+
+  var Query = ''
+  var data = []
+  sql.beginTransaction(function (_err) {
+    if (idIstIq === undefined || idIstIq === null || idIstIq === 0) {
+      Query = Query1
+      data = [sw, iq, prosentase]
+    } else {
+      Query = Query2
+      data = [sw, iq, prosentase, idIstIq]
+    }
+
+    console.log(Query)
+    sql.query(Query, data, function (_err, results) {
+      console.log('Commit ubah simpan-iq-ist')
+      sql.commit(function (_err) {
+        if (_err) {
+          pError.kirimPesanError(res, sql, _err, 'Simpan data IQ IST gagal, harap periksa kembali')
           return
         }
         console.log('success!')
