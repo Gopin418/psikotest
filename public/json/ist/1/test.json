@@ -28,10 +28,10 @@
         "number": 3,
         "question": "......... tidak termasuk cuaca",
         "question_marks": {
-          "a": "Angin Puyuh",
+          "a": "Angin puyuh",
           "b": "Halilintar",
           "c": "Salju",
-          "d": "Gempa Bumi",
+          "d": "Gempa bumi",
           "e": "Kabut"
         }
       },
@@ -107,7 +107,7 @@
         "question_marks": {
           "a": "Kulit",
           "b": "Sol",
-          "c": "Tali Sepatu",
+          "c": "Tali sepatu",
           "d": "Gesper",
           "e": "Lidah"
         }

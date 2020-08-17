@@ -27,7 +27,9 @@
                     label="Email"
                     name="email"
                     outlined
+                    :error="error ? true : false"
                     color="primary"
+                    :error-messages="error"
                     v-model="user.email"
                     type="text"
                   ></v-text-field>
@@ -36,6 +38,7 @@
                     label="Kata Sandi"
                     name="password"
                     outlined
+                    :error="error ? true : false"
                     color="primary"
                     v-model="user.password"
                     type="password"
@@ -72,6 +75,7 @@ export default {
         email: '',
         password: ''
       },
+      error: '',
       hostURL: process.env.VUE_APP_LOCAL_BACKEND
     }
   },
@@ -85,7 +89,7 @@ export default {
           this.$session.set('userName', response.data.namaUser)
           this.$router.push('dashboard')
         }).catch(e => {
-          console.log(e)
+          this.error = e.response.data.error
           this.loading = false
         })
     }
