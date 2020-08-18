@@ -45,7 +45,7 @@ router.post('/simpan-data-jawaban-normal', function (req, res) {
           return
         }
       }
-
+      console.log(results)
       var idTest = results.insertId
 
       for (let i = 0; i < jawaban.length; i++) {

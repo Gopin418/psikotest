@@ -278,6 +278,12 @@ export default {
       this.$forceUpdate()
     },
     finish () {
+      this.answerData = {
+        test_type: this.test,
+        test_number: this.testNumber,
+        time: this.timeUsed,
+        answer_data: this.answeredData
+      }
       this.postData()
       clearInterval(this.countdown)
       this.$cookies.remove('user')

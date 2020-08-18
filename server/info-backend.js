@@ -209,7 +209,6 @@ router.get('/ambil-hasil-pemeriksaan-normal', function (req, res) {
 
       var jawaban = results
 
-      console.log(kunciJawaban)
       for (let i = 0; i < kunciJawaban.data.length; i++) {
         kunciJawaban.data[i].hasil_score = 0
         kunciJawaban.data[i].benar = 0
@@ -219,11 +218,17 @@ router.get('/ambil-hasil-pemeriksaan-normal', function (req, res) {
             jawaban[j].nomor_test === kunciJawaban.data[i].nomor_test &&
             jawaban[j].index_jawaban === kunciJawaban.data[i].index_jawaban) {
             if (kunciJawaban.data[i].tipe_kunci_jawaban === '1') {
-              kunciJawaban.data[i].benar = (kunciJawaban.data[i].kunci_jawaban.trim() === jawaban[j].jawaban.trim()) ? 1 : 0
-              kunciJawaban.data[i].salah = (kunciJawaban.data[i].kunci_jawaban.trim() !== jawaban[j].jawaban.trim()) ? 0 : 1
+              if (kunciJawaban.data[i].kunci_jawaban.trim() === jawaban[j].jawaban.trim()) {
+                kunciJawaban.data[i].benar = 1
+              } else {
+                kunciJawaban.data[i].salah = 1
+              }
             } else {
-              kunciJawaban.data[i].benar = (kunciJawaban.data[i].kunci_jawaban.split(',').includes(jawaban[j].jawaban.trim())) ? 1 : 0
-              kunciJawaban.data[i].salah = (kunciJawaban.data[i].kunci_jawaban.split(',').includes(jawaban[j].jawaban.trim())) ? 0 : 1
+              if (kunciJawaban.data[i].kunci_jawaban.split('\n').includes(jawaban[j].jawaban.trim())) {
+                kunciJawaban.data[i].benar = 1
+              } else {
+                kunciJawaban.data[i].salah = 1
+              }
             }
             kunciJawaban.data[i].hasil_score = (kunciJawaban.data[i].benar === 1) ? kunciJawaban.data[i].hasil_score = kunciJawaban.data[i].nilai_score : 0
           }
@@ -233,12 +238,11 @@ router.get('/ambil-hasil-pemeriksaan-normal', function (req, res) {
       kunciJawaban.total_benar = 0
       kunciJawaban.total_salah = 0
       kunciJawaban.total_score = 0
-      for (let i = 0; i < kunciJawaban.length; i++) {
+      for (let i = 0; i < kunciJawaban.data.length; i++) {
         kunciJawaban.total_benar += kunciJawaban.data[i].benar
-        kunciJawaban.total_benar += kunciJawaban.data[i].salah
+        kunciJawaban.total_salah += kunciJawaban.data[i].salah
         kunciJawaban.total_score += kunciJawaban.data[i].hasil_score
       }
-
       res.status(200).send(kunciJawaban)
     })
   })

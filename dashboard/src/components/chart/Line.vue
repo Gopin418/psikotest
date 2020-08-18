@@ -4,8 +4,16 @@ import { Line } from 'vue-chartjs'
 export default {
   extends: Line,
   props: ['data', 'options'],
+  created () {
+    this.$root.$refs.chartLine = this
+  },
   mounted () {
-    this.renderChart(this.data, this.options)
+    this.render()
+  },
+  methods: {
+    render () {
+      this.renderChart(this.data, this.options)
+    }
   }
 }
 </script>

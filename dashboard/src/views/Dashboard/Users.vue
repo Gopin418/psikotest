@@ -76,135 +76,14 @@
           :items-per-page="10"
           item-key="name">
           <template v-slot:item.detail="{ item }">
-            <v-dialog v-model="summaryDialog" width="980" scrollable persistent transition="dialog-bottom-transition">
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn
-                  small
-                  color="primary"
-                  rounded
-                  v-bind="attrs"
-                  v-on="on"
-                  @click="getSummary(item.detail)"
-                  :key="item.detail"
-                  depressed>Lihat Hasil Tes</v-btn>
-              </template>
-              <v-card>
-                <v-toolbar dark flat color="primary">
-                  <v-btn icon dark @click="summaryDialog = false">
-                    <v-icon>mdi-close</v-icon>
-                  </v-btn>
-                  <v-toolbar-title>Ringkasan IST</v-toolbar-title>
-                </v-toolbar>
-                 <v-card-text class="pt-6">
-                 <v-card outlined>
-                    <v-card-text>
-                      <table>
-                        <tr>
-                          <td>Nomor</td>
-                          <td class="px-4">:</td>
-                          <td>{{ item.detail }}</td>
-                        </tr>
-                        <tr>
-                          <td>Nama Lengkap</td>
-                          <td class="px-4">:</td>
-                          <td>Alvin Ardiansyah Maulana</td>
-                        </tr>
-                        <tr>
-                          <td>Tempat, Tanggal Lahir</td>
-                          <td class="px-4">:</td>
-                          <td>Bandung, 18 April 2000</td>
-                        </tr>
-                        <tr>
-                          <td>Jenis Kelamin</td>
-                          <td class="px-4">:</td>
-                          <td>Laki-laki</td>
-                        </tr>
-                        <tr>
-                          <td>Pendidikan</td>
-                          <td class="px-4">:</td>
-                          <td>Sekolah Lanjutan Tingkat Atas</td>
-                        </tr>
-                        <tr>
-                          <td>Tanggal Test</td>
-                          <td class="px-4">:</td>
-                          <td>
-                            <v-row>
-                              <v-col cols="8">
-                                <v-select
-                                  label="Tanggal Test"
-                                  :items="testDate"
-                                  outlined
-                                  dense></v-select>
-                              </v-col>
-                            </v-row>
-                          </td>
-                        </tr>
-                      </table>
-                    </v-card-text>
-                  </v-card>
-                  <!-- <v-data-table
-                  :headers="summaryHeaders"
-                  :items="summaryData"
-                  :loading="loading"
-                  :item-per-page="10"
-                  item-key="id_test">
-                  <template v-slot:item.id_test="{ item }">
-                    <v-btn
-                      small
-                      color="primary"
-                      @click="getDetail(item.id_test)"
-                      :key="item.detail"
-                      depressed>Detail</v-btn>
-                    &nbsp;
-                    &nbsp;
-                    <v-btn
-                      small
-                      color="primary"
-                      @click="getPeriksa(item.sesi, item.nomor_test)"
-                      :key="item.detail"
-                      depressed>Periksa</v-btn>
-                  </template>
-                </v-data-table> -->
-                  <ISTReport />
-                </v-card-text>
-              </v-card>
-            </v-dialog>
-            <v-dialog v-model="detailDialog" persistent width="600" scrollable>
-              <v-card>
-                <v-toolbar dark color="primary">
-                  <v-btn icon dark @click="detailDialog = false">
-                    <v-icon>mdi-close</v-icon>
-                  </v-btn>
-                  <v-toolbar-title>Detail Tes</v-toolbar-title>
-                </v-toolbar>
-                <v-card-text>
-                  <v-data-table
-                  :headers="detailHeader"
-                  :items="dataDetail"
-                  :loading="loading"
-                  :items-per-page="10"
-                  item-key="id_test">
-                </v-data-table>
-                </v-card-text>
-              </v-card>
-            </v-dialog>
-            <v-dialog v-model="periksaDialog" width="400" persistentz>
-              <v-card>
-                <v-toolbar dark color="primary">
-                  <v-btn icon dark @click="periksaDialog = false">
-                    <v-icon>mdi-close</v-icon>
-                  </v-btn>
-                  <v-toolbar-title>Periksa Tes</v-toolbar-title>
-                </v-toolbar>
-                <v-card-text>
-                  <v-card class="mt-4" outlined>
-                    <v-card-text>
-                      <p>{{ error }}</p>
-                    </v-card-text>
-                  </v-card>
-                </v-card-text>
-              </v-card>
-            </v-dialog>
+            <v-btn
+                small
+                color="primary"
+                rounded
+                @click="getSummary(item)"
+                :key="item.detail"
+                :disabled="testType !== '' && startDate !== '' && endDate !== '' ? false : true"
+                depressed>Lihat hasil test</v-btn>
           </template>
           <template v-slot:item.status="{ item }">
             <span :class="(item.status === 'Aktif' ? 'light-green--text text-accent-3' : 'red--text') + ' font-weight-medium'"><v-icon :color="item.status === 'Aktif' ? 'light-green accent-4' : 'red'" xs>mdi-circle-medium</v-icon>{{ item.status }}</span>
@@ -212,16 +91,78 @@
         </v-data-table>
       </v-col>
     </v-row>
+    <v-dialog v-model="summaryDialog" width="980" scrollable persistent transition="dialog-bottom-transition">
+      <v-card>
+        <v-toolbar dark flat color="primary">
+          <v-btn icon dark @click="summaryDialog = false">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+          <v-toolbar-title>Ringkasan IST</v-toolbar-title>
+        </v-toolbar>
+         <v-card-text class="pt-6">
+         <v-card outlined>
+            <v-card-text>
+              <table>
+                <tr>
+                  <td>Nomor</td>
+                  <td class="px-4">:</td>
+                  <td>{{ biodata.detail }}</td>
+                </tr>
+                <tr>
+                  <td>Nama Lengkap</td>
+                  <td class="px-4">:</td>
+                  <td>{{ biodata.name }}</td>
+                </tr>
+                <tr>
+                  <td>Tempat, Tanggal Lahir</td>
+                  <td class="px-4">:</td>
+                  <td>{{ biodata.birthplace + ', ' + biodata.birthdate }}</td>
+                </tr>
+                <tr>
+                  <td>Jenis Kelamin</td>
+                  <td class="px-4">:</td>
+                  <td>{{ biodata.gender }}</td>
+                </tr>
+                <tr>
+                  <td>Pendidikan</td>
+                  <td class="px-4">:</td>
+                  <td>{{ biodata.education }}</td>
+                </tr>
+                <tr>
+                  <td>Tanggal Test</td>
+                  <td class="px-4">:</td>
+                  <td>
+                    <v-row>
+                      <v-col cols="8">
+                        <v-select
+                          label="Tanggal Test"
+                          :items="testDate"
+                          outlined
+                          dense></v-select>
+                      </v-col>
+                    </v-row>
+                  </td>
+                </tr>
+              </table>
+            </v-card-text>
+          </v-card>
+          <ISTReport :testType="testType" :startDate="startDate" :endDate="endDate" :user="biodata" v-if="testType === 'ist'" />
+          <PauliReport v-if="testType === 'pauli'" />
+        </v-card-text>
+      </v-card>
+    </v-dialog>
     <v-divider></v-divider>
   </div>
 </template>
 
 <script>
 import ISTReport from './Report/IST.vue'
+import PauliReport from './Report/Pauli.vue'
 
 export default {
   components: {
-    ISTReport
+    ISTReport,
+    PauliReport
   },
   data () {
     return {
@@ -326,6 +267,8 @@ export default {
           value: 'jawaban_terakhir'
         }
       ],
+      sesi: '',
+      biodata: [],
       dataPeriksa: [],
       sliceDataUser: [],
       sliceDataSummary: [],
@@ -362,44 +305,20 @@ export default {
           console.log(e)
         })
     },
-    getSummary (id) {
-      this.testId = id
+    getSummary (data) {
+      this.biodata = data
+      this.testId = data.detail
       this.summaryDialog = !this.summaryDialog
-      this.axios.get(this.baseUrl + '/api/ambil-data-test?idUser=' + id + '&tipeTest=' + this.testType + '&tglAwal=' + new Date(this.startDate).getTime() + '&tglAkhir=' + new Date(this.endDate).getTime())
-        .then(response => {
-          console.log(response)
-          this.summaryData = response.data.map(a => {
-            return {
-              catatan_pemeriksa: a.catatan_pemeriksa,
-              catatan_yang_mengesahkan: a.catatan_yang_mengesahkan,
-              id_test: a.id_test,
-              id_user: a.id_user,
-              jenis_kelamin: a.jenis_kelamin,
-              jenjang_pendidikan: a.jenjang_pendidikan,
-              nama_pemeriksa: a.nama_pemeriksa,
-              nama_user: a.nama_user,
-              nama_yang_mengesahkan: a.nama_yang_mengesahkan,
-              nomor_test: a.nomor_test,
-              sesi: a.sesi,
-              tanggal_lahir: a.tanggal_lahir,
-              tanggal_pengesahan: a.tanggal_pengesahan,
-              tanggal_periksa: a.tanggal_periksa,
-              tanggal_test: a.tanggal_test,
-              tempat_lahir: a.tempat_lahir,
-              waktu: a.waktu
-            }
-          })
-        }).catch(e => {
-          console.log(e)
-        })
     },
     getData () {
       this.axios.get(this.baseUrl + '/api/ambil-data-peserta')
         .then(response => {
+          var month = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']
           this.users = response.data.map(a => {
             return {
               name: a.nama_user,
-              birthdate: a.tanggal_lahir,
+              birthdateEpoch: a.tanggal_lahir,
+              birthdate: new Date(a.tanggal_lahir).getDate() + ' ' + month[new Date(a.tanggal_lahir).getMonth()] + ' ' + new Date(a.tanggal_lahir).getFullYear(),
               birthplace: a.tempat_lahir,
               gender: a.jenis_kelamin === '1' ? 'Laki-laki' : 'Perempuan',
               education: a.jenjang_pendidikan,
