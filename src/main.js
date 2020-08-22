@@ -15,7 +15,7 @@ Vue.use(VueCookies)
 Vue.use(VueAxios, axios)
 Vue.config.productionTip = false
 
-axios.defaults.timeout = 10000
+axios.defaults.timeout = 180000
 axios.interceptors.request.use(
   config => {
     const token = window.$cookies.get('token')

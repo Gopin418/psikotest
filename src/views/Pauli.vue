@@ -87,7 +87,10 @@ export default {
   watch: {
     counter (newCount, oldCount) {
       if (newCount === 179) {
-        this.axios.post(this.backendUrl + '/api/simpan-data-jawaban-pauli', this.answerData)
+        // eslint-disable-next-line no-debugger
+        // debugger
+        console.log(this.answersData)
+        this.axios.post(this.backendUrl + '/api/simpan-data-jawaban-pauli', this.answersData)
           .then(() => {
             this.answersData.test_number += 1
             this.answersData.upper_number = []

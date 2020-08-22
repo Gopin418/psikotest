@@ -14,15 +14,6 @@ var sql = mysql.createConnection({
 var router = require('express').Router()
 
 router.post('/simpan-data-jawaban-pauli', function (req, res) {
-  var sesi = req.body.sesi
-  var kodeTest = req.body.kdTest // atau testKe
-  var waktu = req.body.waktu // waktu
-  var angkaAtas = req.body.angkaAtas // array
-  var angkaBawah = req.body.angkaBawah // array
-  var jawaban = req.body.jawaban // array
-})
-
-router.post('/simpan-data-jawaban-pauli', function (req, res) {
   var token = req.headers.Authorization
   console.log(req)
   var session = ''
@@ -55,7 +46,6 @@ router.post('/simpan-data-jawaban-pauli', function (req, res) {
     var data = [idUser, sesi, tipeTest, nomorTest, waktu]
 
     sql.query(Query1, data, function (_err, results, fields) {
-
       if (_err) {
         if (_err.code === 'ER_DUP_ENTRY') {
           pError.kirimPesanError(res, sql, _err, 'Test ini sudah pernah dilakukan, tidak bisa lagi diulangi.')
@@ -66,6 +56,8 @@ router.post('/simpan-data-jawaban-pauli', function (req, res) {
       }
 
       var idTest = results.insertId
+
+      console.log(jawaban)
 
       for (let i = 0; i < jawaban.length; i++) {
         var angkaAtas1 = (angkaAtas[i] === undefined) ? null : angkaAtas[i]
