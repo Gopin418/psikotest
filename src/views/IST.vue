@@ -3,6 +3,7 @@
     <Header/>
     <v-row class="mt-8">
       <v-col class="pl-12" cols="8">
+        <SecondHeader/>
         <QuestionCard/>
       </v-col>
       <v-col class="pr-12">

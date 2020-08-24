@@ -33,25 +33,26 @@
             </v-row>
           </div>
         </div>
-        <v-btn class="text-capitalize font-weight-regular mt-2" @click="startTest()" v-show="currentInstruction[0] == true" :disabled="current < 2 && this.rememberStatus == false" large color="primary" depressed block>Mulai Tes</v-btn>
+        <v-btn class="text-capitalize font-weight-regular mt-2" @click="startTest()" v-show="currentInstruction[0] == true" :disabled="this.rememberStatus == false && time !== '00:00'" large color="primary" depressed block>Mulai Tes</v-btn>
         <v-btn class="text-capitalize font-weight-regular mt-2"
         @click="testNumber === 9 && test === 'ist' || testNumber === 4 && test === 'cfit' || test === 'survey' ? finish() : nextTest()"
         color="primary"
         large
         depressed
-        v-show="currentInstruction[0] == false" :disabled="current == this.$store.state.numbers[1] ? false : true"
-        block>{{ this.$store.state.testNumber === 9 && test === 'ist' || testNumber === 4 && test === 'cfit' || test === 'survey' ? 'Selesai' : 'Lanjut ke ' + test + ' Selanjutnya' }}</v-btn>
+        v-show="currentInstruction[0] == false"
+        :disabled="time === '00:00' ? false : true"
+        block>{{ this.$store.state.testNumber === 9 && test === 'ist' || testNumber === 4 && test === 'cfit' && test === 'survey' ? 'Selesai' : 'Lanjut ke ' + test + ' Selanjutnya' }}</v-btn>
       </v-card-text>
     </v-card>
 
-    <v-dialog v-model="dialog" persistent max-width="430">
+    <v-dialog v-model="dialog" persistent max-width="460">
       <v-card>
         <v-card-title class="headline">Waktu Habis!</v-card-title>
         <v-card-text>Waktu yang diberikan untuk memahami instruksi telah habis, silahkan mulai tes sekarang.</v-card-text>
         <v-card-actions>
           <v-btn class="text-capitalize font-weight-regular mt-2"
           @click="startTest()"
-          v-show="currentInstruction[0] == true"
+          v-if="currentInstruction[0] == true"
           :disabled="this.rememberStatus == true"
           large
           color="primary"
@@ -63,7 +64,7 @@
           color="primary"
           large
           depressed
-          v-show="currentInstruction[0] == false"
+          v-if="currentInstruction[0] == false"
           block>{{ this.$store.state.testNumber === 9 && test === 'ist' || testNumber === 4 && test === 'cfit' || test === 'survey' ? 'Selesai' : 'Lanjut ke ' + test + ' Selanjutnya' }}</v-btn>
         </v-card-actions>
       </v-card>
