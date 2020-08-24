@@ -11,6 +11,7 @@ var sql = mysql.createConnection({
 
 var router = require('express').Router()
 
+// //////////// REGISTRASI ////////////
 router.post('/auth/registrasi', function (req, res) {
   var Query = ' INSERT INTO t_users (email, password, nama_user, tempat_lahir, '
   Query += ' tanggal_lahir, jenis_kelamin, jenjang_pendidikan, aktif) '
@@ -42,159 +43,6 @@ router.post('/auth/registrasi', function (req, res) {
       sql.commit(function (_err) {
         if (_err) {
           pError.kirimPesanError(res, sql, _err, 'Gagal menyimpan data registrasi, silahkan coba lagi simpan lagi atau hub. admin')
-          return
-        }
-        console.log('success!')
-        res.send({ succes: 'success' })
-      })
-    })
-  })
-})
-
-router.post('/auth/ubah-password-by-admin', function (req, res) { // yg melakukan admin
-  var session = JWT.check(req, res)
-  if (session === null) {
-    return
-  }
-
-  var idUser = req.body.idUser
-  var passwordBaru = req.body.passwordBaru
-
-  var data = [passwordBaru, idUser]
-  var Query = ' UPDATE t_users SET password = ? WHERE id_user = ? '
-  sql.beginTransaction(function (_err) {
-    sql.query(Query, data, function (_err, results) {
-      if (_err) {
-        res.status(501).send({ error: 'Gagal mengubah password, silahkan coba lagi.' })
-        sql.rollback(function (_err) { })
-        console.error(_err)
-        return
-      }
-
-      sql.commit(function (_err) {
-        if (_err) {
-          pError.kirimPesanError(res, sql, _err, 'Gagal mengubah password, silahkan coba lagi simpan lagi atau hub. admin')
-          return
-        }
-        console.log('success!')
-        res.send({ succes: 'success' })
-      })
-    })
-  })
-})
-
-router.post('/auth/ubah-password-sendiri', function (req, res) { // yg melakukan usernya
-  var session = JWT.check(req, res)
-  if (session === null) {
-    return
-  }
-
-  var passwordAsli = req.body.passwordAsli
-  var passwordBaru1 = req.body.passwordBaru1
-  var passwordBaru2 = req.body.passwordBaru2
-
-  if (passwordBaru1 !== passwordBaru2) {
-    res.status(501).send({ error: 'Gagal mengubah password, password konfirmasi berbeda.' })
-  }
-
-  var data = [passwordBaru1, session.idUser, passwordAsli]
-  var Query = ' UPDATE t_users SET password = ? WHERE id_user = ? and password = ? '
-  sql.beginTransaction(function (_err) {
-    sql.query(Query, data, function (_err, results) {
-      if (_err) {
-        res.status(501).send({ error: 'Gagal mengubah password, silahkan coba lagi.' })
-        sql.rollback(function (_err) { })
-        console.error(_err)
-        return
-      }
-
-      sql.commit(function (_err) {
-        if (_err) {
-          pError.kirimPesanError(res, sql, _err, 'Gagal mengubah password, silahkan coba lagi simpan lagi atau hub. admin')
-          return
-        }
-        console.log('success!')
-        res.send({ succes: 'success' })
-      })
-    })
-  })
-})
-
-router.post('/auth/ubah-registrasi', function (req, res) { // email dan password di sini tdk bisa diubah.
-  var session = JWT.check(req, res)
-  if (session === null) {
-    return
-  }
-
-  var Query = ' UPDATE t_users SET nama_user = ?, tempat_lahir = ?, '
-  Query += ' tanggal_lahir = ?, jenis_kelamin = ?, jenjang_pendidikan = ?, '
-  Query += ' agama = ?, alamat = ?, nama_ayah = ?, pekerjaan_ayah = ?, alamat_ayah = ?, nama_ibu = ?, pekerjaan_ibu = ?, '
-  Query += ' alamat_ibu = ?, hobi = ?, cita2 = ?, anak_ke = ?, jml_saudara = ?, mata_pelajaran_disukai = ?, '
-  Query += ' mata_pelajaran_disukai_alasan = ?, mata_pelajaran_tdk_disukai = ?, mata_pelajaran_tdk_disukai_alasan = ?, '
-  Query += ' mata_pelajaran_tinggi = ?, mata_pelajaran_rendah, jurusan_sekolah = ?, cara_belajar = ?, tugas_sulit = ?, '
-  Query += ' kegiatan_orang_tua = ?, kegiatan_orang_tua_lainnya = ?, sakit_keras_ya_tidak = ?, sakit_keras_ya_penyakit = ?, '
-  Query += ' sakit_keras_ya_kapan = ?, sakit_keras_ya_akibat = ?, psikotest_ya_tidak = ?, psikotest_ya_kapan = ?, '
-  Query += ' psikotest_tempat = ?, psikotest_tujuan = ? '
-  Query += ' WHERE id_user = ? '
-
-  var idUser = req.body.id_user
-  var fullname = req.body.fullname
-  var city = req.body.city
-  var birthdate = req.body.birthdate
-  var gender = req.body.gender
-  var education = req.body.education
-  var agama = req.body.agama
-  var alamat = req.body.alamat
-  var namaAyah = req.body.nama_ayah
-  var pekerjaanAyah = req.body.pekerjaan_ayah
-  var alamatAyah = req.body.alamat_ayah
-  var namaIbu = req.body.nama_ibu
-  var pekerjaanIbu = req.body.pekerjaan_ibu
-  var alamatIbu = req.body.alamat_ibu
-  var hobi = req.body.hobi
-  var cita2 = req.body.cita2
-  var anakKe = req.body.anak_ke
-  var jmlSaudara = req.body.jml_saudara
-  var mataPelajaranDisukai = req.body.mata_pelajaran_disukai
-  var mataPelajaranDisukaiAlasan = req.body.mata_pelajaran_disukai_alasan
-  var mataPelajaranTdkDisukai = req.body.mata_pelajaran_tdk_disukai
-  var mataPelajaranTdkDisukaiAlasan = req.body.mata_pelajaran_tdk_disukai_alasan
-  var mataPelajaranTinggi = req.body.mata_pelajaran_tinggi
-  var mataPelajaranRendah = req.body.mata_pelajaran_rendah
-  var jurusanSekolah = req.body.jurusan_sekolah // Isinya IPA, IPS, BAHASA, dsb. kirim textnya aja. IPA dan IPS hardcoded
-  var caraBelajar = req.body.cara_belajar
-  var tugasSulit = req.body.tugas_sulit // kirimkan index array, 0, 1, 2, 3 atau 4, dst
-  var kegiatanOrangTua = req.body.kegiatan_orang_tua // kirimkan index array, -1, 0, 1, 2, 3 atau 4, dst, ini isi -1 jika pilih lainnya.
-  var kegiatanOrangTuaLainnya = req.body.kegiatan_orang_tua_lainnya // isinya text dan kegiatan_orang_tua diset -1
-  var sakitKerasYaTidak = req.body.sakit_keras_ya_tidak
-  var sakitKerasPenyakit = req.body.sakit_keras_ya_penyakit
-  var sakitKerasKapan = req.body.sakit_keras_ya_kapan
-  var sakitKerasAkibat = req.body.sakit_keras_ya_akibat
-  var psikotestYaTidak = req.body.psikotest_ya_tidak
-  var psikotestKapan = req.body.psikotest_ya_kapan
-  var psikotestTempat = req.body.psikotest_tempat
-  var psikotestTujuan = req.body.psikotest_tujuan
-
-  var data = [fullname, city, birthdate, gender, education,
-    agama, alamat, namaAyah, pekerjaanAyah, alamatAyah, namaIbu, pekerjaanIbu, alamatIbu,
-    hobi, cita2, anakKe, jmlSaudara, mataPelajaranDisukai, mataPelajaranDisukaiAlasan,
-    mataPelajaranTdkDisukai, mataPelajaranTdkDisukaiAlasan, mataPelajaranTinggi, mataPelajaranRendah,
-    jurusanSekolah, caraBelajar, tugasSulit, kegiatanOrangTua, kegiatanOrangTuaLainnya, sakitKerasYaTidak,
-    sakitKerasPenyakit, sakitKerasKapan, sakitKerasAkibat, psikotestYaTidak, psikotestKapan, psikotestTempat,
-    psikotestTujuan, idUser]
-
-  sql.beginTransaction(function (_err) {
-    sql.query(Query, data, function (_err, results) {
-      if (_err) {
-        res.status(501).send({ error: 'Gagal mengubah data peserta, silahkan coba lagi.' })
-        sql.rollback(function (_err) { })
-        console.error(_err)
-        return
-      }
-
-      sql.commit(function (_err) {
-        if (_err) {
-          pError.kirimPesanError(res, sql, _err, 'Gagal mengubah data peserta, silahkan coba lagi simpan lagi atau hub. admin')
           return
         }
         console.log('success!')
@@ -377,6 +225,94 @@ router.post('/auth/registrasi-lengkap', function (req, res) {
   })
 })
 
+router.post('/auth/ubah-registrasi', function (req, res) { // email dan password di sini tdk bisa diubah.
+  var session = JWT.check(req, res)
+  if (session === null) {
+    return
+  }
+
+  var Query = ' UPDATE t_users SET nama_user = ?, tempat_lahir = ?, '
+  Query += ' tanggal_lahir = ?, jenis_kelamin = ?, jenjang_pendidikan = ?, '
+  Query += ' agama = ?, alamat = ?, nama_ayah = ?, pekerjaan_ayah = ?, alamat_ayah = ?, nama_ibu = ?, pekerjaan_ibu = ?, '
+  Query += ' alamat_ibu = ?, hobi = ?, cita2 = ?, anak_ke = ?, jml_saudara = ?, mata_pelajaran_disukai = ?, '
+  Query += ' mata_pelajaran_disukai_alasan = ?, mata_pelajaran_tdk_disukai = ?, mata_pelajaran_tdk_disukai_alasan = ?, '
+  Query += ' mata_pelajaran_tinggi = ?, mata_pelajaran_rendah, jurusan_sekolah = ?, cara_belajar = ?, tugas_sulit = ?, '
+  Query += ' kegiatan_orang_tua = ?, kegiatan_orang_tua_lainnya = ?, sakit_keras_ya_tidak = ?, sakit_keras_ya_penyakit = ?, '
+  Query += ' sakit_keras_ya_kapan = ?, sakit_keras_ya_akibat = ?, psikotest_ya_tidak = ?, psikotest_ya_kapan = ?, '
+  Query += ' psikotest_tempat = ?, psikotest_tujuan = ? '
+  Query += ' WHERE id_user = ? '
+
+  var idUser = req.body.id_user
+  var fullname = req.body.fullname
+  var city = req.body.city
+  var birthdate = req.body.birthdate
+  var gender = req.body.gender
+  var education = req.body.education
+  var agama = req.body.agama
+  var alamat = req.body.alamat
+  var namaAyah = req.body.nama_ayah
+  var pekerjaanAyah = req.body.pekerjaan_ayah
+  var alamatAyah = req.body.alamat_ayah
+  var namaIbu = req.body.nama_ibu
+  var pekerjaanIbu = req.body.pekerjaan_ibu
+  var alamatIbu = req.body.alamat_ibu
+  var hobi = req.body.hobi
+  var cita2 = req.body.cita2
+  var anakKe = req.body.anak_ke
+  var jmlSaudara = req.body.jml_saudara
+  var mataPelajaranDisukai = req.body.mata_pelajaran_disukai
+  var mataPelajaranDisukaiAlasan = req.body.mata_pelajaran_disukai_alasan
+  var mataPelajaranTdkDisukai = req.body.mata_pelajaran_tdk_disukai
+  var mataPelajaranTdkDisukaiAlasan = req.body.mata_pelajaran_tdk_disukai_alasan
+  var mataPelajaranTinggi = req.body.mata_pelajaran_tinggi
+  var mataPelajaranRendah = req.body.mata_pelajaran_rendah
+  var jurusanSekolah = req.body.jurusan_sekolah // Isinya IPA, IPS, BAHASA, dsb. kirim textnya aja. IPA dan IPS hardcoded
+  var caraBelajar = req.body.cara_belajar
+  var tugasSulit = req.body.tugas_sulit // kirimkan index array, 0, 1, 2, 3 atau 4, dst
+  var kegiatanOrangTua = req.body.kegiatan_orang_tua // kirimkan index array, -1, 0, 1, 2, 3 atau 4, dst, ini isi -1 jika pilih lainnya.
+  var kegiatanOrangTuaLainnya = req.body.kegiatan_orang_tua_lainnya // isinya text dan kegiatan_orang_tua diset -1
+  var sakitKerasYaTidak = req.body.sakit_keras_ya_tidak
+  var sakitKerasPenyakit = req.body.sakit_keras_ya_penyakit
+  var sakitKerasKapan = req.body.sakit_keras_ya_kapan
+  var sakitKerasAkibat = req.body.sakit_keras_ya_akibat
+  var psikotestYaTidak = req.body.psikotest_ya_tidak
+  var psikotestKapan = req.body.psikotest_ya_kapan
+  var psikotestTempat = req.body.psikotest_tempat
+  var psikotestTujuan = req.body.psikotest_tujuan
+
+  var data = [fullname, city, birthdate, gender, education,
+    agama, alamat, namaAyah, pekerjaanAyah, alamatAyah, namaIbu, pekerjaanIbu, alamatIbu,
+    hobi, cita2, anakKe, jmlSaudara, mataPelajaranDisukai, mataPelajaranDisukaiAlasan,
+    mataPelajaranTdkDisukai, mataPelajaranTdkDisukaiAlasan, mataPelajaranTinggi, mataPelajaranRendah,
+    jurusanSekolah, caraBelajar, tugasSulit, kegiatanOrangTua, kegiatanOrangTuaLainnya, sakitKerasYaTidak,
+    sakitKerasPenyakit, sakitKerasKapan, sakitKerasAkibat, psikotestYaTidak, psikotestKapan, psikotestTempat,
+    psikotestTujuan, idUser]
+
+  sql.beginTransaction(function (_err) {
+    sql.query(Query, data, function (_err, results) {
+      if (_err) {
+        res.status(501).send({ error: 'Gagal mengubah data peserta, silahkan coba lagi.' })
+        sql.rollback(function (_err) { })
+        console.error(_err)
+        return
+      }
+
+      sql.commit(function (_err) {
+        if (_err) {
+          pError.kirimPesanError(res, sql, _err, 'Gagal mengubah data peserta, silahkan coba lagi simpan lagi atau hub. admin')
+          return
+        }
+        console.log('success!')
+        res.send({ succes: 'success' })
+      })
+    })
+  })
+})
+
+router.post('/auth/ubah-sekolah-peserta', function (req, res) { })
+
+// //////////// LOGIN - LOGOUT /////////////////////
+
 router.post('/auth/login', function (req, res) {
   login(req, res, '0')
 })
@@ -478,6 +414,77 @@ var login = function (req, res, tipe) {
           }
 
           res.send(token)
+        })
+      })
+    })
+  })
+
+  // ////////////////////////// UBAH PASSWORD ////////
+
+  router.post('/auth/ubah-password-by-admin', function (req, res) { // yg melakukan admin
+    var session = JWT.check(req, res)
+    if (session === null) {
+      return
+    }
+
+    var idUser = req.body.idUser
+    var passwordBaru = req.body.passwordBaru
+
+    var data = [passwordBaru, idUser]
+    var Query = ' UPDATE t_users SET password = ? WHERE id_user = ? '
+    sql.beginTransaction(function (_err) {
+      sql.query(Query, data, function (_err, results) {
+        if (_err) {
+          res.status(501).send({ error: 'Gagal mengubah password, silahkan coba lagi.' })
+          sql.rollback(function (_err) { })
+          console.error(_err)
+          return
+        }
+
+        sql.commit(function (_err) {
+          if (_err) {
+            pError.kirimPesanError(res, sql, _err, 'Gagal mengubah password, silahkan coba lagi simpan lagi atau hub. admin')
+            return
+          }
+          console.log('success!')
+          res.send({ succes: 'success' })
+        })
+      })
+    })
+  })
+
+  router.post('/auth/ubah-password-sendiri', function (req, res) { // yg melakukan usernya
+    var session = JWT.check(req, res)
+    if (session === null) {
+      return
+    }
+
+    var passwordAsli = req.body.passwordAsli
+    var passwordBaru1 = req.body.passwordBaru1
+    var passwordBaru2 = req.body.passwordBaru2
+
+    if (passwordBaru1 !== passwordBaru2) {
+      res.status(501).send({ error: 'Gagal mengubah password, password konfirmasi berbeda.' })
+    }
+
+    var data = [passwordBaru1, session.idUser, passwordAsli]
+    var Query = ' UPDATE t_users SET password = ? WHERE id_user = ? and password = ? '
+    sql.beginTransaction(function (_err) {
+      sql.query(Query, data, function (_err, results) {
+        if (_err) {
+          res.status(501).send({ error: 'Gagal mengubah password, silahkan coba lagi.' })
+          sql.rollback(function (_err) { })
+          console.error(_err)
+          return
+        }
+
+        sql.commit(function (_err) {
+          if (_err) {
+            pError.kirimPesanError(res, sql, _err, 'Gagal mengubah password, silahkan coba lagi simpan lagi atau hub. admin')
+            return
+          }
+          console.log('success!')
+          res.send({ succes: 'success' })
         })
       })
     })
