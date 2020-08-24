@@ -142,31 +142,31 @@ router.post('/auth/registrasi', function (req, res) {
         return
       }
 
-      var idUsers = results.insertId
+      var idUser = results.insertId
 
       var dataSekolah = []
       for (let i = 0; i < sekolah.length; i++) {
-        dataSekolah.push([idUsers, sekolah.jenis_sekolah, sekolah.nama_sekolah, sekolah.lokasi, sekolah.tahun_lulus])
+        dataSekolah.push([idUser, sekolah.jenis_sekolah, sekolah.nama_sekolah, sekolah.lokasi, sekolah.tahun_lulus])
       }
 
       var dataKursus = []
       for (let i = 0; i < kursus.length; i++) {
-        dataKursus.push([idUsers, kursus.macam, kursus.lokasi, kursus.tahun_lulus, kursus.instansi])
+        dataKursus.push([idUser, kursus.macam, kursus.lokasi, kursus.tahun_lulus, kursus.instansi])
       }
 
       var dataOrganisasi = []
       for (let i = 0; i < organisasi.length; i++) {
-        dataOrganisasi.push([idUsers, organisasi.nama, organisasi.jabatan, organisasi.lokasi, organisasi.lamanya])
+        dataOrganisasi.push([idUser, organisasi.nama, organisasi.jabatan, organisasi.lokasi, organisasi.lamanya])
       }
 
       var dataOlahraga = []
       for (let i = 0; i < olahraga.length; i++) {
-        dataOlahraga.push([idUsers, olahraga.tipe_isian, olahraga.kegiatan, olahraga.aktif])
+        dataOlahraga.push([idUser, olahraga.tipe_isian, olahraga.kegiatan, olahraga.aktif])
       }
 
       var dataSaudara = []
       for (let i = 0; i < saudara.length; i++) {
-        dataSaudara.push([idUsers, saudara.tipe_isian, saudara.nama, saudara.pekerjaan_sekolah])
+        dataSaudara.push([idUser, saudara.tipe_isian, saudara.nama, saudara.pekerjaan_sekolah])
       }
 
       data = [dataSekolah, dataKursus, dataOrganisasi, dataOlahraga, dataSaudara]
