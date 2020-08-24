@@ -105,7 +105,7 @@ router.post('/auth/registrasi', function (req, res) {
   var psikotestTempat = req.body.psikotest_tempat
   var psikotestTujuan = req.body.psikotest_tujuan
 
-  const data = [email, password, fullname, city, birthdate, gender, education,
+  var data = [email, password, fullname, city, birthdate, gender, education,
     agama, alamat, namaAyah, pekerjaanAyah, alamatAyah, namaIbu, pekerjaanIbu, alamatIbu,
     hobi, cita2, anakKe, jmlSaudara, mataPelajaranDisukai, mataPelajaranDisukaiAlasan,
     mataPelajaranTdkDisukai, mataPelajaranTdkDisukaiAlasan, mataPelajaranTinggi, mataPelajaranRendah,
@@ -114,25 +114,21 @@ router.post('/auth/registrasi', function (req, res) {
     psikotestTujuan]
 
   var QuerySekolah = 'INSERT INTO t_users_sekolah (id_user, jenis_sekolah, nama_sekolah, lokasi, tahun_lulus) '
-  QuerySekolah += ' VALUES (?, ?, ?, ?, ?) ' // 5 ?
-  var dataSekolah = []
+  QuerySekolah += ' VALUES ? ' // 5 ?
 
   var QueryKursus = 'INSERT INTO t_users_kursus (id_user, macam, lokasi, tahun_lulus, instansi) '
-  QueryKursus += ' VALUES (?, ?, ?, ?, ?) ' // 5 ?
-  var dataKursus = []
+  QueryKursus += ' VALUES ? ' // 5 ?
 
   var QueryOrganisasi = 'INSERT INTO t_users_organisasi (id_user, nama, jabatan, lokasi, lamanya) '
-  QueryOrganisasi += ' VALUES (?, ?, ?, ?, ?) ' // 5 ?
-  var dataOrganisasi = []
+  QueryOrganisasi += ' VALUES ? ' // 5 ?
 
   var QueryOlahraga = 'INSERT INTO t_users_olahraga_seni (id_user, tipe_isian, kegiatan, aktif_tidak) '
-  QueryOlahraga += ' VALUES (?, ?, ?, ?) ' // 4 ?
-  var dataOlahraga = []
+  QueryOlahraga += ' VALUES ? ' // 4 ?
 
   var QuerySaudara = 'INSERT INTO t_users_saudara (id_user, tipe_isian, nama, pekerjaan_sekolah) '
-  QuerySaudara += ' VALUES (?, ?, ?, ?) '
-  var dataSaudara = []
+  QuerySaudara += ' VALUES ? '
 
+  var Query2 = [QuerySekolah, QueryKursus, QueryOrganisasi, QueryOlahraga, QuerySaudara]
   sql.beginTransaction(function (_err) {
     sql.query(Query, data, function (_err, results) {
       if (_err) {
@@ -148,12 +144,52 @@ router.post('/auth/registrasi', function (req, res) {
 
       var idUsers = results.insertId
 
-      sql.commit(function (_err) {
-        if (_err) {
-          pError.kirimPesanError(res, sql, _err, 'Gagal menyimpan sesi, silahkan coba lagi.')
+      var dataSekolah = []
+      for (let i = 0; i < sekolah.length; i++) {
+        dataSekolah.push([idUsers, sekolah.jenis_sekolah, sekolah.nama_sekolah, sekolah.lokasi, sekolah.tahun_lulus])
+      }
+
+      var dataKursus = []
+      for (let i = 0; i < kursus.length; i++) {
+        dataKursus.push([idUsers, kursus.macam, kursus.lokasi, kursus.tahun_lulus, kursus.instansi])
+      }
+
+      var dataOrganisasi = []
+      for (let i = 0; i < organisasi.length; i++) {
+        dataOrganisasi.push([idUsers, organisasi.nama, organisasi.jabatan, organisasi.lokasi, organisasi.lamanya])
+      }
+
+      var dataOlahraga = []
+      for (let i = 0; i < olahraga.length; i++) {
+        dataOlahraga.push([idUsers, olahraga.tipe_isian, olahraga.kegiatan, olahraga.aktif])
+      }
+
+      var dataSaudara = []
+      for (let i = 0; i < saudara.length; i++) {
+        dataSaudara.push([idUsers, saudara.tipe_isian, saudara.nama, saudara.pekerjaan_sekolah])
+      }
+
+      data = [dataSekolah, dataKursus, dataOrganisasi, dataOlahraga, dataSaudara]
+      var adaError = false
+
+      for (let i = 0; i < Query2.length; i++) {
+        sql.query(Query2[i], [data[i]], function (_err) {
+          if (_err) {
+            pError.kirimPesanError(res, sql, _err, 'Registrasi gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
+            adaError = true
+          }
+        })
+        if (adaError) {
           return
         }
-        res.send({ sucess: 'succes' })
+      }
+      sql.commit(function (_err) {
+        if (_err) {
+          pError.kirimPesanError(res, sql, _err, 'Registrasi gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
+          return
+        }
+        console.log('success!')
+        res.send({ succes: 'success' })
       })
     })
   })

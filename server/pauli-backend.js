@@ -75,12 +75,12 @@ router.post('/simpan-data-jawaban-pauli', function (req, res) {
 
       sql.query(Query2, [dataJawaban], function (_err) {
         if (_err) {
-          pError.kirimPesanError(res, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
+          pError.kirimPesanError(res, sql, _err, 'Test Pauli gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
           return
         }
         sql.commit(function (_err) {
           if (_err) {
-            pError.kirimPesanError(res, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
+            pError.kirimPesanError(res, sql, _err, 'Test Pauli gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
             return
           }
           console.log('success!')
