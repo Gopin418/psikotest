@@ -113,6 +113,26 @@ router.post('/auth/registrasi', function (req, res) {
     sakitKerasPenyakit, sakitKerasKapan, sakitKerasAkibat, psikotestYaTidak, psikotestKapan, psikotestTempat,
     psikotestTujuan]
 
+  var QuerySekolah = 'INSERT INTO t_users_sekolah (id_user, jenis_sekolah, nama_sekolah, lokasi, tahun_lulus) '
+  QuerySekolah += ' VALUES (?, ?, ?, ?, ?) ' // 5 ?
+  var dataSekolah = []
+
+  var QueryKursus = 'INSERT INTO t_users_kursus (id_user, macam, lokasi, tahun_lulus, instansi) '
+  QueryKursus += ' VALUES (?, ?, ?, ?, ?) ' // 5 ?
+  var dataKursus = []
+
+  var QueryOrganisasi = 'INSERT INTO t_users_organisasi (id_user, nama, jabatan, lokasi, lamanya) '
+  QueryOrganisasi += ' VALUES (?, ?, ?, ?, ?) ' // 5 ?
+  var dataOrganisasi = []
+
+  var QueryOlahraga = 'INSERT INTO t_users_olahraga_seni (id_user, tipe_isian, kegiatan, aktif_tidak) '
+  QueryOlahraga += ' VALUES (?, ?, ?, ?) ' // 4 ?
+  var dataOlahraga = []
+
+  var QuerySaudara = 'INSERT INTO t_users_saudara (id_user, tipe_isian, nama, pekerjaan_sekolah) '
+  QuerySaudara += ' VALUES (?, ?, ?, ?) '
+  var dataSaudara = []
+
   sql.beginTransaction(function (_err) {
     sql.query(Query, data, function (_err, results) {
       if (_err) {

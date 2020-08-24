@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 24, 2020 at 06:04 AM
+-- Generation Time: Aug 24, 2020 at 06:29 AM
 -- Server version: 10.4.12-MariaDB
 -- PHP Version: 7.2.33
 
@@ -611,7 +611,7 @@ CREATE TABLE `t_users_olahraga_seni` (
   `id_user` int(11) NOT NULL,
   `tipe_isian` varchar(255) NOT NULL,
   `kegiatan` varchar(255) NOT NULL,
-  `aktif` char(1) NOT NULL
+  `aktif_tidak` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -631,10 +631,10 @@ CREATE TABLE `t_users_organisasi` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `t_users _saudara`
+-- Table structure for table `t_users_saudara`
 --
 
-CREATE TABLE `t_users _saudara` (
+CREATE TABLE `t_users_saudara` (
   `id_user` int(11) NOT NULL,
   `tipe_isian` varchar(255) NOT NULL,
   `nama` varchar(255) NOT NULL,
