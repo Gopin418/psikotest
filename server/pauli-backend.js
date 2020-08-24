@@ -73,7 +73,7 @@ router.post('/simpan-data-jawaban-pauli', function (req, res) {
         dataJawaban.push([idTest, angkaAtas1, angkaBawah1, jawaban1, benarSalah])
       }
 
-      sql.query(Query2, [dataJawaban], function (_err, results, fields) {
+      sql.query(Query2, [dataJawaban], function (_err) {
         if (_err) {
           pError.kirimPesanError(res, sql, _err, 'Test gagal disimpan, silahkan coba lagi simpan lagi atau hub. admin')
           return
