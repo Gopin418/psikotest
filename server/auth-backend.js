@@ -114,7 +114,7 @@ router.post('/auth/registrasi', function (req, res) {
     psikotestTujuan]
 
   sql.beginTransaction(function (_err) {
-    sql.query(Query, data, function (_err) {
+    sql.query(Query, data, function (_err, results) {
       if (_err) {
         if (_err.code === 'ER_DUP_ENTRY') {
           res.status(502).send({ error: 'Gagal menyimpan data registrasi, email sudah digunakan, silahkan ganti.' })
@@ -125,6 +125,9 @@ router.post('/auth/registrasi', function (req, res) {
         console.error(_err)
         return
       }
+
+      var idUsers = results.insertId
+
       sql.commit(function (_err) {
         if (_err) {
           pError.kirimPesanError(res, sql, _err, 'Gagal menyimpan sesi, silahkan coba lagi.')
