@@ -1,8 +1,8 @@
 <template lang="html">
   <div class="">
     <Header/>
-    <Timer class="fixed" v-show="show" />
-    <v-container fluid>
+    <Timer />
+    <v-container fluid class="mt-4">
       <v-card class="scroll mx-auto px-4" outlined max-height="900" max-width="1300">
         <v-row>
           <v-col v-for="(a, index) in this.pauli" :key="index">
@@ -30,7 +30,7 @@
         <v-card-title class="headline">
           <p class="mx-auto">Tes Pauli</p>
         </v-card-title>
-        <v-card-text class="text-center">Diberi waktu 15 menit untuk mengerjakan test.</v-card-text>
+        <v-card-text class="text-center">Diberi waktu 60 menit untuk mengerjakan test.</v-card-text>
         <v-card-actions>
           <v-btn class="text-capitalize font-weight-regular mt-2"
           @click="startTest()"
@@ -55,7 +55,7 @@ export default {
   },
   data () {
     return {
-      backendUrl: process.env.VUE_APP_BACKEND_URL,
+      backendUrl: 'http://localhost:1111',
       answers: [],
       show: false,
       dialog: true,
@@ -86,18 +86,18 @@ export default {
   },
   watch: {
     counter (newCount, oldCount) {
-      if (newCount === 179) {
-        // eslint-disable-next-line no-debugger
-        // debugger
+      if (newCount === 179 || newCount % 10 === 0) {
+        this.answersData.time = newCount
         console.log(this.answersData)
         this.axios.post(this.backendUrl + '/api/simpan-data-jawaban-pauli', this.answersData)
-          .then(() => {
+          .then(response => {
             this.answersData.test_number += 1
+            this.answersData.time = 0
             this.answersData.upper_number = []
             this.answersData.bottom_number = []
             this.answersData.answers = []
           }).catch(e => {
-            console.log(e)
+            console.log(e.response.data.error)
           })
       }
     }

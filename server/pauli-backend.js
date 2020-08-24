@@ -14,8 +14,7 @@ var sql = mysql.createConnection({
 var router = require('express').Router()
 
 router.post('/simpan-data-jawaban-pauli', function (req, res) {
-  var token = req.headers.Authorization
-  console.log(req)
+  var token = req.headers.authorization
   var session = ''
 
   try {
@@ -39,8 +38,8 @@ router.post('/simpan-data-jawaban-pauli', function (req, res) {
   var Query1 = ' INSERT INTO t_test (id_user, sesi, tipe_test, nomor_test, waktu) '
   Query1 += ' VALUES (?, ?, ?, ?, ?) '
 
-  var Query2 = ' INSERT INTO t_jawaban_normal (id_test, angka_atas, angka_bawah, jawaban, benar_salah) '
-  Query2 += ' VALUES (?, ?, ?, ?, ?, ?, ?, 1) '
+  var Query2 = ' INSERT INTO t_jawaban_pauli (id_test, angka_atas, angka_bawah, jawaban, benar_salah) '
+  Query2 += ' VALUES (?, ?, ?, ?, ?) '
 
   sql.beginTransaction(function (_err) {
     var data = [idUser, sesi, tipeTest, nomorTest, waktu]
@@ -54,6 +53,7 @@ router.post('/simpan-data-jawaban-pauli', function (req, res) {
           return
         }
       }
+      console.log(results)
 
       var idTest = results.insertId
 
