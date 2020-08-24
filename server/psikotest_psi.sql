@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 17, 2020 at 12:24 PM
+-- Generation Time: Aug 24, 2020 at 04:51 AM
 -- Server version: 10.4.12-MariaDB
 -- PHP Version: 7.2.33
 
@@ -134,6 +134,93 @@ CREATE TABLE `t_jawaban_normal` (
   `jawaban` text DEFAULT NULL,
   `jawaban_terakhir` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `t_jawaban_normal`
+--
+
+INSERT INTO `t_jawaban_normal` (`id_test`, `nomor_soal`, `index_jawaban`, `jawaban`, `jawaban_terakhir`) VALUES
+(11, 3, 1, 'Gempa bumi', '1'),
+(11, 5, 1, 'Kuku', '1'),
+(11, 6, 1, 'Selalu', '1'),
+(11, 6, 1, 'Biasanya', '1'),
+(11, 7, 1, 'Lemak', '1'),
+(11, 8, 1, 'Lawan', '1'),
+(11, 20, 1, '110', '1'),
+(12, 1, 1, 'bujukan', '1'),
+(12, 2, 1, 'Boros', '1'),
+(12, 3, 1, 'Salju', '1'),
+(12, 4, 1, 'Khianat', '1'),
+(12, 5, 1, 'Pelana', '1'),
+(12, 6, 1, 'Tidak pernah', '1'),
+(12, 7, 1, 'Sayuran', '1'),
+(12, 8, 1, 'Sorak', '1'),
+(12, 9, 1, 'Paradoks', '1'),
+(12, 10, 1, 'Lidah', '1'),
+(12, 11, 1, 'Kotak PPPK', '1'),
+(12, 12, 1, '24', '1'),
+(12, 13, 1, 'Konservatif', '1'),
+(12, 14, 1, 'Jarang', '1'),
+(12, 15, 1, '950', '1'),
+(12, 16, 1, 'Ayunan', '1'),
+(12, 17, 1, 'Jarang', '1'),
+(12, 18, 1, 'Semarang', '1'),
+(12, 19, 1, 'Kemungkinan menang', '1'),
+(12, 20, 1, '105', '1'),
+(13, 21, 1, 'Lengkungan', '1'),
+(13, 22, 1, 'Menggergaji', '1'),
+(13, 23, 1, 'Panjang', '1'),
+(13, 24, 1, 'Melepaskan', '1'),
+(13, 25, 1, 'Selatan', '1'),
+(13, 26, 1, 'Tugas', '1'),
+(13, 27, 1, 'Lapisan', '1'),
+(13, 28, 1, 'Berkilauan', '1'),
+(13, 29, 1, 'Sepeda motor', '1'),
+(13, 30, 1, 'Saxophone', '1'),
+(13, 31, 1, 'Licin', '1'),
+(13, 32, 1, 'Bintang pari', '1'),
+(13, 33, 1, 'Pengerahan', '1'),
+(13, 34, 1, 'Bersepeda', '1'),
+(13, 35, 1, 'Potret', '1'),
+(13, 36, 1, 'Runcing', '1'),
+(13, 37, 1, 'Obeng', '1'),
+(13, 38, 1, 'Perkawinan', '1'),
+(13, 39, 1, 'Melicinkan', '1'),
+(13, 40, 1, 'Batu', '1'),
+(14, 41, 1, 'Berpikir', '1'),
+(14, 42, 1, 'Pagar', '1'),
+(14, 43, 1, 'Kecepatan', '1'),
+(14, 44, 1, 'Platina', '1'),
+(14, 45, 1, 'Gambar', '1'),
+(14, 46, 1, 'Menilai', '1'),
+(14, 47, 1, 'Bernapas', '1'),
+(14, 48, 1, 'Talang', '1'),
+(14, 50, 1, 'Tukang emas', '1'),
+(14, 51, 1, 'Mendengar', '1'),
+(14, 52, 1, 'Kelakar', '1'),
+(14, 53, 1, 'Sedih', '1'),
+(14, 54, 1, 'Jas', '1'),
+(14, 55, 1, 'Nyanyian', '1'),
+(14, 56, 1, 'Ilmu hewan', '1'),
+(14, 57, 1, 'Dingin', '1'),
+(14, 58, 1, 'Ditempa', '1'),
+(14, 59, 1, 'Mikroskop', '1'),
+(15, 61, 1, 'Bunga', '1'),
+(15, 62, 1, 'indra', '1'),
+(15, 63, 1, 'permata', '1'),
+(15, 64, 1, '', '1'),
+(15, 65, 1, '', '1'),
+(15, 66, 1, '', '1'),
+(15, 67, 1, '', '1'),
+(15, 68, 1, '', '1'),
+(15, 69, 1, '', '1'),
+(15, 70, 1, '', '1'),
+(15, 71, 1, '', '1'),
+(15, 72, 1, '', '1'),
+(15, 73, 1, '', '1'),
+(15, 74, 1, '', '1'),
+(15, 75, 1, '', '1'),
+(15, 76, 1, '', '1');
 
 -- --------------------------------------------------------
 
@@ -398,7 +485,13 @@ CREATE TABLE `t_sesi_test` (
 --
 
 INSERT INTO `t_sesi_test` (`id_user`, `sesi`, `tanggal_test`, `tanggal_selesai`) VALUES
-(5, '41f6b34acd81eb371597654837492a7febe7a', 1597654837492, NULL);
+(1, '1aa881b4b64db57415977290002674f4cbd77', 1597729000267, NULL),
+(1, '251deec2141c2e3515981308119074d18e0cf', 1598130811907, NULL),
+(1, '8440d5ab37f6ae7d1597669212633d3248f17', 1597669212633, NULL),
+(1, 'e963c084411eb73e1598131222113f68d92ec', 1598131222113, NULL),
+(5, '073807a229176cb11598084088952858058f1', 1598084088952, NULL),
+(5, '41f6b34acd81eb371597654837492a7febe7a', 1597654837492, NULL),
+(6, 'dddd67638e1cf22015978039636587bd65d1e', 1597803963658, NULL);
 
 -- --------------------------------------------------------
 
@@ -423,6 +516,17 @@ CREATE TABLE `t_test` (
   `tanggal_pengesahan` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `t_test`
+--
+
+INSERT INTO `t_test` (`id_test`, `id_user`, `sesi`, `tipe_test`, `nomor_test`, `waktu`, `benar`, `salah`, `catatan_pemeriksa`, `id_user_pemeriksa`, `catatan_yang_mengesahkan`, `id_user_yang_mengesahkan`, `tanggal_periksa`, `tanggal_pengesahan`) VALUES
+(11, 1, '8440d5ab37f6ae7d1597669212633d3248f17', 'ist', 1, 344, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(12, 6, 'dddd67638e1cf22015978039636587bd65d1e', 'ist', 1, 128, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(13, 6, 'dddd67638e1cf22015978039636587bd65d1e', 'ist', 2, 210, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(14, 6, 'dddd67638e1cf22015978039636587bd65d1e', 'ist', 3, 282, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(15, 6, 'dddd67638e1cf22015978039636587bd65d1e', 'ist', 4, 356, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -437,7 +541,43 @@ CREATE TABLE `t_users` (
   `tempat_lahir` varchar(255) NOT NULL,
   `tanggal_lahir` bigint(20) NOT NULL,
   `jenis_kelamin` char(1) NOT NULL,
-  `jenjang_pendidikan` varchar(255) NOT NULL,
+  `jenjang_pendidikan` varchar(255) DEFAULT NULL,
+  `agama` varchar(255) DEFAULT NULL,
+  `alamat` text DEFAULT NULL,
+  `nama_ayah` varchar(255) DEFAULT NULL,
+  `pekerjaan_ayah` varchar(255) DEFAULT NULL,
+  `alamat_ayah` text DEFAULT NULL,
+  `nama_ibu` varchar(255) DEFAULT NULL,
+  `pekerjaan_ibu` varchar(255) DEFAULT NULL,
+  `alamat_ibu` text DEFAULT NULL,
+  `id_sekolah_users` int(11) DEFAULT NULL,
+  `id_kursus_users` int(11) DEFAULT NULL,
+  `id_organisasi_users` int(11) DEFAULT NULL,
+  `id_olahraga_seni_users` int(11) DEFAULT NULL,
+  `hobi` varchar(255) DEFAULT NULL,
+  `cita2` varchar(255) DEFAULT NULL,
+  `anak_ke` int(11) DEFAULT NULL,
+  `jml_saudara` int(11) DEFAULT NULL,
+  `id_saudara_users` int(11) DEFAULT NULL,
+  `mata_pelajaran_disukai` varchar(255) DEFAULT NULL,
+  `mata_pelajaran_disukai_alasan` varchar(255) DEFAULT NULL,
+  `mata_pelajaran_tdk_disukai` varchar(255) DEFAULT NULL,
+  `mata_pelajaran_tdk_disukai_alasan` varchar(255) DEFAULT NULL,
+  `mata_pelajaran_tinggi` varchar(255) DEFAULT NULL,
+  `mata_pelajaran_rendah` varchar(255) DEFAULT NULL,
+  `jurusan_sekolah` varchar(255) DEFAULT NULL,
+  `cara_belajar` varchar(255) DEFAULT NULL,
+  `tugas_sulit` varchar(255) DEFAULT NULL,
+  `kegiatan_orang_tua` int(11) DEFAULT NULL,
+  `kegiatan_orang_tua_lainnya` varchar(255) DEFAULT NULL,
+  `sakit_keras_ya_tidak` varchar(255) DEFAULT NULL,
+  `sakit_keras_ya_penyakit` varchar(255) DEFAULT NULL,
+  `sakit_keras_ya_kapan` varchar(255) DEFAULT NULL,
+  `sakit_keras_ya_akibat` varchar(255) DEFAULT NULL,
+  `psikotest_ya_tidak` varchar(255) DEFAULT NULL,
+  `psikotest_ya_kapan` varchar(255) DEFAULT NULL,
+  `psikotest_tempat` varchar(255) DEFAULT NULL,
+  `psikotest_tujuan` varchar(255) DEFAULT NULL,
   `tipe_user` char(1) NOT NULL DEFAULT '0',
   `aktif` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -446,10 +586,79 @@ CREATE TABLE `t_users` (
 -- Dumping data for table `t_users`
 --
 
-INSERT INTO `t_users` (`id_user`, `email`, `password`, `nama_user`, `tempat_lahir`, `tanggal_lahir`, `jenis_kelamin`, `jenjang_pendidikan`, `tipe_user`, `aktif`) VALUES
-(1, 'bebas@bebas.com', 'bebas', 'Zaenudin Dzulkarnaen', 'Jakarta', 932892855000, '1', 'Strata 1', '0', '1'),
-(2, 'alvin@mail.com', 'alvin', 'Alvin Ardiansyah', 'Bandung', 1431216000000, '1', 'Sekolah Lanjutan Tingkat Atas', '0', '1'),
-(5, 'nurhasan@gmail.com', 'nurhasan', 'Nurhasan', 'Bandung', -473376835000, '1', 'Strata Dua', '1', '1');
+INSERT INTO `t_users` (`id_user`, `email`, `password`, `nama_user`, `tempat_lahir`, `tanggal_lahir`, `jenis_kelamin`, `jenjang_pendidikan`, `agama`, `alamat`, `nama_ayah`, `pekerjaan_ayah`, `alamat_ayah`, `nama_ibu`, `pekerjaan_ibu`, `alamat_ibu`, `id_sekolah_users`, `id_kursus_users`, `id_organisasi_users`, `id_olahraga_seni_users`, `hobi`, `cita2`, `anak_ke`, `jml_saudara`, `id_saudara_users`, `mata_pelajaran_disukai`, `mata_pelajaran_disukai_alasan`, `mata_pelajaran_tdk_disukai`, `mata_pelajaran_tdk_disukai_alasan`, `mata_pelajaran_tinggi`, `mata_pelajaran_rendah`, `jurusan_sekolah`, `cara_belajar`, `tugas_sulit`, `kegiatan_orang_tua`, `kegiatan_orang_tua_lainnya`, `sakit_keras_ya_tidak`, `sakit_keras_ya_penyakit`, `sakit_keras_ya_kapan`, `sakit_keras_ya_akibat`, `psikotest_ya_tidak`, `psikotest_ya_kapan`, `psikotest_tempat`, `psikotest_tujuan`, `tipe_user`, `aktif`) VALUES
+(1, 'bebas@bebas.com', 'bebas', 'Zaenudin Dzulkarnaen', 'Jakarta', 932892855000, '1', 'Strata 1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', '1'),
+(2, 'alvin@mail.com', 'alvin', 'Alvin Ardiansyah', 'Bandung', 1431216000000, '1', 'Sekolah Lanjutan Tingkat Atas', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', '1'),
+(5, 'nurhasan@gmail.com', 'nurhasan', 'Nurhasan', 'Bandung', -473376835000, '1', 'Strata Dua', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '1'),
+(6, 'nurhasanr@gmail.com', 'h454n', 'Nurhasan', 'SAMPANG', -239932800000, '1', 'Strata 2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `t_users_kursus`
+--
+
+CREATE TABLE `t_users_kursus` (
+  `id_kursus_users` int(11) NOT NULL,
+  `macam` varchar(255) NOT NULL,
+  `lokasi` varchar(255) NOT NULL,
+  `tahun_lulus` int(11) NOT NULL,
+  `instansi` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `t_users_olahraga_seni`
+--
+
+CREATE TABLE `t_users_olahraga_seni` (
+  `id_olahraga_seni_users` int(11) NOT NULL,
+  `tipe_isian` varchar(255) NOT NULL,
+  `kegiatan` varchar(255) NOT NULL,
+  `aktif` char(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `t_users_organisasi`
+--
+
+CREATE TABLE `t_users_organisasi` (
+  `id_organisasi_users` int(11) NOT NULL,
+  `nama` varchar(255) NOT NULL,
+  `jabatan` varchar(255) NOT NULL,
+  `lokasi` varchar(255) NOT NULL,
+  `lamanya` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `t_users _saudara`
+--
+
+CREATE TABLE `t_users _saudara` (
+  `id_saudara_users` int(11) NOT NULL,
+  `tipe_isian` varchar(255) NOT NULL,
+  `nama` varchar(255) NOT NULL,
+  `pekerjaan_sekolah` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `t_users_sekolah`
+--
+
+CREATE TABLE `t_users_sekolah` (
+  `id_sekolah_users` int(11) NOT NULL,
+  `jenis_sekolah` varchar(255) NOT NULL,
+  `nama_sekolah` varchar(255) NOT NULL,
+  `lokasi` varchar(255) NOT NULL,
+  `tahun_lulus` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
@@ -506,6 +715,36 @@ ALTER TABLE `t_users`
   ADD UNIQUE KEY `email` (`email`);
 
 --
+-- Indexes for table `t_users_kursus`
+--
+ALTER TABLE `t_users_kursus`
+  ADD PRIMARY KEY (`id_kursus_users`);
+
+--
+-- Indexes for table `t_users_olahraga_seni`
+--
+ALTER TABLE `t_users_olahraga_seni`
+  ADD PRIMARY KEY (`id_olahraga_seni_users`);
+
+--
+-- Indexes for table `t_users_organisasi`
+--
+ALTER TABLE `t_users_organisasi`
+  ADD PRIMARY KEY (`id_organisasi_users`);
+
+--
+-- Indexes for table `t_users _saudara`
+--
+ALTER TABLE `t_users _saudara`
+  ADD PRIMARY KEY (`id_saudara_users`);
+
+--
+-- Indexes for table `t_users_sekolah`
+--
+ALTER TABLE `t_users_sekolah`
+  ADD PRIMARY KEY (`id_sekolah_users`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -543,13 +782,43 @@ ALTER TABLE `t_kunci_jawaban_normal`
 -- AUTO_INCREMENT for table `t_test`
 --
 ALTER TABLE `t_test`
-  MODIFY `id_test` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_test` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `t_users`
 --
 ALTER TABLE `t_users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `t_users_kursus`
+--
+ALTER TABLE `t_users_kursus`
+  MODIFY `id_kursus_users` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `t_users_olahraga_seni`
+--
+ALTER TABLE `t_users_olahraga_seni`
+  MODIFY `id_olahraga_seni_users` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `t_users_organisasi`
+--
+ALTER TABLE `t_users_organisasi`
+  MODIFY `id_organisasi_users` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `t_users _saudara`
+--
+ALTER TABLE `t_users _saudara`
+  MODIFY `id_saudara_users` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `t_users_sekolah`
+--
+ALTER TABLE `t_users_sekolah`
+  MODIFY `id_sekolah_users` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

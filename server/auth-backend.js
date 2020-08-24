@@ -37,6 +37,65 @@ router.post('/auth/registrasi', function (req, res) {
   var birthdate = req.body.birthdate
   var gender = req.body.gender
   var education = req.body.education
+  var agama = req.body.agama
+  var alamat = req.body.alamat
+  var namaAyah = req.body.nama_ayah
+  var pekerjaanAyah = req.body.pekerjaan_ayah
+  var alamatAyah = req.body.alamat_ayah
+  var namaIbu = req.body.nama_ibu
+  var pekerjaanIbu = req.body.pekerjaan_ibu
+  var alamatIbu = req.body.alamat_ibu
+  var sekolah = req.body.sekolah
+  // bentuknya array of objek
+  // sekolah.jenis_sekolah, pilihannya : TK, SD, SLTP, SLTA, S1, S2, S3
+  // sekolah.nama_sekolah
+  // sekolah.lokasi
+  // sekolah.tahun_lulus (tahun lulus tidak wajib diisi)
+  var kursus = req.body.kursus
+  // bentuknya array of objek
+  // kursus.macam
+  // kursus.lokasi
+  // kursus.tahun_lulus
+  // kursus.instansi
+  var organisasi = req.body.organisasi
+  // bentuknya array of objek
+  // organisasi.nama
+  // organisasi.jabatan
+  // organisasi.lokasi
+  // organisasi.lamanya (hitungan tahun aja)
+  var olahraga = req.body.olahraga_seni
+  // bentuknya array of objek
+  // olahraga_seni.tipe_isian, hard coded : Olah Raga atau Seni
+  // olahraga_seni.kegiatan
+  // olahraga_seni.aktif = 1 atau 0.
+  var hobi = req.body.hobi
+  var cita2 = req.body.cita2
+  var anakKe = req.body.anak_ke
+  var jmlSaudara = req.body.jml_saudara
+  var saudara = req.body.saudara
+  // bentuknya array of objek
+  // saudara.tipe_isian, hard coded : Kakak atau Adik
+  // saudara.nama
+  // saudara.pekerjaan_sekolah
+  var mataPelajaranDisukai = req.body.mata_pelajaran_disukai
+  var mataPelajaranDisukaiAlasan = req.body.mata_pelajaran_disukai_alasan
+  var mataPelajaranTdkDisukai = req.body.mata_pelajaran_tdk_disukai
+  var mataPelajaranTdkDisukaiAlasan = req.body.mata_pelajaran_tdk_disukai_alasan
+  var mataPelajaranTinggi = req.body.mata_pelajaran_tinggi
+  var mataPelajaranRendah = req.body.mata_pelajaran_rendah
+  var jurusanSekolah = req.body.jurusan_sekolah // Isinya IPA, IPS, BAHASA, dsb. kirim textnya aja. IPA dan IPS hardcoded
+  var caraBelajar = req.body.cara_belajar
+  var tugasSulit = req.body.tugas_sulit // kirimkan index array, 0, 1, 2, 3 atau 4, dst
+  var kegiatanOrangTua = req.body.kegiatan_orang_tua // kirimkan index array, -1, 0, 1, 2, 3 atau 4, dst, ini isi -1 jika pilih lainnya.
+  var kegiatanOrangTuaLainnya = req.body.kegiatan_orang_tua_lainnya // isinya text dan kegiatan_orang_tua diset -1
+  var sakitKerasYaTidak = req.body.sakit_keras_ya_tidak
+  var sakitKerasPenyakit = req.body.sakit_keras_ya_penyakit
+  var sakitKerasKapan = req.body.sakit_keras_ya_kapan
+  var sakitKerasAkibat = req.body.sakit_keras_ya_akibat
+  var psikotestYaTidak = req.body.psikotest_ya_tidak
+  var psikotestKapan = req.body.psikotest_ya_kapan
+  var psikotestTempat = req.body.psikotest_tempat
+  var psikotestTujuan = req.body.psikotest_tujuan
 
   const data = [email, password, fullname, city, birthdate, gender, education]
 
