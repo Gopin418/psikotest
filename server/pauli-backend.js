@@ -63,7 +63,7 @@ router.post('/simpan-data-jawaban-pauli', function (req, res) {
         var jawaban1 = (jawaban[i] === undefined) ? null : jawaban[i]
 
         var benarSalah = ((angkaAtas1 + angkaBawah1) % 10) === jawaban1 ? 1 : 0
-        console.log( 'urutan ' + (i + 1) + ' - ' + ((angkaAtas1 + angkaBawah1) % 10) + ' = ' + jawaban1 + ' -> ' + benarSalah)
+        console.log('urutan ' + (i + 1) + ' - ' + ((angkaAtas1 + angkaBawah1) % 10) + ' = ' + jawaban1 + ' -> ' + benarSalah)
         dataJawaban.push([idTest, i + 1, angkaAtas1, angkaBawah1, jawaban1, benarSalah])
       }
 
