@@ -1,10 +1,5 @@
 <template lang="html">
   <div class="">
-    <v-card class="mb-2" outlined>
-      <v-card-title class="text-center">
-        <p class="mx-auto text-h3 font-weight-light">{{ testNumber }}</p>
-      </v-card-title>
-    </v-card>
     <v-card class="mb-2" v-show="time != 0" outlined>
       <v-card-text class="text-center font-weight-light text-h3">{{ time }}</v-card-text>
     </v-card>

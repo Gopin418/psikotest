@@ -14,8 +14,7 @@ var sql = mysql.createConnection({
 var router = require('express').Router()
 
 router.post('/simpan-data-jawaban-pauli', function (req, res) {
-  var token = req.headers.Authorization
-  console.log(req)
+  var token = req.headers.authorization
   var session = ''
 
   try {
@@ -39,8 +38,8 @@ router.post('/simpan-data-jawaban-pauli', function (req, res) {
   var Query1 = ' INSERT INTO t_test (id_user, sesi, tipe_test, nomor_test, waktu) '
   Query1 += ' VALUES (?, ?, ?, ?, ?) '
 
-  var Query2 = ' INSERT INTO t_jawaban_normal (id_test, angka_atas, angka_bawah, jawaban, benar_salah) '
-  Query2 += ' VALUES (?, ?, ?, ?, ?, ?, ?, 1) '
+  var Query2 = ' INSERT INTO t_jawaban_pauli (id_test, angka_atas, angka_bawah, jawaban, benar_salah) '
+  Query2 += ' VALUES (?, ?, ?, ?, ?) '
 
   sql.beginTransaction(function (_err) {
     var data = [idUser, sesi, tipeTest, nomorTest, waktu]
@@ -54,6 +53,7 @@ router.post('/simpan-data-jawaban-pauli', function (req, res) {
           return
         }
       }
+      console.log(results)
 
       var idTest = results.insertId
 
@@ -63,8 +63,11 @@ router.post('/simpan-data-jawaban-pauli', function (req, res) {
         var angkaAtas1 = (angkaAtas[i] === undefined) ? null : angkaAtas[i]
         var angkaBawah1 = (angkaBawah[i] === undefined) ? null : angkaBawah[i]
         var jawaban1 = (jawaban[i] === undefined) ? null : jawaban[i]
-
-        var benarSalah = (angkaAtas1 + angkaBawah1) === jawaban1 ? 1 : 0
+        var kunci = angkaAtas1 + angkaBawah1
+        kunci = kunci.split('')
+        console.log(kunci)
+        console.log(kunci.length > 1 ? kunci[0] : kunci[1])
+        var benarSalah = kunci === jawaban1 ? 1 : 0
 
         data = [idTest, angkaAtas1, angkaBawah1, jawaban1, benarSalah]
 
