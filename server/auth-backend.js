@@ -24,8 +24,16 @@ router.post('/auth/ubah-registrasi', function (req, res) {
 
 router.post('/auth/registrasi', function (req, res) {
   var Query = ' INSERT INTO t_users (email, password, nama_user, tempat_lahir, '
-  Query += ' tanggal_lahir, jenis_kelamin, jenjang_pendidikan, aktif) '
-  Query += ' VALUES (?, ?, ?, ?, ?, ?, ?, 1)'
+  Query += ' tanggal_lahir, jenis_kelamin, jenjang_pendidikan, '
+  Query += ' agama, alamat, nama_ayah, pekerjaan_ayah, alamat_ayah, nama_ibu, pekerjaan_ibu, '
+  Query += ' alamat_ibu, hobi, cita2, anak_ke, jml_saudara, mata_pelajaran_disukai, '
+  Query += ' mata_pelajaran_disukai_alasan, mata_pelajaran_tdk_disukai, mata_pelajaran_tdk_disukai_alasan, '
+  Query += ' mata_pelajaran_tinggi, mata_pelajaran_rendah, jurusan_sekolah, cara_belajar, tugas_sulit, '
+  Query += ' kegiatan_orang_tua, kegiatan_orang_tua_lainnya, sakit_keras_ya_tidak, sakit_keras_ya_penyakit, '
+  Query += ' sakit_keras_ya_kapan, sakit_keras_ya_akibat, psikotest_ya_tidak, psikotest_ya_kapan, '
+  Query += ' psikotest_tempat, psikotest_tujuan, '
+  Query += ' ,aktif) '
+  Query += ' VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, 1)' // 38 ?
 
   // console.log(req.body)
   // console.log(req.rawBody)
@@ -97,7 +105,13 @@ router.post('/auth/registrasi', function (req, res) {
   var psikotestTempat = req.body.psikotest_tempat
   var psikotestTujuan = req.body.psikotest_tujuan
 
-  const data = [email, password, fullname, city, birthdate, gender, education]
+  const data = [email, password, fullname, city, birthdate, gender, education,
+    agama, alamat, namaAyah, pekerjaanAyah, alamatAyah, namaIbu, pekerjaanIbu, alamatIbu,
+    hobi, cita2, anakKe, jmlSaudara, mataPelajaranDisukai, mataPelajaranDisukaiAlasan,
+    mataPelajaranTdkDisukai, mataPelajaranTdkDisukaiAlasan, mataPelajaranTinggi, mataPelajaranRendah,
+    jurusanSekolah, caraBelajar, tugasSulit, kegiatanOrangTua, kegiatanOrangTuaLainnya, sakitKerasYaTidak,
+    sakitKerasPenyakit, sakitKerasKapan, sakitKerasAkibat, psikotestYaTidak, psikotestKapan, psikotestTempat,
+    psikotestTujuan]
 
   sql.beginTransaction(function (_err) {
     sql.query(Query, data, function (_err) {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 24, 2020 at 06:03 AM
+-- Generation Time: Aug 24, 2020 at 06:04 AM
 -- Server version: 10.4.12-MariaDB
 -- PHP Version: 7.2.33
 
@@ -550,15 +550,10 @@ CREATE TABLE `t_users` (
   `nama_ibu` varchar(255) DEFAULT NULL,
   `pekerjaan_ibu` varchar(255) DEFAULT NULL,
   `alamat_ibu` text DEFAULT NULL,
-  `id_sekolah_users` int(11) DEFAULT NULL,
-  `id_kursus_users` int(11) DEFAULT NULL,
-  `id_organisasi_users` int(11) DEFAULT NULL,
-  `id_olahraga_seni_users` int(11) DEFAULT NULL,
   `hobi` varchar(255) DEFAULT NULL,
   `cita2` varchar(255) DEFAULT NULL,
   `anak_ke` int(11) DEFAULT NULL,
   `jml_saudara` int(11) DEFAULT NULL,
-  `id_saudara_users` int(11) DEFAULT NULL,
   `mata_pelajaran_disukai` varchar(255) DEFAULT NULL,
   `mata_pelajaran_disukai_alasan` varchar(255) DEFAULT NULL,
   `mata_pelajaran_tdk_disukai` varchar(255) DEFAULT NULL,
@@ -586,11 +581,11 @@ CREATE TABLE `t_users` (
 -- Dumping data for table `t_users`
 --
 
-INSERT INTO `t_users` (`id_user`, `email`, `password`, `nama_user`, `tempat_lahir`, `tanggal_lahir`, `jenis_kelamin`, `jenjang_pendidikan`, `agama`, `alamat`, `nama_ayah`, `pekerjaan_ayah`, `alamat_ayah`, `nama_ibu`, `pekerjaan_ibu`, `alamat_ibu`, `id_sekolah_users`, `id_kursus_users`, `id_organisasi_users`, `id_olahraga_seni_users`, `hobi`, `cita2`, `anak_ke`, `jml_saudara`, `id_saudara_users`, `mata_pelajaran_disukai`, `mata_pelajaran_disukai_alasan`, `mata_pelajaran_tdk_disukai`, `mata_pelajaran_tdk_disukai_alasan`, `mata_pelajaran_tinggi`, `mata_pelajaran_rendah`, `jurusan_sekolah`, `cara_belajar`, `tugas_sulit`, `kegiatan_orang_tua`, `kegiatan_orang_tua_lainnya`, `sakit_keras_ya_tidak`, `sakit_keras_ya_penyakit`, `sakit_keras_ya_kapan`, `sakit_keras_ya_akibat`, `psikotest_ya_tidak`, `psikotest_ya_kapan`, `psikotest_tempat`, `psikotest_tujuan`, `tipe_user`, `aktif`) VALUES
-(1, 'bebas@bebas.com', 'bebas', 'Zaenudin Dzulkarnaen', 'Jakarta', 932892855000, '1', 'Strata 1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', '1'),
-(2, 'alvin@mail.com', 'alvin', 'Alvin Ardiansyah', 'Bandung', 1431216000000, '1', 'Sekolah Lanjutan Tingkat Atas', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', '1'),
-(5, 'nurhasan@gmail.com', 'nurhasan', 'Nurhasan', 'Bandung', -473376835000, '1', 'Strata Dua', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '1'),
-(6, 'nurhasanr@gmail.com', 'h454n', 'Nurhasan', 'SAMPANG', -239932800000, '1', 'Strata 2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', '1');
+INSERT INTO `t_users` (`id_user`, `email`, `password`, `nama_user`, `tempat_lahir`, `tanggal_lahir`, `jenis_kelamin`, `jenjang_pendidikan`, `agama`, `alamat`, `nama_ayah`, `pekerjaan_ayah`, `alamat_ayah`, `nama_ibu`, `pekerjaan_ibu`, `alamat_ibu`, `hobi`, `cita2`, `anak_ke`, `jml_saudara`, `mata_pelajaran_disukai`, `mata_pelajaran_disukai_alasan`, `mata_pelajaran_tdk_disukai`, `mata_pelajaran_tdk_disukai_alasan`, `mata_pelajaran_tinggi`, `mata_pelajaran_rendah`, `jurusan_sekolah`, `cara_belajar`, `tugas_sulit`, `kegiatan_orang_tua`, `kegiatan_orang_tua_lainnya`, `sakit_keras_ya_tidak`, `sakit_keras_ya_penyakit`, `sakit_keras_ya_kapan`, `sakit_keras_ya_akibat`, `psikotest_ya_tidak`, `psikotest_ya_kapan`, `psikotest_tempat`, `psikotest_tujuan`, `tipe_user`, `aktif`) VALUES
+(1, 'bebas@bebas.com', 'bebas', 'Zaenudin Dzulkarnaen', 'Jakarta', 932892855000, '1', 'Strata 1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', '1'),
+(2, 'alvin@mail.com', 'alvin', 'Alvin Ardiansyah', 'Bandung', 1431216000000, '1', 'Sekolah Lanjutan Tingkat Atas', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', '1'),
+(5, 'nurhasan@gmail.com', 'nurhasan', 'Nurhasan', 'Bandung', -473376835000, '1', 'Strata Dua', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '1'),
+(6, 'nurhasanr@gmail.com', 'h454n', 'Nurhasan', 'SAMPANG', -239932800000, '1', 'Strata 2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', '1');
 
 -- --------------------------------------------------------
 
