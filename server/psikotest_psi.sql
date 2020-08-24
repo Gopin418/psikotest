@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 24, 2020 at 04:51 AM
+-- Generation Time: Aug 24, 2020 at 06:03 AM
 -- Server version: 10.4.12-MariaDB
 -- PHP Version: 7.2.33
 
@@ -599,7 +599,7 @@ INSERT INTO `t_users` (`id_user`, `email`, `password`, `nama_user`, `tempat_lahi
 --
 
 CREATE TABLE `t_users_kursus` (
-  `id_kursus_users` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
   `macam` varchar(255) NOT NULL,
   `lokasi` varchar(255) NOT NULL,
   `tahun_lulus` int(11) NOT NULL,
@@ -613,7 +613,7 @@ CREATE TABLE `t_users_kursus` (
 --
 
 CREATE TABLE `t_users_olahraga_seni` (
-  `id_olahraga_seni_users` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
   `tipe_isian` varchar(255) NOT NULL,
   `kegiatan` varchar(255) NOT NULL,
   `aktif` char(1) NOT NULL
@@ -626,7 +626,7 @@ CREATE TABLE `t_users_olahraga_seni` (
 --
 
 CREATE TABLE `t_users_organisasi` (
-  `id_organisasi_users` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
   `nama` varchar(255) NOT NULL,
   `jabatan` varchar(255) NOT NULL,
   `lokasi` varchar(255) NOT NULL,
@@ -640,7 +640,7 @@ CREATE TABLE `t_users_organisasi` (
 --
 
 CREATE TABLE `t_users _saudara` (
-  `id_saudara_users` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
   `tipe_isian` varchar(255) NOT NULL,
   `nama` varchar(255) NOT NULL,
   `pekerjaan_sekolah` varchar(255) NOT NULL
@@ -653,7 +653,7 @@ CREATE TABLE `t_users _saudara` (
 --
 
 CREATE TABLE `t_users_sekolah` (
-  `id_sekolah_users` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
   `jenis_sekolah` varchar(255) NOT NULL,
   `nama_sekolah` varchar(255) NOT NULL,
   `lokasi` varchar(255) NOT NULL,
@@ -715,36 +715,6 @@ ALTER TABLE `t_users`
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- Indexes for table `t_users_kursus`
---
-ALTER TABLE `t_users_kursus`
-  ADD PRIMARY KEY (`id_kursus_users`);
-
---
--- Indexes for table `t_users_olahraga_seni`
---
-ALTER TABLE `t_users_olahraga_seni`
-  ADD PRIMARY KEY (`id_olahraga_seni_users`);
-
---
--- Indexes for table `t_users_organisasi`
---
-ALTER TABLE `t_users_organisasi`
-  ADD PRIMARY KEY (`id_organisasi_users`);
-
---
--- Indexes for table `t_users _saudara`
---
-ALTER TABLE `t_users _saudara`
-  ADD PRIMARY KEY (`id_saudara_users`);
-
---
--- Indexes for table `t_users_sekolah`
---
-ALTER TABLE `t_users_sekolah`
-  ADD PRIMARY KEY (`id_sekolah_users`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -789,36 +759,6 @@ ALTER TABLE `t_test`
 --
 ALTER TABLE `t_users`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `t_users_kursus`
---
-ALTER TABLE `t_users_kursus`
-  MODIFY `id_kursus_users` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `t_users_olahraga_seni`
---
-ALTER TABLE `t_users_olahraga_seni`
-  MODIFY `id_olahraga_seni_users` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `t_users_organisasi`
---
-ALTER TABLE `t_users_organisasi`
-  MODIFY `id_organisasi_users` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `t_users _saudara`
---
-ALTER TABLE `t_users _saudara`
-  MODIFY `id_saudara_users` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `t_users_sekolah`
---
-ALTER TABLE `t_users_sekolah`
-  MODIFY `id_sekolah_users` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
