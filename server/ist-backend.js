@@ -12,6 +12,11 @@ var sql = mysql.createConnection({
 var router = require('express').Router()
 
 router.get('/ambil-data-ist', function (req, res) {
+  var session = JWT.check(req, res)
+  if (session === null) {
+    return
+  }
+
   var Query = 'SELECT * FROM t_ist_info'
 
   sql.query(Query, function (_err, results, fields) {
@@ -25,6 +30,11 @@ router.get('/ambil-data-ist', function (req, res) {
 })
 
 router.post('/simpan-data-ist', function (req, res) {
+  var session = JWT.check(req, res)
+  if (session === null) {
+    return
+  }
+
   var idIstInfo = req.body.id_ist_info
   var mode = req.body.mode
   var umurMin = req.body.umur_min
@@ -163,6 +173,11 @@ router.get('/ambil-hasil-sw-ist-normen-ge', function (req, res) {
 })
 
 router.get('/ambil-data-norman-ge-ist', function (req, res) {
+  var session = JWT.check(req, res)
+  if (session === null) {
+    return
+  }
+
   var Query = 'SELECT * FROM t_ist_norm_ge'
 
   sql.query(Query, function (_err, results, fields) {
@@ -176,6 +191,11 @@ router.get('/ambil-data-norman-ge-ist', function (req, res) {
 })
 
 router.post('/simpan-norman-ge-ist', function (req, res) {
+  var session = JWT.check(req, res)
+  if (session === null) {
+    return
+  }
+
   var idIstNormGe = req.body.id_ist_norm_ge
   var nilaiAtas = req.body.nilai_atas
   var nilaiBawah = req.body.nilai_bawah
@@ -241,6 +261,11 @@ router.get('/ambil-hasil-sw-iq-ist', function (req, res) {
 })
 
 router.get('/ambil-data-iq-ist', function (req, res) {
+  var session = JWT.check(req, res)
+  if (session === null) {
+    return
+  }
+
   var Query = 'SELECT * FROM t_ist_iq'
 
   sql.query(Query, function (_err, results, fields) {
@@ -254,6 +279,11 @@ router.get('/ambil-data-iq-ist', function (req, res) {
 })
 
 router.post('/simpan-iq-ist', function (req, res) {
+  var session = JWT.check(req, res)
+  if (session === null) {
+    return
+  }
+
   var idIstIq = req.body.id_ist_iq
   var sw = req.body.sw
   var iq = req.body.iq

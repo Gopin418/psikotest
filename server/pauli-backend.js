@@ -14,14 +14,8 @@ var sql = mysql.createConnection({
 var router = require('express').Router()
 
 router.post('/simpan-data-jawaban-pauli', function (req, res) {
-  var token = req.headers.authorization
-  var session = ''
-
-  try {
-    session = JWT.verify(token)
-  } catch (_err) {
-    res.status(501).send({ error: 'Sesi anda sudah tidak valid, silahkan login ulang.' })
-    console.error(_err)
+  var session = JWT.check(req, res)
+  if (session === null) {
     return
   }
 

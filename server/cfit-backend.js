@@ -12,6 +12,11 @@ var sql = mysql.createConnection({
 var router = require('express').Router()
 
 router.get('/ambil-data-cfit', function (req, res) {
+  var session = JWT.check(req, res)
+  if (session === null) {
+    return
+  }
+
   var Query = 'SELECT * FROM t_cfit_iq'
 
   sql.query(Query, function (_err, results, fields) {
@@ -25,6 +30,11 @@ router.get('/ambil-data-cfit', function (req, res) {
 })
 
 router.post('/simpan-data-cfit', function (req, res) {
+  var session = JWT.check(req, res)
+  if (session === null) {
+    return
+  }
+
   var idCfitIq = req.body.id_cfit_iq
   var totalRawScoreMin = req.body.total_raw_score_min
   var totalRawScoreMax = req.body.total_raw_score_max
@@ -103,6 +113,5 @@ router.get('/ambil-hasil-score-cfit', function (req, res) {
     res.status(200).send(results)
   })
 })
-
 
 module.exports = router
