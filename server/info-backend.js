@@ -63,6 +63,107 @@ router.get('/ambil-data-peserta', function (req, res) {
   })
 })
 
+router.get('/ambil-data-peserta-sekolah', function (req, res) {
+  var session = JWT.check(req, res)
+  if (session === null) {
+    return
+  }
+
+  var idUser = req.query.idUser
+
+  var Query = 'SELECT * FROM t_users_sekolah WHERE id_user = ? '
+
+  sql.query(Query, [idUser], function (_err, results, fields) {
+    if (_err) {
+      res.status(200).send([])
+      console.error(_err)
+      return
+    }
+    res.status(200).send(results)
+  })
+})
+
+router.get('/ambil-data-peserta-kursus', function (req, res) {
+  var session = JWT.check(req, res)
+  if (session === null) {
+    return
+  }
+
+  var idUser = req.query.idUser
+
+  var Query = 'SELECT * FROM t_users_kursus WHERE id_user = ? '
+
+  sql.query(Query, [idUser], function (_err, results, fields) {
+    if (_err) {
+      res.status(200).send([])
+      console.error(_err)
+      return
+    }
+    res.status(200).send(results)
+  })
+})
+
+router.get('/ambil-data-peserta-organisasi', function (req, res) {
+  var session = JWT.check(req, res)
+  if (session === null) {
+    return
+  }
+
+  var idUser = req.query.idUser
+
+  var Query = 'SELECT * FROM t_users_organisasi WHERE id_user = ? '
+
+  sql.query(Query, [idUser], function (_err, results, fields) {
+    if (_err) {
+      res.status(200).send([])
+      console.error(_err)
+      return
+    }
+    res.status(200).send(results)
+  })
+})
+
+router.get('/ambil-data-peserta-olahraga-seni', function (req, res) {
+  var session = JWT.check(req, res)
+  if (session === null) {
+    return
+  }
+
+  var idUser = req.query.idUser
+
+  var Query = 'SELECT * FROM t_users_olahraga_seni WHERE id_user = ? '
+
+  sql.query(Query, [idUser], function (_err, results, fields) {
+    if (_err) {
+      res.status(200).send([])
+      console.error(_err)
+      return
+    }
+    res.status(200).send(results)
+  })
+})
+
+router.get('/ambil-data-peserta-saudara', function (req, res) {
+  var session = JWT.check(req, res)
+  if (session === null) {
+    return
+  }
+
+  var idUser = req.query.idUser
+
+  var Query = 'SELECT * FROM t_users_saudara WHERE id_user = ? '
+
+  sql.query(Query, [idUser], function (_err, results, fields) {
+    if (_err) {
+      res.status(200).send([])
+      console.error(_err)
+      return
+    }
+    res.status(200).send(results)
+  })
+})
+// ////////////////////////////////////////////////////////////
+
 router.get('/ambil-data-test', function (req, res) {
 
   var session = JWT.check(req, res)
