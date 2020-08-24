@@ -35,7 +35,7 @@ router.post('/simpan-data-jawaban-pauli', function (req, res) {
   // var Query2 = ' INSERT INTO t_jawaban_pauli (id_test, angka_atas, angka_bawah, jawaban, benar_salah) '
   // Query2 += ' VALUES (?, ?, ?, ?, ?) '
 
-  var Query2 = ' INSERT INTO t_jawaban_pauli (id_test, angka_atas, angka_bawah, jawaban, benar_salah) '
+  var Query2 = ' INSERT INTO t_jawaban_pauli (id_test, urutan, angka_atas, angka_bawah, jawaban, benar_salah) '
   Query2 += ' VALUES ? '
 
   sql.beginTransaction(function (_err) {
@@ -63,8 +63,8 @@ router.post('/simpan-data-jawaban-pauli', function (req, res) {
         var jawaban1 = (jawaban[i] === undefined) ? null : jawaban[i]
 
         var benarSalah = ((angkaAtas1 + angkaBawah1) % 10) === jawaban1 ? 1 : 0
-        console.log(((angkaAtas1 + angkaBawah1) % 10) + ' = ' + jawaban1 + ' -> ' + benarSalah)
-        dataJawaban.push([idTest, angkaAtas1, angkaBawah1, jawaban1, benarSalah])
+        console.log( 'urutan ' + (i + 1) + ' - ' + ((angkaAtas1 + angkaBawah1) % 10) + ' = ' + jawaban1 + ' -> ' + benarSalah)
+        dataJawaban.push([idTest, i + 1, angkaAtas1, angkaBawah1, jawaban1, benarSalah])
       }
 
       sql.query(Query2, [dataJawaban], function (_err) {
