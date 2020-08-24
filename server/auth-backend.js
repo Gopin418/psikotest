@@ -418,77 +418,77 @@ var login = function (req, res, tipe) {
       })
     })
   })
-
-  // ////////////////////////// UBAH PASSWORD ////////
-
-  router.post('/auth/ubah-password-by-admin', function (req, res) { // yg melakukan admin
-    var session = JWT.check(req, res)
-    if (session === null) {
-      return
-    }
-
-    var idUser = req.body.idUser
-    var passwordBaru = req.body.passwordBaru
-
-    var data = [passwordBaru, idUser]
-    var Query = ' UPDATE t_users SET password = ? WHERE id_user = ? '
-    sql.beginTransaction(function (_err) {
-      sql.query(Query, data, function (_err, results) {
-        if (_err) {
-          res.status(501).send({ error: 'Gagal mengubah password, silahkan coba lagi.' })
-          sql.rollback(function (_err) { })
-          console.error(_err)
-          return
-        }
-
-        sql.commit(function (_err) {
-          if (_err) {
-            pError.kirimPesanError(res, sql, _err, 'Gagal mengubah password, silahkan coba lagi simpan lagi atau hub. admin')
-            return
-          }
-          console.log('success!')
-          res.send({ succes: 'success' })
-        })
-      })
-    })
-  })
-
-  router.post('/auth/ubah-password-sendiri', function (req, res) { // yg melakukan usernya
-    var session = JWT.check(req, res)
-    if (session === null) {
-      return
-    }
-
-    var passwordAsli = req.body.passwordAsli
-    var passwordBaru1 = req.body.passwordBaru1
-    var passwordBaru2 = req.body.passwordBaru2
-
-    if (passwordBaru1 !== passwordBaru2) {
-      res.status(501).send({ error: 'Gagal mengubah password, password konfirmasi berbeda.' })
-    }
-
-    var data = [passwordBaru1, session.idUser, passwordAsli]
-    var Query = ' UPDATE t_users SET password = ? WHERE id_user = ? and password = ? '
-    sql.beginTransaction(function (_err) {
-      sql.query(Query, data, function (_err, results) {
-        if (_err) {
-          res.status(501).send({ error: 'Gagal mengubah password, silahkan coba lagi.' })
-          sql.rollback(function (_err) { })
-          console.error(_err)
-          return
-        }
-
-        sql.commit(function (_err) {
-          if (_err) {
-            pError.kirimPesanError(res, sql, _err, 'Gagal mengubah password, silahkan coba lagi simpan lagi atau hub. admin')
-            return
-          }
-          console.log('success!')
-          res.send({ succes: 'success' })
-        })
-      })
-    })
-  })
 }
+
+// ////////////////////////// UBAH PASSWORD ////////
+
+router.post('/auth/ubah-password-by-admin', function (req, res) { // yg melakukan admin
+  var session = JWT.check(req, res)
+  if (session === null) {
+    return
+  }
+
+  var idUser = req.body.idUser
+  var passwordBaru = req.body.passwordBaru
+
+  var data = [passwordBaru, idUser]
+  var Query = ' UPDATE t_users SET password = ? WHERE id_user = ? '
+  sql.beginTransaction(function (_err) {
+    sql.query(Query, data, function (_err, results) {
+      if (_err) {
+        res.status(501).send({ error: 'Gagal mengubah password, silahkan coba lagi.' })
+        sql.rollback(function (_err) { })
+        console.error(_err)
+        return
+      }
+
+      sql.commit(function (_err) {
+        if (_err) {
+          pError.kirimPesanError(res, sql, _err, 'Gagal mengubah password, silahkan coba lagi simpan lagi atau hub. admin')
+          return
+        }
+        console.log('success!')
+        res.send({ succes: 'success' })
+      })
+    })
+  })
+})
+
+router.post('/auth/ubah-password-sendiri', function (req, res) { // yg melakukan usernya
+  var session = JWT.check(req, res)
+  if (session === null) {
+    return
+  }
+
+  var passwordAsli = req.body.passwordAsli
+  var passwordBaru1 = req.body.passwordBaru1
+  var passwordBaru2 = req.body.passwordBaru2
+
+  if (passwordBaru1 !== passwordBaru2) {
+    res.status(501).send({ error: 'Gagal mengubah password, password konfirmasi berbeda.' })
+  }
+
+  var data = [passwordBaru1, session.idUser, passwordAsli]
+  var Query = ' UPDATE t_users SET password = ? WHERE id_user = ? and password = ? '
+  sql.beginTransaction(function (_err) {
+    sql.query(Query, data, function (_err, results) {
+      if (_err) {
+        res.status(501).send({ error: 'Gagal mengubah password, silahkan coba lagi.' })
+        sql.rollback(function (_err) { })
+        console.error(_err)
+        return
+      }
+
+      sql.commit(function (_err) {
+        if (_err) {
+          pError.kirimPesanError(res, sql, _err, 'Gagal mengubah password, silahkan coba lagi simpan lagi atau hub. admin')
+          return
+        }
+        console.log('success!')
+        res.send({ succes: 'success' })
+      })
+    })
+  })
+})
 
 module.exports = router
