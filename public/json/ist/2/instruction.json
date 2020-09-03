@@ -9,7 +9,7 @@
           "question": "",
           "question_marks": ["Meja", "Kursi", "Burung", "Lemari", "Tempat tidur"],
           "answers": {
-            "hint": "a, b, d, dan e ialah perabot rumah (meubel).\nc burung bukan perabot rumah atau tidak memiliki kesamaan dengan keempat itu",
+            "hint": "Meja, Kursi, Lemari, dan Tempat tidur ialah perabot rumah (meubel).\nc Burung bukan perabot rumah atau tidak memiliki kesamaan dengan keempat itu",
             "answer": "Burung",
             "message": "Oleh karena itu, pada pilihan contoh 02, \"Burung\" yang harus dipilih."
           }
@@ -18,9 +18,9 @@
           "number": 2,
           "title": "Contoh berikutnya",
           "question": "",
-          "question_marks": ["Duduk", "Berbaring", "Berdiri", "Berjalan", "berjongkok"],
+          "question_marks": ["Duduk", "Berbaring", "Berdiri", "Berjalan", "Berjongkok"],
           "answers": {
-            "hint": "Pada a, b, c, dan e orang dalam keadaan tidak bergerak, sedangkan d orang dalam keadaan bergerak\nMaka jawaban yang benar ialah: \"Berjalan\".",
+            "hint": "Pada Duduk, Berbaring, Berdiri, dan Berjongkok orang dalam keadaan tidak bergerak, sedangkan Berjalan, orang dalam keadaan bergerak\nMaka jawaban yang benar ialah: \"Berjalan\".",
             "answer": "Berjalan",
             "message": "Oleh karena itu \"Berjalan\" seharusnya yang dipilih."
           }
