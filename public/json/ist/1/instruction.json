@@ -1,7 +1,7 @@
 [
   {
     "type": "selection",
-    "instruction": "Soal-soal 01-20 terdiri atas kalimat-kalimat.\nsetiap kalimat satu kata hilang dan disediakan 5 (lima) pilihan sebagai penggantinya.\nPilihlah kata yang tepat yang dapat menyempurnakan kalimat itu!",
+    "instruction": "Soal-soal 01-20 terdiri atas kalimat-kalimat.\nPada setiap kalimat satu kata hilang dan disediakan 5 (lima) pilihan sebagai penggantinya.\nPilihlah kata yang tepat yang dapat menyempurnakan kalimat itu!",
     "questions" : [
       {
           "number": 1,

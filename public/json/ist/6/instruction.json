@@ -1,7 +1,7 @@
 [
   {
     "type": "numeric",
-    "instruction": "Pada persoalan berikut akan diberikan deret angka.\nSetiap deret tersusun menurut suatu aturan tertentu dan dapat dilanjutkan menurut aturan itu.\nCarilah untuk setiap deret, angka berikutnya dan pilihlah jawaban saudara pada koloh dibawah soal.",
+    "instruction": "Pada persoalan berikut akan diberikan deret angka.\nPada setiap deret tersusun menurut suatu aturan tertentu dan dapat dilanjutkan menurut aturan itu.\nCarilah untuk setiap deret, angka berikutnya dan pilihlah jawaban saudara pada koloh dibawah soal.",
     "questions" : [
       {
         "number": 1,
