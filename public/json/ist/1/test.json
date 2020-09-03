@@ -7,7 +7,7 @@
         "question": "Pengaruh seseorang terhadap orang lain seharusnya bergantung pada .........",
         "question_marks": {
           "a": "Kekuasaan",
-          "b": "bujukan",
+          "b": "Bujukan",
           "c": "Kekayaan",
           "d": "Keberanian",
           "e": "Kewibawaan"
@@ -37,7 +37,7 @@
       },
       {
         "number": 4,
-        "question": "Lawannya \"setia\" ialah .........",
+        "question": "Lawannya \"Setia\" ialah .........",
         "question_marks": {
           "a": "Cinta",
           "b": "Benci",
@@ -59,7 +59,7 @@
       },
       {
         "number": 6,
-        "question": "Seorang paman ......... dari kemenakannya.",
+        "question": "Seorang paman ......... lebih tua dari kemenakannya.",
         "question_marks": {
           "a": "Jarang",
           "b": "Biasanya",
@@ -130,8 +130,8 @@
           "a": "20",
           "b": "29",
           "c": "17",
-          "d": "15",
-          "e": "24"
+          "d": "24",
+          "e": "15"
         }
       },
       {
@@ -147,7 +147,7 @@
       },
       {
         "number": 14,
-        "question": "Lawannya \"tidak pernah\" ialah .........",
+        "question": "Lawannya \"Tidak Pernah\" ialah .........",
         "question_marks": {
           "a": "Sering",
           "b": "Kadang-kadang",

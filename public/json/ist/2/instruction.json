@@ -20,7 +20,7 @@
           "question": "",
           "question_marks": ["Duduk", "Berbaring", "Berdiri", "Berjalan", "Berjongkok"],
           "answers": {
-            "hint": "Pada Duduk, Berbaring, Berdiri, dan Berjongkok orang dalam keadaan tidak bergerak, sedangkan Berjalan, orang dalam keadaan bergerak\nMaka jawaban yang benar ialah: \"Berjalan\".",
+            "hint": "Pada Duduk, Berbaring, Berdiri, dan Berjongkok, orang dalam keadaan tidak bergerak, sedangkan Berjalan, orang dalam keadaan bergerak\nMaka jawaban yang benar ialah: \"Berjalan\".",
             "answer": "Berjalan",
             "message": "Oleh karena itu \"Berjalan\" seharusnya yang dipilih."
           }

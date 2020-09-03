@@ -41,7 +41,7 @@
         depressed
         v-show="currentInstruction[0] == false"
         :disabled="time === '00:00' ? false : true"
-        block>{{ this.$store.state.testNumber === 9 && test === 'ist' || testNumber === 4 && test === 'cfit' && test === 'survey' ? 'Selesai' : 'Lanjut ke soal selanjutnya' }}</v-btn>
+        block>{{ this.$store.state.testNumber === 9 && test === 'ist' || testNumber === 4 && test === 'cfit' && test === 'survey' ? 'Selesai' : 'Lanjut ke kelompok soal selanjutnya' }}</v-btn>
       </v-card-text>
     </v-card>
 
@@ -65,7 +65,7 @@
           large
           depressed
           v-if="currentInstruction[0] == false"
-          block>{{ this.$store.state.testNumber === 9 && test === 'ist' || testNumber === 4 && test === 'cfit' || test === 'survey' ? 'Selesai' : 'Lanjut ke soal selanjutnya' }}</v-btn>
+          block>{{ this.$store.state.testNumber === 9 && test === 'ist' || testNumber === 4 && test === 'cfit' || test === 'survey' ? 'Selesai' : 'Lanjut ke kelompok soal selanjutnya' }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
