@@ -26,11 +26,11 @@
       },
       {
         "number": 43,
-        "question": "Kereta api : Rel = Otobis : ?",
+        "question": "Kereta api : Rel = Bis : ?",
         "question_marks": {
           "a": "Roda",
           "b": "Poros",
-          "c": "ban",
+          "c": "Ban",
           "d": "Jalan raya",
           "e": "Kecepatan"
         }

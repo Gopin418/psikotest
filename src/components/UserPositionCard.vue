@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 <template lang="html">
   <div class="">
     <v-card class="mb-2" v-show="time != 0" outlined>
@@ -48,7 +49,7 @@
     <v-dialog v-model="dialog" persistent max-width="460">
       <v-card>
         <v-card-title class="headline">Waktu Habis!</v-card-title>
-        <v-card-text>Waktu yang diberikan untuk memahami instruksi telah habis, silahkan mulai tes sekarang.</v-card-text>
+        <v-card-text>{{ this.textHeader }}.</v-card-text>
         <v-card-actions>
           <v-btn class="text-capitalize font-weight-regular mt-2"
           @click="startTest()"
@@ -88,6 +89,7 @@ export default {
       questionTime: [],
       countdown: '',
       next: 0,
+      textHeader: 'Waktu yang diberikan untuk memahami instruksi telah habis, silahkan mulai tes sekarang',
       baseUrl: process.env.VUE_APP_BASE_URL,
       backendUrl: process.env.VUE_APP_BACKEND_URL,
       answerData: {
@@ -242,12 +244,16 @@ export default {
       }, 1000)
     },
     startTest () {
+      this.textHeader = 'Waktu yang diberikan untuk memahami instruksi telah habis, silahkan mulai tes sekarang'
       this.dialog = false
       clearInterval(this.countdown)
       if (this.testNumber === 9 && this.rememberStatus === true) {
+        debugger
         this.$store.commit('rememberDisable')
         this.getData()
       } else {
+        debugger
+        this.textHeader = 'Waktu yang diberikan untuk kelompok soal ini sudah habis, silahkan ke soal berikutnya'
         this.instruction.forEach((item, i) => {
           if (i === this.testNumber - 1) {
             item[0] = false
