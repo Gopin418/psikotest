@@ -1,4 +1,3 @@
-/* eslint-disable no-debugger */
 <template lang="html">
   <div class="">
     <v-card class="mb-2" v-show="time != 0" outlined>
@@ -248,10 +247,12 @@ export default {
       this.dialog = false
       clearInterval(this.countdown)
       if (this.testNumber === 9 && this.rememberStatus === true) {
+        // eslint-disable-next-line no-debugger
         debugger
         this.$store.commit('rememberDisable')
         this.getData()
       } else {
+        // eslint-disable-next-line no-debugger
         debugger
         this.textHeader = 'Waktu yang diberikan untuk kelompok soal ini sudah habis, silahkan ke soal berikutnya'
         this.instruction.forEach((item, i) => {
